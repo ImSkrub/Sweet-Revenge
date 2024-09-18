@@ -4,21 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CharacterController : MonoBehaviour
 {
+ //Player variables   
     [SerializeField] private float speed;
-    public bool running = false;
-    public Transform player;
+    [SerializeField] private bool running = false;
+    [SerializeField] private Transform player;
 
-
-    public Image StaminaBar;
-    public float Stamina, MaxStamina;
-    public float AttackCost;
-    public float RunCost;
-    public float ChargeRate;
+    //UI
+    [SerializeField] private Image StaminaBar;
+    [SerializeField] private float Stamina, MaxStamina;
+    [SerializeField] private float AttackCost;
+    [SerializeField] private float RunCost;
+    [SerializeField] private float ChargeRate;
 
     private Coroutine recharge;
 
-    Vector3 targetRotation;
-    Vector3 target;
+    private Vector3 targetRotation;
+    private Vector3 target;
 
 
     void Update()
@@ -26,10 +27,12 @@ public class CharacterController : MonoBehaviour
         targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
         player.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
         Move();
+
+        
     }
 
+  
     private IEnumerator RechargeStamina()
     {
         yield return new WaitForSeconds(1f);
@@ -37,8 +40,11 @@ public class CharacterController : MonoBehaviour
         while (Stamina < MaxStamina)
         {
             Stamina += ChargeRate / 10f;
-            if (Stamina > MaxStamina) Stamina = MaxStamina;
             StaminaBar.fillAmount = Stamina / MaxStamina;
+            if (Stamina > MaxStamina)
+            {
+                Stamina = MaxStamina;
+            }
             yield return new WaitForSeconds(.1f);
         }
     }
