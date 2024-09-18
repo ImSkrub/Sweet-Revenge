@@ -2,32 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-   public static GameManager instance;
+    public static GameManager Instance;
+  
+
+
     private void Awake()
     {
-        if (instance == null)
+
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if(Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-     DontDestroyOnLoad(gameObject);
-       //event in case of death
+        DontDestroyOnLoad(gameObject);
+        //player.GetComponent<LifePlayer>().OnDeath += FinishGame;
     }
 
-    public void WinGame()
+    private void Update()
     {
-        SceneManager.LoadScene("Win");
-    }
-    public void LoseGame()
-    {
-        SceneManager.LoadScene("Lose");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+        
+        
     }
 
+    public void CompleteGame()
+    {
+       // AudioManager.instance.PlaySound(7);
+        SceneManager.LoadScene(14);
+       //PointManager.Instance.SaveFinalScore();
+    }
+
+    public void FinishGame()
+    {
+       // AudioManager.instance.PlaySound(6);
+        SceneManager.LoadScene(12);
+        //PointManager.Instance.SaveFinalScore();
+    }
+
+   
 }
