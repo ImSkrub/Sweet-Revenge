@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class CharacterController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
  //Player variables   
     [SerializeField] private float speed;
     [SerializeField] private bool running = false;
     [SerializeField] private Transform player;
-
-    //UI
-    [SerializeField] private Image StaminaBar;
-    [SerializeField] private float Stamina, MaxStamina;
-    [SerializeField] private float AttackCost;
+    [SerializeField] public float Stamina, MaxStamina;
+    [SerializeField] public float AttackCost;
     [SerializeField] private float RunCost;
     [SerializeField] private float ChargeRate;
 
-    private Coroutine recharge;
+    //UI
+    [SerializeField] public Image StaminaBar;
+    public Coroutine recharge;
 
     private Vector3 targetRotation;
     private Vector3 target;
@@ -28,12 +27,10 @@ public class CharacterController : MonoBehaviour
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
         player.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         Move();
-
-        
     }
 
   
-    private IEnumerator RechargeStamina()
+    public IEnumerator RechargeStamina()
     {
         yield return new WaitForSeconds(1f);
 
@@ -76,7 +73,5 @@ public class CharacterController : MonoBehaviour
         }
         else
             transform.position += MoveDir * Time.deltaTime * speed;
-
     }
-
 }

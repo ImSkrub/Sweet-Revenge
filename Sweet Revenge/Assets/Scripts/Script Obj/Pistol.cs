@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : MonoBehaviour
+public class Pistol : MonoBehaviour, IWeapons
 {
     Vector3 targetRotation;
     public Transform pistol;
     public int bulletSpeed;
     public GameObject bullet;
     Vector3 target;
-    public SpriteRenderer armaSR;
-    [SerializeField] private CharacterController characterMovement;
-
+    public SpriteRenderer pistolSR;
+    [SerializeField] PlayerController player;
+    [SerializeField] public float pistolDamage;
 
     void Update()
     {
@@ -21,27 +21,33 @@ public class Pistol : MonoBehaviour
 
         if (angle > 90 || angle < -90)
         {
-            armaSR.flipY = true;
+            pistolSR.flipY = true;
         }
         else
         {
-            armaSR.flipY = false;
+            pistolSR.flipY = false;
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && (player.Stamina > 0))
         {
-            disparar();
+            if (player.recharge != null) StopCoroutine(player.recharge);
+            player.recharge = StartCoroutine(player.RechargeStamina());
+            Attack();
         }
     }
 
 
-    void disparar()
+    public void Attack()
     {
         var Bullet = Instantiate(bullet, pistol.position, transform.rotation);
         targetRotation.z = 0;
         target = (targetRotation - transform.position).normalized;
         Bullet.GetComponent<Rigidbody2D>().AddForce(target * bulletSpeed, ForceMode2D.Impulse);
+
+        player.Stamina -= player.AttackCost;
+        if (player.Stamina < 0) player.Stamina = 0;
+        player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
     }
 
 }
