@@ -14,6 +14,8 @@ public class Pistol : MonoBehaviour, IWeapons
     [SerializeField] public float pistolDamage;
 
     public bool canRotate = true;
+    public bool canAttack = true;
+
 
     void Update()
     {
@@ -21,15 +23,16 @@ public class Pistol : MonoBehaviour, IWeapons
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
         if (canRotate)
         {
-        pistol.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        if (angle > 90 || angle < -90)
-        {
-            pistolSR.flipY = true;
-        }
-        else
-        {
-            pistolSR.flipY = false;
-        }
+          pistol.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+             if (angle > 90 || angle < -90)
+             {
+                pistolSR.flipY = true;
+             }
+             else
+             {
+               pistolSR.flipY = false;
+             }
         }
 
 
@@ -45,14 +48,18 @@ public class Pistol : MonoBehaviour, IWeapons
 
     public void Attack()
     {
-        var Bullet = Instantiate(bullet, pistol.position, transform.rotation);
-        targetRotation.z = 0;
-        target = (targetRotation - transform.position).normalized;
-        Bullet.GetComponent<Rigidbody2D>().AddForce(target * bulletSpeed, ForceMode2D.Impulse);
+        if (canAttack)
+        {
+            var Bullet = Instantiate(bullet, pistol.position, transform.rotation);
+            targetRotation.z = 0;
+            target = (targetRotation - transform.position).normalized;
+            Bullet.GetComponent<Rigidbody2D>().AddForce(target * bulletSpeed, ForceMode2D.Impulse);
 
-        player.Stamina -= player.AttackCost;
-        if (player.Stamina < 0) player.Stamina = 0;
-        player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
+            player.Stamina -= player.AttackCost;
+            if (player.Stamina < 0) player.Stamina = 0;
+            player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
+        }
+        
     }
 
 }

@@ -106,10 +106,11 @@ MonoBehaviour:
   player: {fileID: 3404793763485691485}
   Stamina: 100
   MaxStamina: 100
-  AttackCost: 10
+  AttackCost: 5
   RunCost: 5
   ChargeRate: 15
   StaminaBar: {fileID: 0}
+  canRotate: 1
 --- !u!50 &5785503798244368686
 Rigidbody2D:
   serializedVersion: 4
