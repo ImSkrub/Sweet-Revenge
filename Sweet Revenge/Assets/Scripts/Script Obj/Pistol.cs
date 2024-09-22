@@ -13,12 +13,15 @@ public class Pistol : MonoBehaviour, IWeapons
     [SerializeField] PlayerController player;
     [SerializeField] public float pistolDamage;
 
+    public bool canRotate = true;
+
     void Update()
     {
         targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+        if (canRotate)
+        {
         pistol.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
         if (angle > 90 || angle < -90)
         {
             pistolSR.flipY = true;
@@ -27,6 +30,8 @@ public class Pistol : MonoBehaviour, IWeapons
         {
             pistolSR.flipY = false;
         }
+        }
+
 
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && (player.Stamina > 0))

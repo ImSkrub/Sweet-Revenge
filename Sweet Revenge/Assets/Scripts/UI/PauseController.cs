@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PauseController : MonoBehaviour
 {
-    public GameObject pauseMenuUI;
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private PlayerController player;
+    [SerializeField] private Pistol pistol;
 
     private bool isPaused = false;
 
@@ -32,6 +34,8 @@ public class PauseController : MonoBehaviour
     public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
+        player.canRotate = false;
+        pistol.canRotate = false;
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -39,6 +43,8 @@ public class PauseController : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
+        player.canRotate = true;
+        pistol.canRotate = true;
         Time.timeScale = 1f; 
         isPaused = false;
     }

@@ -20,12 +20,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetRotation;
     private Vector3 target;
 
+    public bool canRotate = true;
+
 
     void Update()
     {
         targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+        if(canRotate)
+        {
         player.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
         Move();
     }
 
