@@ -27,10 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-        if(canRotate)
-        {
-        player.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        }
+        if(canRotate) player.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         Move();
     }
 
