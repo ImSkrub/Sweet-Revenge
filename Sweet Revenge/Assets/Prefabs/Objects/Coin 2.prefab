@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9013374921344775277}
   - component: {fileID: 535619107342440243}
   m_Layer: 0
-  m_Name: Coin
+  m_Name: Coin 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2115080116, guid: 04616b7ac00794e4bb66d9f48768b268, type: 3}
+  m_Sprite: {fileID: -1830378789, guid: 029de76b263e13047881686a5b475c09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd5ec3a7e4a27047bfbe65e3cc54d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsQuantity: 15
+  pointsQuantity: 0
   points: {fileID: 0}
 --- !u!1 &3044724361339190335
 GameObject:
