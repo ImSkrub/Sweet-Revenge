@@ -11,7 +11,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        //LevelManager.instance.RestartLevel();
+        LevelManager.instance.RestartLevel();
     }
     public void ButtonPlay()
     {

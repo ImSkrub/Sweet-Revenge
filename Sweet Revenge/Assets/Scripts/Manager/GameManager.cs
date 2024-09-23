@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        
         player.GetComponent<PlayerLife>().onDeath += FinishGame;
         
     }

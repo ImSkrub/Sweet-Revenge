@@ -32,22 +32,6 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-  
-    public IEnumerator RechargeStamina()
-    {
-        yield return new WaitForSeconds(1f);
-
-        while (Stamina < MaxStamina)
-        {
-            Stamina += ChargeRate / 10f;
-            StaminaBar.fillAmount = Stamina / MaxStamina;
-            if (Stamina > MaxStamina)
-            {
-                Stamina = MaxStamina;
-            }
-            yield return new WaitForSeconds(.1f);
-        }
-    }
 
     private void Move()
     {
@@ -68,13 +52,39 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += MoveDir * Time.deltaTime * speed * 2;
             Stamina -= RunCost * Time.deltaTime;
-            if (Stamina < 0) Stamina = 0;
+            if (Stamina < 0)
+            {
+                Stamina = 0;
+            }
             StaminaBar.fillAmount = Stamina / MaxStamina;
 
-            if (recharge != null) StopCoroutine(recharge);
+            if (recharge != null)
+            {
+                StopCoroutine(recharge);
+
+            }
             recharge = StartCoroutine(RechargeStamina());
+
         }
         else
+        {
             transform.position += MoveDir * Time.deltaTime * speed;
+        }
+    }
+  
+    public IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1f);
+
+        while (Stamina < MaxStamina)
+        {
+            Stamina += ChargeRate / 10f;
+            StaminaBar.fillAmount = Stamina / MaxStamina;
+            if (Stamina > MaxStamina)
+            {
+                Stamina = MaxStamina;
+            }
+            yield return new WaitForSeconds(.1f);
+        }
     }
 }
