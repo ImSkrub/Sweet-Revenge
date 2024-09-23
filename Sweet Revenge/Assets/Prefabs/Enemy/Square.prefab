@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -2866894488867628062}
   - component: {fileID: 7396358911814645616}
   - component: {fileID: -8720782612204591832}
+  - component: {fileID: -3113800227475947490}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -183,3 +184,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
+--- !u!114 &-3113800227475947490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732179487159104317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aef18d51e233684e8384e9e4d8b6be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50

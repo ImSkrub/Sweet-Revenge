@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
- //Player variables   
+    //Player variables   
+    [Header("Variables")]
     [SerializeField] private float speed;
     [SerializeField] private bool running = false;
     [SerializeField] private Transform player;

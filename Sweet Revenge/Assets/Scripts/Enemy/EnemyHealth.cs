@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Pistol pistol;
     [SerializeField] private float maxHealth;
     [SerializeField] private float health;
+    public event Action onDeath;
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -21,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            GameManager.Instance.eDeathCount += 1;
+            onDeath?.Invoke();
         }
     }
 

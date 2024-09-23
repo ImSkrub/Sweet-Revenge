@@ -7,7 +7,7 @@ public class ButtonManager : MonoBehaviour
 {
     public void GoToMenu()
     {
-        //LevelManager.instance.LoadLevel(0);
+       LevelManager.instance.LoadLevel(0);
     }
     public void RestartGame()
     {
