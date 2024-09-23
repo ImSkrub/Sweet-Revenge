@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class SpikeBat : MonoBehaviour, IWeapons
 {
+    [Header("Parameters")]
     [SerializeField] private Animation anim;
     [SerializeField] private float damage;
     [SerializeField] private float attackSpeed;
-
-    float timeUntilAttack;
+    [SerializeField] private float knockback = 10f;
+    [SerializeField][Range(0,1)] private float timeUntilAttack;
 
     private void Update()
     {

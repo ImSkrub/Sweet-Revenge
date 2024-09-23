@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8720782612204591832}
   - component: {fileID: -3113800227475947490}
   m_Layer: 0
-  m_Name: Square
+  m_Name: ZombieEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,4 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aef18d51e233684e8384e9e4d8b6be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 25

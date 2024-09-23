@@ -16,6 +16,11 @@ public class Pistol : MonoBehaviour, IWeapons
     public bool canRotate = true;
     public bool canAttack = true;
 
+    public float knockback = 10f;
+    public int totalBullets = 10;
+    [SerializeField] private float delay = 0.5f;
+    [SerializeField] private float attackRange = 10f;
+
 
     void Update()
     {
