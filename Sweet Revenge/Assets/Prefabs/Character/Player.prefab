@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdda4cfa36f965418742ed066679e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   running: 0
   player: {fileID: 3404793763485691485}
   Stamina: 100

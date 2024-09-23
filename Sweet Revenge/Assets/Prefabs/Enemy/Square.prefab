@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7973765605201123489}
   - component: {fileID: 3554893477178463154}
   - component: {fileID: -2866894488867628062}
+  - component: {fileID: 7396358911814645616}
+  - component: {fileID: -8720782612204591832}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -146,3 +148,38 @@ MonoBehaviour:
   pistol: {fileID: 7477256744555536310, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
   maxHealth: 100
   health: 100
+--- !u!195 &7396358911814645616
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732179487159104317}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-8720782612204591832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732179487159104317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06769333f5e732499274fd4ddedcd18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
