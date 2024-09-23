@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
   m_FlipX: 0
@@ -98,8 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pistol: {fileID: 7566356605575177470}
-  bulletSpeed: 8
+  bulletSpeed: 10
   bullet: {fileID: 1591815753473743695, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
   pistolSR: {fileID: 9081115927628332158}
   player: {fileID: 7095673868828625585, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
   pistolDamage: 20
+  canRotate: 1
+  canAttack: 1
