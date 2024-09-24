@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
             StaminaBar.fillAmount = Stamina / MaxStamina;
 
             if (recharge != null) StopCoroutine(recharge);
+
+
             recharge = StartCoroutine(RechargeStamina());
         }
         else

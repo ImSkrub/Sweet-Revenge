@@ -40,6 +40,8 @@ public class Pistol : MonoBehaviour, IWeapons
         if (Input.GetKeyDown(KeyCode.Mouse0) && (player.Stamina > 0))
         {
             if (player.recharge != null) StopCoroutine(player.recharge);
+
+
             player.recharge = StartCoroutine(player.RechargeStamina());
             Attack();
         }
