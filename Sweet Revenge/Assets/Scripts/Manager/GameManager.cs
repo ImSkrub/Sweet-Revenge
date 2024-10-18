@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-  
+
+    private Player player;
 
 
     private void Awake()
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        //player.GetComponent<LifePlayer>().OnDeath += FinishGame;
+        player.GetComponent<PlayerLife>().OnDeath += FinishGame;
     }
 
     private void Update()
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
        // AudioManager.instance.PlaySound(7);
         SceneManager.LoadScene(14);
-       //PointManager.Instance.SaveFinalScore();
+       
     }
 
     public void FinishGame()

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
- //Player variables   
+    [Header("Parameters")]   
     [SerializeField] private float speed;
     [SerializeField] private bool running = false;
     [SerializeField] private Transform player;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float RunCost;
     [SerializeField] private float ChargeRate;
 
-    //UI
+    [Header("UI")]
     [SerializeField] public Image StaminaBar;
     public Coroutine recharge;
 
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+
             running = false;
         }
 

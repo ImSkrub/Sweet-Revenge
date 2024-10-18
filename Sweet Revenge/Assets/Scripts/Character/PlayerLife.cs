@@ -11,10 +11,10 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float currentHealth;
     public float CurrentHealth => currentHealth;
     [SerializeField] private float maxHealth = 100;
-    //[SerializeField] private SpriteRenderer spriteRenderer;
-   // [SerializeField] private Animation anim;
+     private SpriteRenderer spriteRenderer;
+   // private Animation anim;
     private float currentTime;
-    public event Action onDeath;
+    public event Action OnDeath;
     
     //Color on hit
     public Color damageColor= Color.red;
@@ -29,8 +29,8 @@ public class PlayerLife : MonoBehaviour
     private void Start()
     {
         //anim = GetComponent<Animation>();
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-        //originalColor = spriteRenderer.color;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
     private void Update()
     {
@@ -40,27 +40,27 @@ public class PlayerLife : MonoBehaviour
         {
             currentHealth = 0;
             Debug.Log("murio");
-            //Death();
+            Death();
         }
     }
 
     public void GetDamage(float value)
     {
         currentHealth -= value;
-        //spriteRenderer.color = damageColor;
-        //Invoke("RestoreColor", 0.5F);
+        spriteRenderer.color = damageColor;
+        Invoke("RestoreColor", 0.5F);
     }
 
     private void RestoreColor()
     {
-        //spriteRenderer.color = originalColor;
+        spriteRenderer.color = originalColor;
     }
 
 
     public void Death()
     {
         //anim.SetTrigger("Death");
-        onDeath?.Invoke();
+        OnDeath?.Invoke();
         this.gameObject.SetActive(false);
     }
 

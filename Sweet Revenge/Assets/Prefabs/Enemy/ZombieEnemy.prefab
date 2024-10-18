@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: -2866894488867628062}
   - component: {fileID: 7396358911814645616}
   - component: {fileID: 4981943968389556585}
-  - component: {fileID: 6632573717416530494}
+  - component: {fileID: 8531479608204030045}
+  - component: {fileID: 7109243454796781215}
   m_Layer: 0
   m_Name: ZombieEnemy
   m_TagString: Untagged
@@ -136,9 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e2328f5b27e55459730fa227674f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistol: {fileID: 7477256744555536310, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
   maxHealth: 100
-  health: 100
+  health: 0
+  damageCooldown: 1
+  destroyDelay: 0.5
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!195 &7396358911814645616
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -173,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06769333f5e732499274fd4ddedcd18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
---- !u!114 &6632573717416530494
+  target: {fileID: 0}
+--- !u!114 &8531479608204030045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,8 +186,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732179487159104317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80bae3914f4cb0b41a48cd842230525a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7367d91932126db4f8fc3ee0426679aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: -1311028509660312670, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-  damage: 5
+  damage: 10
+  attackCooldown: 0.2
+  velocity: 15
+  rangeToAttack: 10
+  closestDist: 1
+  lerpSpeedRotation: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  Name: Zombie
+  target: {fileID: 0}
+--- !u!50 &7109243454796781215
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732179487159104317}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
