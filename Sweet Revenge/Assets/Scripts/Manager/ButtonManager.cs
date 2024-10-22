@@ -7,11 +7,11 @@ public class ButtonManager : MonoBehaviour
 {
     public void GoToMenu()
     {
-        //LevelManager.instance.LoadLevel(0);
+        LevelManager.instance.LoadLevel(0);
     }
     public void RestartGame()
     {
-        //LevelManager.instance.RestartLevel();
+        LevelManager.instance.RestartLevel();
     }
     public void ButtonPlay()
     {
@@ -23,7 +23,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void Config()
     {
-        SceneManager.LoadScene(11);
+        SceneManager.LoadScene(5);
     }
     public void LvlSelect()
     {

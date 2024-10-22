@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float closestDist;
     [SerializeField] private float lerpSpeedRotation;
     [SerializeField] private LayerMask playerLayer;
-    private float cooldownTimer = Mathf.Infinity;
     private float currentTime;
 
 
@@ -43,13 +42,6 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject,0.5f);
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, rangeToAttack);
-    }
-
     //colision con jugador
     private void OnCollisionStay2D(Collision2D collision)
     {

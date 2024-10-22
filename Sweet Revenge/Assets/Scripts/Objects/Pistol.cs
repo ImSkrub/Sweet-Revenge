@@ -15,8 +15,8 @@ public class Pistol : MonoBehaviour, IWeapon
     private Vector3 targetRotation;
     private Vector3 target;
     private SpriteRenderer pistolSR;
-    [SerializeField] PlayerController player;
-    //[SerializeField] public float pistolDamage;
+    [SerializeField] private PlayerController player;
+ 
 
     //booleans
     public bool canRotate = true;
@@ -57,7 +57,6 @@ public class Pistol : MonoBehaviour, IWeapon
             
             player.Stamina -= player.AttackCost;
             if (player.Stamina < 0) player.Stamina = 0;
-            player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
         }
     }
 

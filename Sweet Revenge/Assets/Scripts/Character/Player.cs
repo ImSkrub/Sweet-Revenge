@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Image currentWeapon;
     
     private IWeapon weapon;
-    private PlayerController player;
+    public PlayerController player;
 
     private void Awake()
     {
@@ -23,11 +23,12 @@ public class Player : MonoBehaviour
     private void Update()
     {
         currentTime = Time.deltaTime;
-        if ((Input.GetKeyDown(KeyCode.Mouse0)&&currentTime >= attackDelay&&player.Stamina >0))
+        if ((Input.GetKeyDown(KeyCode.Mouse0)&&player.Stamina >0))
         {
             if (player.recharge != null) StopCoroutine(player.recharge);
             player.recharge = StartCoroutine(player.RechargeStamina());
             weapon?.Attack();
+            player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
             currentTime = 0f;
 
         }
