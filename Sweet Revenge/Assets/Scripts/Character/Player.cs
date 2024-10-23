@@ -25,11 +25,16 @@ public class Player : MonoBehaviour
         currentTime = Time.deltaTime;
         if ((Input.GetKeyDown(KeyCode.Mouse0)&&player.Stamina >0))
         {
-            if (player.recharge != null) StopCoroutine(player.recharge);
-            player.recharge = StartCoroutine(player.RechargeStamina());
-            weapon?.Attack();
-            player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
-            currentTime = 0f;
+            if (player.recharge != null)
+            {
+                StopCoroutine(player.recharge);
+            }
+            else 
+            {
+                player.recharge = StartCoroutine(player.RechargeStamina());
+                weapon?.Attack();
+                
+            }
 
         }
     }

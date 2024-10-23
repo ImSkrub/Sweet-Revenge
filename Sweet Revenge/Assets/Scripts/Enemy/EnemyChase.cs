@@ -11,6 +11,7 @@ public class EnemyChase : MonoBehaviour
 
     private void Start()
     {
+        target=FindObjectOfType<Player>().transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;

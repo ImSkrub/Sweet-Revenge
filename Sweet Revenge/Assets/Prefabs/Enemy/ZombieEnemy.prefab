@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 9117206898997643892}
   - component: {fileID: -2866894488867628062}
   - component: {fileID: 7396358911814645616}
-  - component: {fileID: 4981943968389556585}
   - component: {fileID: 8531479608204030045}
   - component: {fileID: 7109243454796781215}
+  - component: {fileID: -1981713124904804754}
   m_Layer: 0
   m_Name: ZombieEnemy
   m_TagString: Untagged
@@ -164,19 +164,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4981943968389556585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732179487159104317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d06769333f5e732499274fd4ddedcd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &8531479608204030045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +214,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1981713124904804754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732179487159104317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06769333f5e732499274fd4ddedcd18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}

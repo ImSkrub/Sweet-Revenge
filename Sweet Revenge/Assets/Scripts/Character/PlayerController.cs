@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
 
     public bool canRotate = true;
 
+    private void Awake()
+    {
+        Stamina = MaxStamina;
+    }
 
     void Update()
     {
@@ -36,15 +40,15 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        while (Stamina < MaxStamina)
+        while (Stamina <= MaxStamina)
         {
             Stamina += ChargeRate / 10f;
             StaminaBar.fillAmount = Stamina / MaxStamina;
-            if (Stamina > MaxStamina)
+            if (Stamina >= MaxStamina)
             {
                 Stamina = MaxStamina;
             }
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -71,10 +75,15 @@ public class PlayerController : MonoBehaviour
             if (Stamina < 0) Stamina = 0;
             StaminaBar.fillAmount = Stamina / MaxStamina;
 
-            if (recharge != null) StopCoroutine(recharge);
+            if (recharge != null)
+            {
+              StopCoroutine(recharge);
+            }
+            else
+            {
+              recharge = StartCoroutine(RechargeStamina());
+            }
 
-
-            recharge = StartCoroutine(RechargeStamina());
         }
         else
             transform.position += MoveDir * Time.deltaTime * speed;

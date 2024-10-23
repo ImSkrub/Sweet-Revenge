@@ -24,8 +24,11 @@ public class Pistol : MonoBehaviour, IWeapon
 
     private void Awake()
     {
+        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject, true, 10, valueGun.maxBullets);
+    }
+    private void Start()
+    {
         pistolSR = GetComponent<SpriteRenderer>();
-        bulletPool = new ObjectPool<Bullet>(CreatePoolItem,OnTakeFromPool,OnReturnedFromPool,OnDestroyObject,true,10,valueGun.maxBullets);
         parentTransform = GetComponentInParent<Transform>();
     }
     void Update()
@@ -53,10 +56,10 @@ public class Pistol : MonoBehaviour, IWeapon
         {
             bulletPool.Get();
             target = (targetRotation - transform.position).normalized;
-            targetRotation.z = 0;   
-            
+            targetRotation.z = 0;
             player.Stamina -= player.AttackCost;
             if (player.Stamina < 0) player.Stamina = 0;
+            //player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
         }
     }
 

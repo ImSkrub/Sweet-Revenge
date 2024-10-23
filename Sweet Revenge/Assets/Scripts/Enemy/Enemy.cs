@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        //anim
+        target= FindObjectOfType<Player>().transform;
     }
 
     private void FixedUpdate()
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject,0.5f);
     }
     //colision con jugador
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (currentTime >= attackCooldown)
         {

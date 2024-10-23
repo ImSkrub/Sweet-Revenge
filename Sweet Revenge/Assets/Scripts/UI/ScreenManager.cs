@@ -53,7 +53,7 @@ public class ScreenManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("numeroResolucion", resolucionesDropDown.value);
 
-        Resolution resolution= resoluciones[indiceResolucion];
+        Resolution resolution = resoluciones[indiceResolucion];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }

@@ -41,8 +41,8 @@ public class SpawnerEnemy : MonoBehaviour
         while(spawnCount < enemiesPerRound)
         {
             yield return new WaitForSeconds(spawnInterval);
-            Transform spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-            string enemyType = enemyTypeToSpawn[UnityEngine.Random.Range(0, enemyTypeToSpawn.Count)];
+            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            string enemyType = enemyTypeToSpawn[Random.Range(0, enemyTypeToSpawn.Count)];
             SpawnEnemies(enemyType, spawnPoint.position);
             spawnCount += enemiesPerSpawn;
         }
