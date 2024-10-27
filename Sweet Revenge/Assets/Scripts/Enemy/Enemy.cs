@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        target= FindObjectOfType<Player>().transform;
+        target = FindObjectOfType<Player>().transform;
     }
 
     private void FixedUpdate()

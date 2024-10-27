@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
+        
     }
 
     public void ApplyEffectPowerUp(IPowerUp powerUp)
@@ -69,5 +70,6 @@ public class Player : MonoBehaviour
         {
             ApplyEffectPowerUp(collision.gameObject.GetComponent<IPowerUp>());
         }
+        
     }
 }

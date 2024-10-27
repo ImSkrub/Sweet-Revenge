@@ -7,7 +7,7 @@ public class SpikeBat : MonoBehaviour, IWeapon
     [Header("Parameters")]
     [SerializeField] private Parameters dataBat;
     [SerializeField] private LayerMask enemyLayer;
-
+    public string Name { get; private set; } = "SpikeBat";
     private Animation anim;
     private float lastAttackTime;
 

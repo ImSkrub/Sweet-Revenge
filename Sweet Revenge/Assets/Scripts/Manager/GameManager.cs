@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
     private Player player;
 
 
@@ -39,16 +38,16 @@ public class GameManager : MonoBehaviour
 
     public void CompleteGame()
     {
-       // AudioManager.instance.PlaySound(7);
+       
         SceneManager.LoadScene(14);
        
     }
 
     public void FinishGame()
     {
-       // AudioManager.instance.PlaySound(6);
+       
         SceneManager.LoadScene(12);
-        //PointManager.Instance.SaveFinalScore();
+       
     }
 
    
