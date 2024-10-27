@@ -5,12 +5,12 @@ using UnityEngine.Pool;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
+    public string Name { get; private set; } = "Pistol";
     [Header("Parameters")]
     [SerializeField] Parameters valueGun;
     [SerializeField] private Bullet bullet;
     private ObjectPool<Bullet> bulletPool;
     private Transform parentTransform;
-    public string Name { get; private set; } = "Pistol";
     
     private Vector3 targetRotation;
     private Vector3 target;
