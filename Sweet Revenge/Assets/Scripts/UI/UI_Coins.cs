@@ -15,8 +15,7 @@ public class UI_Coins : MonoBehaviour
 
     private void Update()
     {
-        //coins += Time.deltaTime;
-        textMesh.text = coins.ToString("0");
+       textMesh.text = coins.ToString("0");
     }
 
     public void AddCoins(float entryCoins)

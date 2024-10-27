@@ -5,15 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - bullet
+  - Weapon
+  - PowerUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - Player
-  - 
+  - Enemy
+  - Wall
   - 
   - 
   - 

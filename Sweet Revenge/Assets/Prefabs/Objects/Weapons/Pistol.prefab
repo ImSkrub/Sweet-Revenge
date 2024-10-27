@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7566356605575177470}
   - component: {fileID: 9081115927628332158}
   - component: {fileID: 7477256744555536310}
+  - component: {fileID: 9040467234407406048}
   m_Layer: 0
   m_Name: Pistol
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
   m_FlipX: 0
@@ -97,11 +98,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b54ab3d370838c49bc96c7e3e860dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistol: {fileID: 7566356605575177470}
-  bulletSpeed: 10
-  bullet: {fileID: 1591815753473743695, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
-  pistolSR: {fileID: 9081115927628332158}
+  valueGun: {fileID: 11400000, guid: 4d709a72d4fe42d4280aaf474bc1593c, type: 2}
+  bullet: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
   player: {fileID: 7095673868828625585, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-  pistolDamage: 25
   canRotate: 1
   canAttack: 1
+--- !u!61 &9040467234407406048
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350612921599990342}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

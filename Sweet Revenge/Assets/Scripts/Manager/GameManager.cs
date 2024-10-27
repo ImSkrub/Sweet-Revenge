@@ -7,13 +7,12 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public PlayerLife player;
-    public int eDeathCount;
+    private Player player;
 
 
     private void Awake()
     {
-        
+
         if (Instance == null)
         {
             Instance = this;
@@ -23,9 +22,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
-        player.GetComponent<PlayerLife>().onDeath += FinishGame;
-        
+        DontDestroyOnLoad(gameObject);
+        player.GetComponent<PlayerLife>().OnDeath += FinishGame;
     }
 
     private void Update()
@@ -34,26 +32,22 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if (eDeathCount >= 3)
-        {
-            CompleteGame();
-        }
-
-
+        
+        
     }
-    //Ganar
+
     public void CompleteGame()
     {
-        // AudioManager.instance.PlaySound(7);
-        SceneManager.LoadScene(4);
-       //PointManager.Instance.SaveFinalScore();
+       
+        SceneManager.LoadScene(14);
+       
     }
-    //Perder
+
     public void FinishGame()
     {
-       // AudioManager.instance.PlaySound(6);
-        SceneManager.LoadScene(3);
-        //PointManager.Instance.SaveFinalScore();
+       
+        SceneManager.LoadScene(12);
+       
     }
 
    

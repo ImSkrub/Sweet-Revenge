@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private FactoryEnemy enemyFactory;
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
 
@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (timeUntilSpawn < 0 )
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            enemyFactory.CreateEnemy("Golem");
             SetTimeUntilSpawn();
         }
     }

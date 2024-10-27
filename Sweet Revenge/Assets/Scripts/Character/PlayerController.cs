@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
-    //Player variables   
-    [Header("Variables")]
+    [Header("Parameters")]   
     [SerializeField] private float speed;
     [SerializeField] private bool running = false;
     [SerializeField] private Transform player;
@@ -14,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float RunCost;
     [SerializeField] private float ChargeRate;
 
-    //UI
+    [Header("UI")]
     [SerializeField] public Image StaminaBar;
     public Coroutine recharge;
 
@@ -23,6 +22,10 @@ public class PlayerController : MonoBehaviour
 
     public bool canRotate = true;
 
+    private void Awake()
+    {
+        Stamina = MaxStamina;
+    }
 
     void Update()
     {
@@ -32,6 +35,22 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
+  
+    public IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1f);
+
+        while (Stamina <= MaxStamina)
+        {
+            Stamina += ChargeRate / 10f;
+            StaminaBar.fillAmount = Stamina / MaxStamina;
+            if (Stamina >= MaxStamina)
+            {
+                Stamina = MaxStamina;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     private void Move()
     {
@@ -45,6 +64,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+
             running = false;
         }
 
@@ -52,39 +72,20 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += MoveDir * Time.deltaTime * speed * 2;
             Stamina -= RunCost * Time.deltaTime;
-            if (Stamina < 0)
-            {
-                Stamina = 0;
-            }
+            if (Stamina < 0) Stamina = 0;
             StaminaBar.fillAmount = Stamina / MaxStamina;
 
             if (recharge != null)
             {
-                StopCoroutine(recharge);
-
+              StopCoroutine(recharge);
             }
-            recharge = StartCoroutine(RechargeStamina());
+            else
+            {
+              recharge = StartCoroutine(RechargeStamina());
+            }
 
         }
         else
-        {
             transform.position += MoveDir * Time.deltaTime * speed;
-        }
-    }
-  
-    public IEnumerator RechargeStamina()
-    {
-        yield return new WaitForSeconds(1f);
-
-        while (Stamina < MaxStamina)
-        {
-            Stamina += ChargeRate / 10f;
-            StaminaBar.fillAmount = Stamina / MaxStamina;
-            if (Stamina > MaxStamina)
-            {
-                Stamina = MaxStamina;
-            }
-            yield return new WaitForSeconds(.1f);
-        }
     }
 }
