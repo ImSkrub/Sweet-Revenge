@@ -12,8 +12,8 @@ public class PointManager : MonoBehaviour
     [SerializeField] private TMP_Text shopCoinText;
     
     [Header("Coins")]
-    private int shopCoin = 0;
-    private int doorCoin = 0;
+    [SerializeField] private int shopCoin = 0;
+    [SerializeField] private int doorCoin = 0;
     public int _shopCoin => shopCoin;
     public int _doorCoin => doorCoin;
     
