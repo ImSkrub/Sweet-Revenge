@@ -14,7 +14,23 @@ public class DoorArea : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             message.gameObject.SetActive(true);
-            text.SetText($"To open this door you need /{valueDoor}");
+            // Get the current amount of coins the player has
+            int currentCoins = PointManager.Instance._doorCoin;
+
+            // Determine the color based on the current coins compared to the door value
+            string color;
+            if (currentCoins < valueDoor)
+            {
+                color = "red"; // Less than required
+            }
+            else
+            {
+                color = "green"; // Greater than or equal to required
+            }
+
+            // Set the text with the determined color
+            text.SetText($"<color=white>To open this door you need:</color> " +
+                          $"<color={color}>{currentCoins}</color>/</color=white>{valueDoor}</color>");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
