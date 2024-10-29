@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Header("Weapon")]
     [SerializeField] private Transform weaponSlot;
     private float attackDelay = 0.5f;
-    private float currentTime;
+    private float lastAttackTime;
     [Header("UI")]
     [SerializeField] private Image currentWeapon;
     
@@ -22,26 +22,19 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        currentTime = Time.deltaTime;
-        if ((Input.GetKeyDown(KeyCode.Mouse0)&&player.Stamina >0))
+        // Check if the player can attack
+        if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay)
         {
-            if (player.recharge != null)
-            {
-                StopCoroutine(player.recharge);
-            }
-            else 
-            {
-                player.recharge = StartCoroutine(player.RechargeStamina());
-                weapon?.Attack();
-                
-            }
-
+           
+            player.recharging = false;
+            weapon?.Attack();
+            player.r = true;
+            lastAttackTime = Time.time; // Update the last attack time
         }
     }
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
-        
     }
 
     public void ApplyEffectPowerUp(IPowerUp powerUp)

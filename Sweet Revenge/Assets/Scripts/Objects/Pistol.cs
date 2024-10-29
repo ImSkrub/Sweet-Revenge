@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
+    public string Name { get; private set; } = "Pistol";
     [Header("Parameters")]
     [SerializeField] Parameters valueGun;
     [SerializeField] private Bullet bullet;
     private ObjectPool<Bullet> bulletPool;
     private Transform parentTransform;
-    public string Name { get; private set; } = "Pistol";
     
     private Vector3 targetRotation;
     private Vector3 target;
@@ -21,6 +22,7 @@ public class Pistol : MonoBehaviour, IWeapon
     //booleans
     public bool canRotate = true;
     public bool canAttack = true;
+    public bool pickedUp = false;
 
     private void Awake()
     {
@@ -32,6 +34,30 @@ public class Pistol : MonoBehaviour, IWeapon
         parentTransform = GetComponentInParent<Transform>();
     }
     void Update()
+    {
+        Rotation(); 
+    }
+
+    public void Attack()
+    {
+        if (canAttack && player.Stamina >= valueGun.attackCost)
+        {
+            Bullet bullet = bulletPool.Get();
+            if (bullet != null)
+            {
+                // Set bullet position and direction
+                bullet.SetPosition(transform.position); // Set bullet position to the gun's position
+                Vector3 direction = (targetRotation - transform.position).normalized; // Calculate direction
+                bullet.SetDirection(direction); // Initialize the bullet with the direction
+
+                player.Stamina -= valueGun.attackCost; // Deduct stamina
+                if (player.Stamina < 0) player.Stamina = 0;
+                player.UpdateStaminaBar();
+            }
+        }
+    }
+
+    private void Rotation()
     {
         targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
@@ -47,19 +73,6 @@ public class Pistol : MonoBehaviour, IWeapon
             {
                 pistolSR.flipY = false;
             }
-        }
-    }
-
-    public void Attack()
-    {
-        if (canAttack)
-        {
-            bulletPool.Get();
-            target = (targetRotation - transform.position).normalized;
-            targetRotation.z = 0;
-            player.Stamina -= player.AttackCost;
-            if (player.Stamina < 0) player.Stamina = 0;
-            //player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
         }
     }
 
@@ -83,7 +96,4 @@ public class Pistol : MonoBehaviour, IWeapon
     {
         Destroy(bullet.gameObject);
     }
-
-
-
 }
