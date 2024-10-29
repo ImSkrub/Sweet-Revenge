@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
@@ -21,10 +22,11 @@ public class Pistol : MonoBehaviour, IWeapon
     //booleans
     public bool canRotate = true;
     public bool canAttack = true;
+    public bool pickedUp = false;
 
     private void Awake()
     {
-        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject, true, 10, 10);
+        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject, true, 10, valueGun.maxBullets);
     }
     private void Start()
     {
@@ -33,21 +35,7 @@ public class Pistol : MonoBehaviour, IWeapon
     }
     void Update()
     {
-        targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-        if (canRotate)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-            if (angle > 90 || angle < -90)
-            {
-                pistolSR.flipY = true;
-            }
-            else
-            {
-                pistolSR.flipY = false;
-            }
-        }
+        Rotation(); 
     }
 
     public void Attack()
@@ -65,6 +53,25 @@ public class Pistol : MonoBehaviour, IWeapon
                 player.Stamina -= valueGun.attackCost; // Deduct stamina
                 if (player.Stamina < 0) player.Stamina = 0;
                 player.UpdateStaminaBar();
+            }
+        }
+    }
+
+    private void Rotation()
+    {
+        targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+        if (canRotate)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            if (angle > 90 || angle < -90)
+            {
+                pistolSR.flipY = true;
+            }
+            else
+            {
+                pistolSR.flipY = false;
             }
         }
     }
