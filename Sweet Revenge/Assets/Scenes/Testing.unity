@@ -144494,7 +144494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3880303165023028391, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 37.6306
+      value: 73.963
       objectReference: {fileID: 0}
     - target: {fileID: 3880303165023028391, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_SizeDelta.y
@@ -144550,7 +144550,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5431500292486071754, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_fontSize
-      value: 19.15
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431500292486071754, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431500292486071754, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9003260546611804009, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_Name
@@ -144651,10 +144659,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3149222838435362601, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1445504074}
-    - target: {fileID: 3149222838435362601, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: currentWeapon
       value: 
       objectReference: {fileID: 1951188150}
@@ -144699,26 +144703,14 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7095673868828625585, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-      propertyPath: StaminaBar
+      propertyPath: staminaBar
       value: 
       objectReference: {fileID: 1714023151}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6690118472320966156, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
---- !u!114 &1445504074 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7095673868828625585, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-  m_PrefabInstance: {fileID: 1445504073}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bdda4cfa36f965418742ed066679e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1547079688 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 348961257172501069, guid: cc4768531df57e040bb8d52a68f41773, type: 3}
@@ -145031,7 +145023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3880303165023028391, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 37.6306
+      value: 73.9629
       objectReference: {fileID: 0}
     - target: {fileID: 3880303165023028391, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_SizeDelta.y
@@ -145087,7 +145079,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5431500292486071754, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_fontSize
-      value: 19.15
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431500292486071754, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431500292486071754, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9003260546611804009, guid: dc1987c13916fdb4398da8957ff3d3f3, type: 3}
       propertyPath: m_Name
@@ -145262,6 +145262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorCoinText: {fileID: 1687739899}
   shopCoinText: {fileID: 1211179020}
+  shopCoin: 0
+  doorCoin: 0
 --- !u!4 &1740644803
 Transform:
   m_ObjectHideFlags: 0

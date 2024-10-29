@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,15 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]private Transform target;
     private PlayerLife playerHealth;
+    private EnemyHealth enemyHealth;
     private Vector3 enemyDirection;
     private bool isFacingRight = true;
+    public event Action OnDeath;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        enemyHealth = GetComponent<EnemyHealth>();
         target = FindObjectOfType<Player>().transform;
     }
 
@@ -38,9 +42,10 @@ public class Enemy : MonoBehaviour
         currentTime += Time.deltaTime;
         //anim
     }
-    public void OnDeath()
+    public void Death()
     {
         Destroy(gameObject,0.5f);
+        OnDeath?.Invoke();
     }
     //colision con jugador
     private void OnCollisionEnter2D(Collision2D collision)

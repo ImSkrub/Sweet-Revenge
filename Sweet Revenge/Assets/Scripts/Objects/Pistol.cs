@@ -24,7 +24,7 @@ public class Pistol : MonoBehaviour, IWeapon
 
     private void Awake()
     {
-        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject, true, 10, valueGun.maxBullets);
+        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject, true, 10, 10);
     }
     private void Start()
     {
@@ -52,14 +52,20 @@ public class Pistol : MonoBehaviour, IWeapon
 
     public void Attack()
     {
-        if (canAttack)
+        if (canAttack && player.Stamina >= valueGun.attackCost)
         {
-            bulletPool.Get();
-            target = (targetRotation - transform.position).normalized;
-            targetRotation.z = 0;
-            player.Stamina -= player.AttackCost;
-            if (player.Stamina < 0) player.Stamina = 0;
-            //player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
+            Bullet bullet = bulletPool.Get();
+            if (bullet != null)
+            {
+                // Set bullet position and direction
+                bullet.SetPosition(transform.position); // Set bullet position to the gun's position
+                Vector3 direction = (targetRotation - transform.position).normalized; // Calculate direction
+                bullet.SetDirection(direction); // Initialize the bullet with the direction
+
+                player.Stamina -= valueGun.attackCost; // Deduct stamina
+                if (player.Stamina < 0) player.Stamina = 0;
+                player.UpdateStaminaBar();
+            }
         }
     }
 
@@ -83,7 +89,4 @@ public class Pistol : MonoBehaviour, IWeapon
     {
         Destroy(bullet.gameObject);
     }
-
-
-
 }

@@ -10,7 +10,11 @@ public class Bullet : MonoBehaviour
     private ObjectPool<Bullet> bulletPool;
     private bool isReleased = false;
     private int damage = 25;
-    public ObjectPool<Bullet> Pool { get { return bulletPool; } set { bulletPool = value; } }
+    public ObjectPool<Bullet> Pool
+    {
+        get { return bulletPool; }
+        set { bulletPool = value; }
+    }
 
     private void Update()
     {
@@ -39,6 +43,12 @@ public class Bullet : MonoBehaviour
     {
         transform.position = position;
     }
+
+    public void SetDirection(Vector3 newDirection)
+    {
+        direction = newDirection.normalized; // Ensure the direction is normalized
+    }
+
     private void ApplyDamage(int damage, Collider2D enemy)
     {
         IDamageable damageable = enemy.GetComponent<IDamageable>();
