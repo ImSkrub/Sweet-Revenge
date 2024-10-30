@@ -32,23 +32,38 @@ public class PointManager : MonoBehaviour
         
     }
 
-    private void Update()
+    private void Start()
     {
-        doorCoinText.text = $"{doorCoin}";
-        shopCoinText.text = $"{shopCoin}";
+        // Initialize the text display
+        UpdateCoinTexts();
     }
 
+    // Method to update the coin text displays
+    private void UpdateCoinTexts()
+    {
+        doorCoinText.SetText($"{doorCoin}");
+        shopCoinText.SetText($"{shopCoin}");
+    }
+
+    // Method to add shop coins
     public void AddShopCoin(int value)
     {
         shopCoin += value;
+        UpdateCoinTexts(); // Update the text display
     }
+
+    // Method to add door coins
     public void AddDoorCoin(int value)
     {
-       doorCoin += value;
+        doorCoin += value;
+        UpdateCoinTexts(); // Update the text display
     }
+
+    // Method to reset door coins
     public void RestartDoorCoin()
     {
         doorCoin = 0;
+        UpdateCoinTexts(); // Update the text display
     }
-   
+
 }

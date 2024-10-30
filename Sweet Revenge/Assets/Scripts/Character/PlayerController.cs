@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,23 +10,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxStamina = 100f;
     [SerializeField] private float runCost = 20f;
     [SerializeField] private float staminaRechargeRate = 2f;
-   
+
     private float stamina;
     public float Stamina
     {
-        get => stamina; // Getter
-        set => stamina = Mathf.Max(0, value); // Setter with validation (e.g., no negative values)
+        get => stamina;
+        set => stamina = Mathf.Max(0, value); // Setter with validation
     }
 
     [Header("UI")]
     [SerializeField] private Image staminaBar;
 
-    public Coroutine rechargeCoroutine;
+    private Coroutine rechargeCoroutine;
     private Transform playerTransform;
-    public bool recharging;
-    public bool r = true;
-    public bool canRotate = true;
-
+    public bool isRecharging;
+    
     private void Awake()
     {
         stamina = maxStamina;
@@ -37,6 +36,7 @@ public class PlayerController : MonoBehaviour
         HandleRotation();
         HandleMovement();
     }
+
     private void HandleRotation()
     {
         Vector3 targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(playerTransform.position);
@@ -49,70 +49,59 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = GetInputDirection();
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        if(!isRunning)
-        {
-         r = true;   
-        }
         if (isRunning && stamina > 0)
         {
-            recharging = false;
             Move(moveDir * 2); // Double speed when running
-            stamina -= runCost * Time.deltaTime;
-            if (stamina < 0) stamina = 0;
+            Stamina -= runCost * Time.deltaTime;
             UpdateStaminaBar();
-            // Start recharge coroutine if stamina is above 0 and not already running
-            if (stamina < maxStamina)
-            {
-                rechargeCoroutine = StartCoroutine(RechargeStamina());
-            }
+            StartRechargeCoroutine();
         }
         else
         {
             Move(moveDir);
-            // Start recharge coroutine if not running and stamina is below max
-            if (stamina < maxStamina && !recharging && r)
-            {
-                rechargeCoroutine = StartCoroutine(RechargeStamina());
-            }
+            StartRechargeCoroutine();
         }
     }
 
     private Vector3 GetInputDirection()
     {
-        //vector normalized for direction
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         return new Vector3(horizontal, vertical).normalized;
     }
+
     private void Move(Vector3 direction)
     {
         playerTransform.position += direction * speed * Time.deltaTime;
     }
 
-    public IEnumerator RechargeStamina()
+    private void StartRechargeCoroutine()
+    {
+        if (stamina < maxStamina && !isRecharging)
+        {
+            isRecharging = true;
+            if (rechargeCoroutine != null)
+            {
+                StopCoroutine(rechargeCoroutine);
+            }
+            rechargeCoroutine = StartCoroutine(RechargeStamina());
+        }
+    }
+
+    private IEnumerator RechargeStamina()
     {
         yield return new WaitForSeconds(1.5f);
-        if (r)
-        {
         while (stamina < maxStamina)
         {
-            recharging = true;
-            stamina += staminaRechargeRate * Time.deltaTime;
-            stamina = Mathf.Clamp(stamina,0, maxStamina); // Clamp stamina to maxStamina
+            Stamina += staminaRechargeRate * Time.deltaTime;
             UpdateStaminaBar();
             yield return null; // Wait for the next frame
         }
-        if(stamina == maxStamina)
-        {
-            r = false;    
-        }
-        }
-
-        
+        isRecharging = false; // Reset the recharging state
     }
 
-    public void UpdateStaminaBar()
+   public void UpdateStaminaBar()
     {
-        staminaBar.fillAmount = stamina/maxStamina;
+        staminaBar.fillAmount = stamina / maxStamina;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour
     
     private IWeapon weapon;
     public PlayerController player;
-
+    public event Action equipped;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -25,16 +26,15 @@ public class Player : MonoBehaviour
         // Check if the player can attack
         if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay)
         {
-           
-            player.recharging = false;
+            player.isRecharging= false;
             weapon?.Attack();
-            player.r = true;
             lastAttackTime = Time.time; // Update the last attack time
         }
     }
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
+        equipped.Invoke();
     }
 
     public void ApplyEffectPowerUp(IPowerUp powerUp)
@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
             SetWeapon(collision.gameObject.GetComponent<IWeapon>());
             collision.gameObject.transform.SetParent(weaponSlot);
             collision.gameObject.transform.position = weaponSlot.position;
-            //agregar codigo para que vuelva a la posicion donde se agarro asi no se elimina.
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))

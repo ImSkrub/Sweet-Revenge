@@ -282,11 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6664644015094670130, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.43
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 6664644015094670130, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.047
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6690118472320966156, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_Layer
@@ -310,7 +310,7 @@ PrefabInstance:
       objectReference: {fileID: 1534702246}
     - target: {fileID: 7095673868828625585, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: staminaRechargeRate
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8432209008377885961, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_SortingOrder
@@ -712,6 +712,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7477256744555536310, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
       propertyPath: bullet
+      value: 
+      objectReference: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
+    - target: {fileID: 7477256744555536310, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
+      propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
     - target: {fileID: 7566356605575177470, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}

@@ -18,7 +18,10 @@ public class EnemyRanged: MonoBehaviour
     //Timers
     private float cooldownTimer;
     private float currentTime;
-
+    private void Awake()
+    {
+        target = FindObjectOfType<Player> ().transform;
+    }
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
