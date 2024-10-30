@@ -5,12 +5,9 @@ using UnityEngine;
 public class EnemyRanged: MonoBehaviour
 {
     [Header("Attack")]
-    [SerializeField] private float attackCooldown = 1f;
-    [SerializeField] private float rangeToAttack = 10f;
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private Transform target;
-    [SerializeField] private float damage = 25f;
-
+    [SerializeField] private EnemiesValues rangedData;
+    private Transform target;
+ 
     [Header("References")]
     private PlayerLife playerHealth;
 
@@ -20,7 +17,8 @@ public class EnemyRanged: MonoBehaviour
     private float currentTime;
     private void Awake()
     {
-        target = FindObjectOfType<Player> ().transform;
+        target = FindObjectOfType<Player>().transform;
+        playerHealth = FindObjectOfType<PlayerLife>();
     }
     private void Update()
     {
@@ -29,7 +27,7 @@ public class EnemyRanged: MonoBehaviour
 
         if (PlayerInSight())
         {
-            if (cooldownTimer >= attackCooldown)
+            if (cooldownTimer >=  rangedData.attackCooldown)
             {
                 cooldownTimer = 0;
                 Attack();
@@ -44,10 +42,10 @@ public class EnemyRanged: MonoBehaviour
         //direction to player
         Vector2 directionToPlayer = (target.position - transform.position).normalized;
         //Cast a ray from enemy to player. Make sure player has PlayerLife script
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, rangeToAttack, playerLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer,rangedData.rangeToAttack, rangedData.playerLayer);
 
         //drawing the ray in scene.
-        Debug.DrawRay(transform.position, directionToPlayer * rangeToAttack, Color.red);
+        Debug.DrawRay(transform.position, directionToPlayer * rangedData.rangeToAttack, Color.red);
 
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
@@ -63,7 +61,7 @@ public class EnemyRanged: MonoBehaviour
         if (PlayerInSight())
         {
             //hacer la logica del ranged attack
-            playerHealth.GetDamage(damage);
+            playerHealth.GetDamage(rangedData.damage);
         }
     }
 
