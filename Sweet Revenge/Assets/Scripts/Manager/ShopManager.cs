@@ -72,6 +72,7 @@ public class ShopManager : MonoBehaviour
             currentCoins -= item.cost;
             item.quantity++;
             item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
+            ApplyItem(item);
             //player logic, change current weapon, apply power up.
         }
     }
@@ -104,8 +105,8 @@ public class Item {
     public string itemName;
     public int cost;
     public Sprite image;
+    public GameObject itemRef;
     [HideInInspector] public int quantity;
-    [HideInInspector] public GameObject itemRef;
 }
 
 
