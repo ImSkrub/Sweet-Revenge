@@ -176,15 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7367d91932126db4f8fc3ee0426679aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  attackCooldown: 0.2
-  velocity: 15
-  rangeToAttack: 10
-  closestDist: 1
-  lerpSpeedRotation: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  enemyData: {fileID: 11400000, guid: 143e68afc32aeaa42ab4546c275e3e61, type: 2}
   Name: Zombie
   target: {fileID: 0}
 --- !u!50 &7109243454796781215
