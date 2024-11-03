@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private Player player;
+    private PlayerLife player;
 
 
     private void Awake()
@@ -23,7 +23,11 @@ public class GameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        player.GetComponent<PlayerLife>().OnDeath += FinishGame;
+    }
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerLife>();
+        player.OnDeath += LoseGame;
     }
 
     private void Update()
@@ -36,18 +40,14 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void CompleteGame()
+    public void WinGame()
     {
-       
-        SceneManager.LoadScene(14);
-       
+       SceneManager.LoadScene(3);
     }
 
-    public void FinishGame()
+    public void LoseGame()
     {
-       
-        SceneManager.LoadScene(12);
-       
+       SceneManager.LoadScene(4);
     }
 
    

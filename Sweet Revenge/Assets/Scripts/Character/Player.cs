@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,39 +10,31 @@ public class Player : MonoBehaviour
     [Header("Weapon")]
     [SerializeField] private Transform weaponSlot;
     private float attackDelay = 0.5f;
-    private float currentTime;
+    private float lastAttackTime;
     [Header("UI")]
     [SerializeField] private Image currentWeapon;
     
     private IWeapon weapon;
     public PlayerController player;
-
+    public event Action equipped;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
     }
     private void Update()
     {
-        currentTime = Time.deltaTime;
-        if ((Input.GetKeyDown(KeyCode.Mouse0)&&player.Stamina >0))
+        // Check if the player can attack
+        if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay)
         {
-            if (player.recharge != null)
-            {
-                StopCoroutine(player.recharge);
-            }
-            else 
-            {
-                player.recharge = StartCoroutine(player.RechargeStamina());
-                weapon?.Attack();
-                
-            }
-
+            player.isRecharging= false;
+            weapon?.Attack();
+            lastAttackTime = Time.time; // Update the last attack time
         }
     }
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
-        
+        equipped.Invoke();
     }
 
     public void ApplyEffectPowerUp(IPowerUp powerUp)
@@ -63,7 +56,6 @@ public class Player : MonoBehaviour
             SetWeapon(collision.gameObject.GetComponent<IWeapon>());
             collision.gameObject.transform.SetParent(weaponSlot);
             collision.gameObject.transform.position = weaponSlot.position;
-            //agregar codigo para que vuelva a la posicion donde se agarro asi no se elimina.
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))

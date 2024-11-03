@@ -34,9 +34,6 @@ public class PauseController : MonoBehaviour
     public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
-        player.canRotate = false;
-        pistol.canRotate = false;
-        pistol.canAttack = false;
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -44,9 +41,6 @@ public class PauseController : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
-        player.canRotate = true;
-        pistol.canRotate = true;
-        pistol.canAttack = true;
         Time.timeScale = 1f; 
         isPaused = false;
     }

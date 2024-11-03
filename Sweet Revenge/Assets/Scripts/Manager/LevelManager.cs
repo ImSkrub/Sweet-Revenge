@@ -16,13 +16,14 @@ public class LevelManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
+            return;
         }
         DontDestroyOnLoad(gameObject);
+
 
     }
 
@@ -30,11 +31,13 @@ public class LevelManager : MonoBehaviour
     {
         currentLevelIndex++;
         LoadLevel(currentLevelIndex);
+        PointManager.Instance.RestartDoorCoin();
     }
 
     public void RestartLevel()
     {
         LoadLevel(currentLevelIndex);
+        PointManager.Instance.RestartDoorCoin();
 
     }
 

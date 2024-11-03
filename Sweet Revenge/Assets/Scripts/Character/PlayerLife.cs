@@ -8,16 +8,18 @@ public class PlayerLife : MonoBehaviour
 {
     //Parametres
     [Header("Parametres")]
-    [SerializeField] private float currentHealth;
-    public float CurrentHealth => currentHealth;
     [SerializeField] private float maxHealth = 100;
-     private SpriteRenderer spriteRenderer;
+    [SerializeField] private float damageCooldown = 1f;
+    [SerializeField] private float currentHealth;
+    public float CurrentHealth { get { return CurrentHealth; } set { if (CurrentHealth >= 0) currentHealth = value; } }
+    private SpriteRenderer spriteRenderer;
    // private Animation anim;
     private float currentTime;
     public event Action OnDeath;
     
     //Color on hit
-    public Color damageColor= Color.red;
+    [SerializeField] private Color damageColor = Color.red;
+    [SerializeField] private Color lifeGainColor = Color.green;
     private Color originalColor;
 
     [SerializeField] private Image lifeBar;
@@ -35,7 +37,7 @@ public class PlayerLife : MonoBehaviour
     private void Update()
     {
         lifeBar.fillAmount =currentHealth/maxHealth;
-        currentTime = Time.deltaTime;
+        currentTime += Time.deltaTime;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -50,12 +52,17 @@ public class PlayerLife : MonoBehaviour
         spriteRenderer.color = damageColor;
         Invoke("RestoreColor", 0.5F);
     }
+    public void RestoreLife(int value)
+    {
+        currentHealth += value;
+        spriteRenderer.color = lifeGainColor;
+        Invoke("RestoreColor", 0.5f);
+    }
 
     private void RestoreColor()
     {
         spriteRenderer.color = originalColor;
     }
-
 
     public void Death()
     {
@@ -64,4 +71,14 @@ public class PlayerLife : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    public PlayerMemento SaveState()
+    {
+        return new PlayerMemento(transform.position, maxHealth);
+    }
+
+    public void RestoreState(PlayerMemento state)
+    {
+        transform.position = state.position;
+        this.currentHealth = state.health;
+    }
 }
