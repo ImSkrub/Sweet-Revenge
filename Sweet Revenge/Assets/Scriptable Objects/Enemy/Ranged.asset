@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626148bfa3baaaf43ae887523572d6e4, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  damage: 0
-  attackCooldown: 0
+  damage: 25
+  attackCooldown: 1
   velocity: 10
-  rangeToAttack: 0
-  closestDist: 0
+  rangeToAttack: 10
+  closestDist: 1
   lerpSpeedRotation: 0
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
-  Name: 
+    m_Bits: 8
+  Name: Ranged

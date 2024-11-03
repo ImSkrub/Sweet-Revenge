@@ -1,91 +1,107 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
-    [Header("Parameters")]   
-    [SerializeField] private float speed;
-    [SerializeField] private bool running = false;
-    [SerializeField] private Transform player;
-    [SerializeField] public float Stamina, MaxStamina;
-    [SerializeField] public float AttackCost;
-    [SerializeField] private float RunCost;
-    [SerializeField] private float ChargeRate;
+    [Header("Parameters")]
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float maxStamina = 100f;
+    [SerializeField] private float runCost = 20f;
+    [SerializeField] private float staminaRechargeRate = 2f;
+
+    private float stamina;
+    public float Stamina
+    {
+        get => stamina;
+        set => stamina = Mathf.Max(0, value); // Setter with validation
+    }
 
     [Header("UI")]
-    [SerializeField] public Image StaminaBar;
-    public Coroutine recharge;
+    [SerializeField] private Image staminaBar;
 
-    private Vector3 targetRotation;
-    private Vector3 target;
-
-    public bool canRotate = true;
-
+    private Coroutine rechargeCoroutine;
+    private Transform playerTransform;
+    public bool isRecharging;
+    
     private void Awake()
     {
-        Stamina = MaxStamina;
+        stamina = maxStamina;
+        playerTransform = transform;
     }
 
     void Update()
     {
-        targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-        if(canRotate) player.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        Move();
+        HandleRotation();
+        HandleMovement();
     }
 
-  
-    public IEnumerator RechargeStamina()
+    private void HandleRotation()
     {
-        yield return new WaitForSeconds(1f);
-
-        while (Stamina <= MaxStamina)
-        {
-            Stamina += ChargeRate / 10f;
-            StaminaBar.fillAmount = Stamina / MaxStamina;
-            if (Stamina >= MaxStamina)
-            {
-                Stamina = MaxStamina;
-            }
-            yield return new WaitForSeconds(1f);
-        }
+        Vector3 targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(playerTransform.position);
+        float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+        playerTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    private void Move()
+    private void HandleMovement()
     {
-        var horizontal = Input.GetAxisRaw("Horizontal");
-        var vertical = Input.GetAxisRaw("Vertical");
-        var MoveDir = new Vector3(horizontal, vertical).normalized;
+        Vector3 moveDir = GetInputDirection();
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (isRunning && stamina > 0)
         {
-            running = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-
-            running = false;
-        }
-
-        if (running && (MoveDir.x != 0 || MoveDir.y != 0) && Stamina > 0)
-        {
-            transform.position += MoveDir * Time.deltaTime * speed * 2;
-            Stamina -= RunCost * Time.deltaTime;
-            if (Stamina < 0) Stamina = 0;
-            StaminaBar.fillAmount = Stamina / MaxStamina;
-
-            if (recharge != null)
-            {
-              StopCoroutine(recharge);
-            }
-            else
-            {
-              recharge = StartCoroutine(RechargeStamina());
-            }
-
+            Move(moveDir * 2); // Double speed when running
+            Stamina -= runCost * Time.deltaTime;
+            UpdateStaminaBar();
+            StartRechargeCoroutine();
         }
         else
-            transform.position += MoveDir * Time.deltaTime * speed;
+        {
+            Move(moveDir);
+            StartRechargeCoroutine();
+        }
+    }
+
+    private Vector3 GetInputDirection()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        return new Vector3(horizontal, vertical).normalized;
+    }
+
+    private void Move(Vector3 direction)
+    {
+        playerTransform.position += direction * speed * Time.deltaTime;
+    }
+
+    private void StartRechargeCoroutine()
+    {
+        if (stamina < maxStamina && !isRecharging)
+        {
+            isRecharging = true;
+            if (rechargeCoroutine != null)
+            {
+                StopCoroutine(rechargeCoroutine);
+            }
+            rechargeCoroutine = StartCoroutine(RechargeStamina());
+        }
+    }
+
+    private IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (stamina < maxStamina)
+        {
+            Stamina += staminaRechargeRate * Time.deltaTime;
+            UpdateStaminaBar();
+            yield return null; // Wait for the next frame
+        }
+        isRecharging = false; // Reset the recharging state
+    }
+
+   public void UpdateStaminaBar()
+    {
+        staminaBar.fillAmount = stamina / maxStamina;
     }
 }
