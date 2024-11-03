@@ -28,7 +28,7 @@ public class SpawnerEnemy : MonoBehaviour
     {
         if(enemiesPerRound >= spawnCount)
         {
-            currentRound++;
+            //currentRound++;
             spawnCount = 0;
         }
     }

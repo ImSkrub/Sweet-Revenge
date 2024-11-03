@@ -31,24 +31,24 @@ public class Pistol : MonoBehaviour, IWeapon
         pistolSR = GetComponent<SpriteRenderer>();
         parentTransform = GetComponentInParent<Transform>();
     }
-    void Update()
-    {
-        targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-        if (canRotate)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    //void Update()
+    //{
+    //    targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+    //    var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+    //    if (canRotate)
+    //    {
+    //        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-            if (angle > 90 || angle < -90)
-            {
-                pistolSR.flipY = true;
-            }
-            else
-            {
-                pistolSR.flipY = false;
-            }
-        }
-    }
+    //        if (angle > 90 || angle < -90)
+    //        {
+    //            pistolSR.flipY = true;
+    //        }
+    //        else
+    //        {
+    //            pistolSR.flipY = false;
+    //        }
+    //    }
+    //}
 
     public void Attack()
     {
