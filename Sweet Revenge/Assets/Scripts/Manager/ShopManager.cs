@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-
     public static ShopManager instance;
     [Header("Items for shop")]
     [SerializeField] private Item[] items;
@@ -17,12 +16,14 @@ public class ShopManager : MonoBehaviour
     public Transform shopContent;
     public GameObject itemPrefab;
     private Player player;
-    private int currentCoins=0;
+    private int currentCoins = 0;
 
+    // Reference to the spawn point
+    [SerializeField] private Transform itemSpawnPoint;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -37,15 +38,15 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         currentCoins = PointManager.Instance._shopCoin;
-        foreach (Item item in items) {
+        foreach (Item item in items)
+        {
             GameObject _item = Instantiate(itemPrefab, shopContent);
-            item.itemRef = _item;
             foreach (Transform child in _item.transform)
             {
-                if(child.gameObject.name == "Quantity")
+                if (child.gameObject.name == "Quantity")
                 {
                     child.gameObject.GetComponent<TMP_Text>().SetText(item.quantity.ToString());
-                } 
+                }
                 else if (child.gameObject.name == "Cost")
                 {
                     child.gameObject.GetComponent<TMP_Text>().SetText(item.cost.ToString());
@@ -56,27 +57,31 @@ public class ShopManager : MonoBehaviour
                 }
                 else if (child.gameObject.name == "Image")
                 {
-                    child.gameObject.GetComponent<Image>().sprite= item.image;
+                    child.gameObject.GetComponent<Image>().sprite = item.image;
                 }
             }
-            _item.GetComponent<Button>().onClick.AddListener(()=> {BuyItem(item);});
+            _item.GetComponent<Button>().onClick.AddListener(() => { BuyItem(item); });
         }
-        
-
     }
 
     public void BuyItem(Item item)
     {
-        if(currentCoins>= item.cost)
+        if (currentCoins >= item.cost)
         {
             currentCoins -= item.cost;
             item.quantity++;
             item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
-            ApplyItem(item);
-            //player logic, change current weapon, apply power up.
+            //ApplyItem(item);
+            SpawnItem(item); // Spawn the item in the world
         }
     }
 
+    private void SpawnItem(Item item)
+    {
+        GameObject spawnedItem = Instantiate(item.itemPrefab, itemSpawnPoint.position, Quaternion.identity);
+    }
+
+    //Usar ApplyItem si queremos hacer items de modificacion no temporal.
     public void ApplyItem(Item item)
     {
         switch (item.itemName)
@@ -87,6 +92,7 @@ public class ShopManager : MonoBehaviour
             case "SpikeBat":
                 player.SetWeapon(item.itemRef.gameObject.GetComponent<IWeapon>());
                 break;
+            
         }
     }
 
@@ -94,6 +100,7 @@ public class ShopManager : MonoBehaviour
     {
         shopUI.SetActive(!shopUI.activeSelf);
     }
+
     private void OnGUI()
     {
         coinText.SetText("Coins: " + currentCoins);
@@ -105,7 +112,8 @@ public class Item {
     public string itemName;
     public int cost;
     public Sprite image;
-    public GameObject itemRef;
+    public GameObject itemPrefab;
+    [HideInInspector]public GameObject itemRef;
     [HideInInspector] public int quantity;
 }
 

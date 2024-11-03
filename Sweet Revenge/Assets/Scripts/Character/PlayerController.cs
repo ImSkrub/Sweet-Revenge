@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
         get => stamina;
         set => stamina = Mathf.Max(0, value); // Setter with validation
     }
+    public float MovementSpeed
+    {
+        get => speed;
+        set => speed = Mathf.Max(0, value); // Setter with validation
+    }
 
     [Header("UI")]
     [SerializeField] private Image staminaBar;

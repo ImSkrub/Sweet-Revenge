@@ -158,9 +158,9 @@ RectTransform:
   m_Father: {fileID: 1764026343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &24194858
 MonoBehaviour:
@@ -335,6 +335,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287219415}
   m_CullTransparentMesh: 1
+--- !u!1 &292555708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292555709}
+  m_Layer: 0
+  m_Name: SpawnItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &292555709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292555708}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.22, y: 2.03, z: 5.7205505}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &295994464
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +401,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 351.49954}
-  m_SizeDelta: {x: 0, y: 703}
+  m_SizeDelta: {x: -1260, y: 703}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &295994466
 MonoBehaviour:
@@ -144261,7 +144292,7 @@ RectTransform:
   m_Father: {fileID: 1527627783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -144321,7 +144352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &530108130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144553,12 +144584,14 @@ MonoBehaviour:
   - itemName: Warhammer
     cost: 1000
     image: {fileID: 1764687209, guid: 7f6adea634b3e0946814afa5f7f5a73a, type: 3}
+    itemPrefab: {fileID: 4172010714539424532, guid: 90dec5095978add4ea98f52210aba471, type: 3}
     itemRef: {fileID: 2973998461811780404, guid: e01be067a95470b4eb48088b0427a96e, type: 3}
     quantity: 0
   shopUI: {fileID: 530108129}
   coinText: {fileID: 1807470803}
   shopContent: {fileID: 295994465}
   itemPrefab: {fileID: 634377645338783148, guid: 26667747fd85ccb41a10e35d671f7175, type: 3}
+  itemSpawnPoint: {fileID: 292555709}
 --- !u!4 &912404363
 Transform:
   m_ObjectHideFlags: 0
@@ -147152,5 +147185,6 @@ SceneRoots:
   - {fileID: 6401592241564339514}
   - {fileID: 2124780264}
   - {fileID: 706495317}
+  - {fileID: 292555709}
   - {fileID: 912404363}
   - {fileID: 1114186447}

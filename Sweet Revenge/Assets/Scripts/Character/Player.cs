@@ -12,11 +12,11 @@ public class Player : MonoBehaviour
     private float attackDelay = 0.5f;
     private float lastAttackTime;
     [Header("UI")]
-    [SerializeField] private Image currentWeapon;
-    
+        
     private IWeapon weapon;
     public PlayerController player;
-    public event Action equipped;
+  
+    public event Action Equipped;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -34,7 +34,8 @@ public class Player : MonoBehaviour
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
-        equipped.Invoke();
+        
+        Equipped.Invoke();
     }
 
     public void ApplyEffectPowerUp(IPowerUp powerUp)
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
             {
                 Destroy(weaponSlot.GetChild(0).gameObject);
             }
+            
             SetWeapon(collision.gameObject.GetComponent<IWeapon>());
             collision.gameObject.transform.SetParent(weaponSlot);
             collision.gameObject.transform.position = weaponSlot.position;

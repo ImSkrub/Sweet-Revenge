@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
-    public string Name { get; private set; } = "Pistol";
+    public string Name { get;private set; } = "Pistol";
     [Header("Parameters")]
     [SerializeField] Parameters valueGun;
     [SerializeField] private Bullet bulletPrefab;
@@ -29,7 +29,7 @@ public class Pistol : MonoBehaviour, IWeapon
         pistolSR = GetComponent<SpriteRenderer>();
         parentTransform = GetComponentInParent<Transform>();
         player = FindObjectOfType<Player>();
-        player.equipped += Gun_equipped;
+        player.Equipped += Gun_equipped;
     }
 
     private void Gun_equipped()
