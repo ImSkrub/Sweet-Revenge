@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1311028509660312670}
   - component: {fileID: 3149222838435362601}
   - component: {fileID: 2896864044589723802}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 354a8cd0ba77ccf4e949d4cbd86967c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   damageCooldown: 1
   currentHealth: 0
   damageColor: {r: 1, g: 0, b: 0, a: 1}
-  lifeGainColor: {r: 0, g: 1, b: 0, a: 1}
+  lifeGainColor: {r: 0, g: 1, b: 0.049598217, a: 1}
   lifeBar: {fileID: 0}
 --- !u!114 &3149222838435362601
 MonoBehaviour:
@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 6664644015094670130}
-  currentWeapon: {fileID: 0}
   player: {fileID: 7095673868828625585}
 --- !u!70 &2896864044589723802
 CapsuleCollider2D:
@@ -236,7 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6510527663029822289}
   - component: {fileID: 1111347596277579821}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6664644015094670130}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: WeaponSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +332,7 @@ Transform:
   m_GameObject: {fileID: 2892388928123035167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.95, y: -0.11, z: 0}
+  m_LocalPosition: {x: 1.52, y: -0.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,6 +9,7 @@ public class ShopTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             ShopManager.instance.ToggleShop();
+            
         }
         
     }

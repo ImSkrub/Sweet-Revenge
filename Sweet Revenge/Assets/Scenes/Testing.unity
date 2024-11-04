@@ -360,7 +360,7 @@ Transform:
   m_GameObject: {fileID: 292555708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.22, y: 2.03, z: 5.7205505}
+  m_LocalPosition: {x: 7.06, y: 2.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -434,8 +434,8 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
-  m_Spacing: 40
+  m_ChildAlignment: 4
+  m_Spacing: 60
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -144581,6 +144581,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
+  - itemName: Warhammer
+    cost: 1000
+    image: {fileID: 1764687209, guid: 7f6adea634b3e0946814afa5f7f5a73a, type: 3}
+    itemPrefab: {fileID: 4172010714539424532, guid: 90dec5095978add4ea98f52210aba471, type: 3}
+    itemRef: {fileID: 2973998461811780404, guid: e01be067a95470b4eb48088b0427a96e, type: 3}
+    quantity: 0
+  - itemName: Spike Bat
+    cost: 500
+    image: {fileID: 883212538, guid: 7f6adea634b3e0946814afa5f7f5a73a, type: 3}
+    itemPrefab: {fileID: 4172010714539424532, guid: 90dec5095978add4ea98f52210aba471, type: 3}
+    itemRef: {fileID: 2973998461811780404, guid: e01be067a95470b4eb48088b0427a96e, type: 3}
+    quantity: 0
+  - itemName: Potion
+    cost: 1000
+    image: {fileID: 21300000, guid: 73a1bd83ca4bd62449ab180becb58eaa, type: 3}
+    itemPrefab: {fileID: 4172010714539424532, guid: 90dec5095978add4ea98f52210aba471, type: 3}
+    itemRef: {fileID: 2973998461811780404, guid: e01be067a95470b4eb48088b0427a96e, type: 3}
+    quantity: 0
   - itemName: Warhammer
     cost: 1000
     image: {fileID: 1764687209, guid: 7f6adea634b3e0946814afa5f7f5a73a, type: 3}

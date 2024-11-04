@@ -15,11 +15,10 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]private Transform target;
     private PlayerLife playerHealth;
-    private EnemyHealth enemyHealth;
+    public EnemyHealth enemyHealth;
     private Vector3 enemyDirection;
     private bool isFacingRight = true;
-    public event Action OnDeath;
-
+  
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,16 +29,12 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = enemyDirection.normalized * enemyData.velocity;
+        
     }
     private void Update()
     {
         currentTime += Time.deltaTime;
         //anim
-    }
-    public void Death()
-    {
-        Destroy(gameObject,0.5f);
-        OnDeath?.Invoke();
     }
     //colision con jugador
     private void OnCollisionEnter2D(Collision2D collision)

@@ -29,12 +29,35 @@ public class PointManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+
         
     }
 
     private void Start()
     {
-        // Initialize the text display
+        // Busca los objetos en la escena por su nombre
+        GameObject doorCoinObject = GameObject.Find("DoorCoin");
+        GameObject shopCoinObject = GameObject.Find("ShopCoin");
+
+        // Asegúrate de que los objetos se encontraron antes de intentar acceder a sus componentes
+        if (doorCoinObject != null)
+        {
+            doorCoinText = doorCoinObject.GetComponent<TMP_Text>();
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'DoorCoin' en la escena.");
+        }
+
+        if (shopCoinObject != null)
+        {
+            shopCoinText = shopCoinObject.GetComponent<TMP_Text>();
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'ShopCoin' en la escena.");
+        }
+
         UpdateCoinTexts();
     }
 

@@ -41,6 +41,7 @@ public class ShopManager : MonoBehaviour
         foreach (Item item in items)
         {
             GameObject _item = Instantiate(itemPrefab, shopContent);
+            item.itemRef = _item;
             foreach (Transform child in _item.transform)
             {
                 if (child.gameObject.name == "Quantity")
@@ -113,7 +114,7 @@ public class Item {
     public int cost;
     public Sprite image;
     public GameObject itemPrefab;
-    [HideInInspector]public GameObject itemRef;
+    [HideInInspector] public GameObject itemRef;
     [HideInInspector] public int quantity;
 }
 
