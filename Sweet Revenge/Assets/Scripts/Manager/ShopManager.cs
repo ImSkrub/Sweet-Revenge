@@ -17,6 +17,10 @@ public class ShopManager : MonoBehaviour
     public GameObject itemPrefab;
     private Player player;
     private int currentCoins = 0;
+    [Header("Chest")]
+    [SerializeField] private GameObject chestPrefab; // Reference to the chest prefab
+    private Chest chestInstance; // Reference to the chest instance
+
 
     // Reference to the spawn point
     [SerializeField] private Transform itemSpawnPoint;
@@ -33,6 +37,7 @@ public class ShopManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         player = FindObjectOfType<Player>();
+        chestInstance = FindObjectOfType<Chest>();
     }
 
     private void Start()
@@ -65,6 +70,13 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) // Change to your desired input
+        {
+            OpenChest();
+        }
+    }
     public void BuyItem(Item item)
     {
         if (currentCoins >= item.cost)
@@ -72,14 +84,9 @@ public class ShopManager : MonoBehaviour
             currentCoins -= item.cost;
             item.quantity++;
             item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
-            //ApplyItem(item);
-            SpawnItem(item); // Spawn the item in the world
+            // Allow the chest to be opened after a purchase
+            chestInstance.SetCanOpen(true);
         }
-    }
-
-    private void SpawnItem(Item item)
-    {
-        GameObject spawnedItem = Instantiate(item.itemPrefab, itemSpawnPoint.position, Quaternion.identity);
     }
 
     //Usar ApplyItem si queremos hacer items de modificacion no temporal.
@@ -94,6 +101,37 @@ public class ShopManager : MonoBehaviour
                 player.SetWeapon(item.itemRef.gameObject.GetComponent<IWeapon>());
                 break;
             
+        }
+    }
+
+    private void OpenChest()
+    {
+        if (chestInstance != null)
+        {
+            chestInstance.OpenChest();
+            SpawnPurchasedItems();
+        }
+    }
+
+    private void SpawnPurchasedItems()
+    {
+        bool itemsSpawned = false; // Track if any items were spawned
+
+        foreach (Item item in items)
+        {
+            if (item.quantity > 0)
+            {
+                // Notify the chest to spawn the item
+                chestInstance.SpawnItem(item.itemPrefab);
+                item.quantity = 0; // Reset quantity after spawning
+                itemsSpawned = true; // Mark that items were spawned
+            }
+        }
+
+        // If items were spawned, allow the chest to be opened again
+        if (itemsSpawned)
+        {
+            chestInstance.SetCanOpen(true);
         }
     }
 

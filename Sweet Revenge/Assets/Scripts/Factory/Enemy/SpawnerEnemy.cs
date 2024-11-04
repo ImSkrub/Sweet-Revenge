@@ -20,45 +20,68 @@ public class SpawnerEnemy : MonoBehaviour
 
     private int spawnCount = 0;
     private int activeEnemies = 0;
+    private float spawnTimer = 0f; // Temporizador para el intervalo de spawn
+    private float roundTimer = 0f; // Temporizador para el tiempo entre rondas
+    private bool isSpawning = false; // Indica si se están generando enemigos
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(SpawnEnemiesRoutine());
+        if (currentRound <= maxRounds)
+        {
+            if (isSpawning)
+            {
+                // Manejar el temporizador de spawn
+                spawnTimer += Time.deltaTime;
+                if (spawnTimer >= spawnInterval && spawnCount < CalculateEnemiesPerRound())
+                {
+                    SpawnEnemies();
+                    spawnTimer = 0f; // Reiniciar el temporizador
+                }
+
+                // Verificar si todos los enemigos han sido derrotados
+                if (activeEnemies == 0 && spawnCount >= CalculateEnemiesPerRound() && spawnCount > 0)
+                {
+                    isSpawning = false; // Detener la generación de enemigos
+                    roundTimer = 0f; // Reiniciar el temporizador de ronda
+                    Debug.Log($"Round {currentRound} completed.");
+                }
+            }
+            else
+            {
+                // Manejar el temporizador entre rondas
+                roundTimer += Time.deltaTime;
+                if (roundTimer >= timeBetweenRounds)
+                {
+                    // Recompensar al jugador y avanzar a la siguiente ronda
+                    int coinsRewarded = CalculateCoinsReward(currentRound);
+                    RewardPlayer(coinsRewarded);
+                    currentRound++;
+                    spawnCount = 0; // Reiniciar el contador de enemigos por ronda
+                    isSpawning = true; // Comenzar a generar enemigos
+                }
+            }
+        }
+        else
+        {
+            // Aquí puedes agregar lógica para lo que sucede después de alcanzar el número máximo de rondas
+            Debug.Log("Se ha alcanzado el número máximo de rondas.");
+        }
     }
 
-    private IEnumerator SpawnEnemiesRoutine()
+
+    private void SpawnEnemies()
     {
-        while (currentRound <= maxRounds) // Loop hasta que se alcance el número máximo de rondas
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        string enemyType = enemyTypeToSpawn[Random.Range(0, enemyTypeToSpawn.Count)];
+        for (int i = 0; i < enemiesPerSpawn; i++)
         {
-            // Calcular el número de enemigos por ronda
-            int enemiesPerRound = CalculateEnemiesPerRound();
-            spawnCount = 0; // Reiniciar el contador de enemigos por ronda
-            activeEnemies = 0; // Reiniciar el conteo de enemigos activos
-
-            // Generar enemigos hasta alcanzar el límite de enemigos por ronda
-            while (spawnCount < enemiesPerRound)
-            {
-                yield return new WaitForSeconds(spawnInterval);
-
-                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                string enemyType = enemyTypeToSpawn[Random.Range(0, enemyTypeToSpawn.Count)];
-                SpawnEnemies(enemyType, spawnPoint.position, enemiesPerSpawn);
-            }
-
-            // Esperar hasta que todos los enemigos activos sean derrotados
-            yield return new WaitUntil(() => activeEnemies == 0);
-
-            // Recompensar al jugador después de cada ronda
-            int coinsRewarded = CalculateCoinsReward(currentRound);
-            RewardPlayer(coinsRewarded);
-
-            // Esperar antes de comenzar la siguiente ronda
-            yield return new WaitForSeconds(timeBetweenRounds);
-            currentRound++;
+            Enemy newEnemy = enemyFactory.CreateEnemy(enemyType);
+            newEnemy.transform.position = spawnPoint.position;
+            activeEnemies++; // Incrementar el conteo de enemigos activos
+            newEnemy.enemyHealth.OnDeath += OnEnemyDeath; // Suscribirse al evento de muerte del enemigo
+            Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
         }
-
-        // Aquí puedes agregar lógica para lo que sucede después de alcanzar el número máximo de rondas
-        Debug.Log("Se ha alcanzado el número máximo de rondas.");
+        spawnCount++; // Incrementar el contador de enemigos generados
     }
 
     private int CalculateEnemiesPerRound()
@@ -76,17 +99,6 @@ public class SpawnerEnemy : MonoBehaviour
     {
         PointManager.Instance.AddShopCoin(coins);
         Debug.Log($"Player rewarded with {coins} coins for completing round {currentRound}.");
-    }
-
-    private void SpawnEnemies(string enemyType, Vector3 position, int enemiesPerSpawn)
-    {
-        for (int i = 0; i < enemiesPerSpawn; i++)
-        {
-            Enemy newEnemy = enemyFactory.CreateEnemy(enemyType);
-            newEnemy.transform.position = position;
-            activeEnemies++; // Incrementar el conteo de enemigos activos
-            newEnemy.enemyHealth.OnDeath += OnEnemyDeath; // Suscribirse al evento de muerte del enemigo
-        }
     }
 
     private void OnEnemyDeath()
