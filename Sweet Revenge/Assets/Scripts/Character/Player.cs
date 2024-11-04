@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         {
             player.isRecharging= false;
             weapon?.Attack();
-            lastAttackTime = Time.time; // Update the last attack time
+            lastAttackTime = Time.time; // Update the last attack time            
         }
     }
     public void SetWeapon(IWeapon weapon)

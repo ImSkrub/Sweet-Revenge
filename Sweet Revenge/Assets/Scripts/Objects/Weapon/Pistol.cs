@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
+    public string Name { get; private set; } = "Pistol";
     [Header("Parameters")]
     [SerializeField] Parameters valueGun;
-    [SerializeField] private Bullet bullet;
+    [SerializeField] private Bullet bulletPrefab;
     private ObjectPool<Bullet> bulletPool;
     private Transform parentTransform;
-    public string Name { get; private set; } = "Pistol";
-    
-    private Vector3 targetRotation;
-    private Vector3 target;
-    private SpriteRenderer pistolSR;
-    [SerializeField] private PlayerController player;
- 
 
+    private Vector3 targetRotation;
+    private SpriteRenderer pistolSR;
+    [SerializeField] private Player player;
     //booleans
-    public bool canRotate = true;
-    public bool canAttack = true;
+    public bool canRotate = false;
+
 
     private void Awake()
     {
@@ -30,42 +28,38 @@ public class Pistol : MonoBehaviour, IWeapon
     {
         pistolSR = GetComponent<SpriteRenderer>();
         parentTransform = GetComponentInParent<Transform>();
+        player = FindObjectOfType<Player>();
+        player.equipped += Gun_equipped;
     }
-    //void Update()
-    //{
-    //    targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-    //    var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-    //    if (canRotate)
-    //    {
-    //        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-    //        if (angle > 90 || angle < -90)
-    //        {
-    //            pistolSR.flipY = true;
-    //        }
-    //        else
-    //        {
-    //            pistolSR.flipY = false;
-    //        }
-    //    }
-    //}
+    private void Gun_equipped()
+    {
+        canRotate = true;
+    }
+
+    private void Update()
+    {
+        if (canRotate)
+        {
+            Rotation();
+        }
+    }
 
     public void Attack()
     {
-        if (canAttack)
-        {
-            bulletPool.Get();
-            target = (targetRotation - transform.position).normalized;
-            targetRotation.z = 0;
-            player.Stamina -= player.AttackCost;
-            if (player.Stamina < 0) player.Stamina = 0;
-            //player.StaminaBar.fillAmount = player.Stamina / player.MaxStamina;
-        }
+        bulletPool.Get();
+    }
+    private void Rotation()
+    {
+        targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        pistolSR.flipY = angle > 90 || angle < -90;
     }
 
     private Bullet CreatePoolItem()
     {
-        Bullet newBullet = Instantiate(bullet, transform.position, new Quaternion(0, 0, 0, 0), parentTransform);
+        Bullet newBullet = Instantiate(bulletPrefab, transform.position, new Quaternion(0, 0, 0, 0), parentTransform);
         newBullet.gameObject.SetActive(false);
         newBullet.Pool = bulletPool;
         return newBullet;
@@ -83,7 +77,5 @@ public class Pistol : MonoBehaviour, IWeapon
     {
         Destroy(bullet.gameObject);
     }
-
-
-
 }
+
