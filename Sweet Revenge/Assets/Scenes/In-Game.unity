@@ -807,7 +807,7 @@ MonoBehaviour:
   baseEnemiesPerRound: 1
   baseCoinReward: 100
   roundMultiplier: 2
-  coinMultiplier: 2
+  coinMultiplier: 1.375
   timeBetweenRounds: 1.5
   activateSpawn: 1
 --- !u!1001 &281373722
