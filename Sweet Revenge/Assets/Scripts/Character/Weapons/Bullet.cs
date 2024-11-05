@@ -9,8 +9,8 @@ public class Bullet : MonoBehaviour
     private Vector3 direction = Vector3.right;
     private ObjectPool<Bullet> bulletPool;
     private bool isReleased = false;
-    private int baseDamage = 25;
-    public int damage;
+    //private int baseDamage = 25;
+    public int damage = 25;
     public int Damage
     {
         get => damage;
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        damage = baseDamage;
+        damage = 25;
     }
 
     private void Update()
