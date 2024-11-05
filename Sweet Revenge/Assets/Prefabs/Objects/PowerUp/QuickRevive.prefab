@@ -183,3 +183,4 @@ MonoBehaviour:
   _UI: {fileID: 0}
   purchaseText: {fileID: 0}
   activeUI: 0
+  cost: 500
