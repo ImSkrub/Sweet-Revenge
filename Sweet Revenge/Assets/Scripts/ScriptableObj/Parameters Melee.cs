@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//Add a guntype for the BaseGun parent script
+public enum GunType { Pistol, Shotgun }
 [CreateAssetMenu(fileName = "New Values", menuName = "Parameters")]
 public class Parameters : ScriptableObject
 {
@@ -17,4 +19,5 @@ public class Parameters : ScriptableObject
     [Header("Values ranged")]
     public int maxBullets;
     public float bulletSpeed;
+    public GunType gunType;
 }

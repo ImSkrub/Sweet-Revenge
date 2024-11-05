@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47b789221eedec0489e16b5a5f26f70a, type: 3}
-  m_Name: Pistol Parameter
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  damage: 25
-  attackSpeed: 0.1
-  attackCost: 30
-  attackRange: 100
-  knockbackForce: 3
-  maxBullets: 21
-  bulletSpeed: 10
-  gunType: 0
+  damage: 45
+  attackSpeed: 3
+  attackCost: 0
+  attackRange: 0
+  knockbackForce: 5
+  maxBullets: 5
+  bulletSpeed: 15
+  gunType: 1

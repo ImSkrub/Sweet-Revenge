@@ -39,8 +39,6 @@ public class Player : MonoBehaviour
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
-        
-        Equipped.Invoke();
     }
 
     public void ApplyEffectPowerUp(IPowerUp powerUp)

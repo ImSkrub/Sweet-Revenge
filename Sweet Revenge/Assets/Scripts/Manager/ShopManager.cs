@@ -17,14 +17,16 @@ public class ShopManager : MonoBehaviour
     public GameObject itemPrefab;
     private Player player;
     private int currentCoins = 0;
-    [Header("Chest")]
-    [SerializeField] private GameObject chestPrefab; // Reference to the chest prefab
-    private Chest chestInstance; // Reference to the chest instance
+    //[Header("Chest")]
+    //[SerializeField] private GameObject chestPrefab; // Reference to the chest prefab
+    //private Chest chestInstance; // Reference to the chest instance
 
 
     // Reference to the spawn point
     [SerializeField] private Transform itemSpawnPoint;
+    private List<Vector3> occupiedPositions = new List<Vector3>(); // List to track occupied positions
 
+    public bool itemsSpawned = false;
     private void Awake()
     {
         if (instance == null)
@@ -37,7 +39,7 @@ public class ShopManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         player = FindObjectOfType<Player>();
-        chestInstance = FindObjectOfType<Chest>();
+        //chestInstance = FindObjectOfType<Chest>();
     }
 
     private void Start()
@@ -70,13 +72,6 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E)) // Change to your desired input
-        {
-            OpenChest();
-        }
-    }
     public void BuyItem(Item item)
     {
         if (currentCoins >= item.cost)
@@ -84,12 +79,14 @@ public class ShopManager : MonoBehaviour
             currentCoins -= item.cost;
             item.quantity++;
             item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
-            // Allow the chest to be opened after a purchase
-            chestInstance.SetCanOpen(true);
+            SpawnPurchasedItems(item); // Pass the item to spawn
         }
     }
+    /*
+    Allow the chest to be opened after a purchase
+    chestInstance.SetCanOpen(true);
 
-    //Usar ApplyItem si queremos hacer items de modificacion no temporal.
+    Usar ApplyItem si queremos hacer items de modificacion no temporal.
     public void ApplyItem(Item item)
     {
         switch (item.itemName)
@@ -100,7 +97,7 @@ public class ShopManager : MonoBehaviour
             case "SpikeBat":
                 player.SetWeapon(item.itemRef.gameObject.GetComponent<IWeapon>());
                 break;
-            
+
         }
     }
 
@@ -111,28 +108,54 @@ public class ShopManager : MonoBehaviour
             chestInstance.OpenChest();
             SpawnPurchasedItems();
         }
-    }
+    }*/
 
-    private void SpawnPurchasedItems()
+    private void SpawnPurchasedItems(Item item)
     {
-        bool itemsSpawned = false; // Track if any items were spawned
+        // Calculate a spawn position
+        Vector3 spawnPosition = GetNextSpawnPosition();
 
-        foreach (Item item in items)
+        if (spawnPosition != Vector3.zero) // Check if a valid position was found
         {
-            if (item.quantity > 0)
+            // Instantiate the item prefab at the calculated position
+            GameObject spawnedItem = Instantiate(item.itemPrefab, spawnPosition, Quaternion.identity);
+            // Add the position to the occupied list
+            occupiedPositions.Add(spawnPosition);
+            Debug.Log($"Spawned {item.itemName} at {spawnPosition}");
+        }
+        else
+        {
+            Debug.LogWarning("No available spawn positions!");
+        }
+
+        item.quantity = 0; // Reset quantity after spawning
+    }
+    /*
+    //itemsSpawned = true; // Mark that items were spawned
+    // Notify the chest to spawn the item
+    // chestInstance.SpawnItem(item.itemPrefab); // Commented out as per request
+    // If items were spawned, allow the chest to be opened again
+    // if (itemsSpawned) { chestInstance.SetCanOpen(true); } // Commented out as per request
+    */
+    private Vector3 GetNextSpawnPosition()
+    {
+        // Define the spacing between items
+        float spacing = 1.0f; // Adjust this value as needed
+        Vector3 basePosition = itemSpawnPoint.position;
+
+        // Check for the next available position
+        for (int i = 0; i < 100; i++) // Limit the number of attempts to find a position
+        {
+            Vector3 newPosition = basePosition + new Vector3((i % 10) * spacing, (i / 10) * spacing, 0); // Create a grid-like pattern
+
+            // Check if the position is already occupied
+            if (!occupiedPositions.Contains(newPosition))
             {
-                // Notify the chest to spawn the item
-                chestInstance.SpawnItem(item.itemPrefab);
-                item.quantity = 0; // Reset quantity after spawning
-                itemsSpawned = true; // Mark that items were spawned
+                return newPosition; // Return the first unoccupied position found
             }
         }
 
-        // If items were spawned, allow the chest to be opened again
-        if (itemsSpawned)
-        {
-            chestInstance.SetCanOpen(true);
-        }
+        return Vector3.zero; // Return zero if no position is found
     }
 
     public void ToggleShop()
