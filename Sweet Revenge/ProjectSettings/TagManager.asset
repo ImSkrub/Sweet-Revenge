@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - PowerUp
   - Enemy
+  - DoorCoin
+  - ShopCoin
   layers:
   - Default
   - TransparentFX

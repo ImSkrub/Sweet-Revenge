@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     private PlayerLife player;
-
+    private SpawnerEnemy spawnerEnemy;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         player = FindObjectOfType<PlayerLife>();
         player.OnDeath += LoseGame;
+        spawnerEnemy = FindObjectOfType<SpawnerEnemy>();
     }
 
     private void Update()
@@ -35,6 +36,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(0);
+        }
+        if(spawnerEnemy.CurrentRound >= 15)
+        {
+            WinGame();
         }
     }
 
@@ -45,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseGame()
     {
+       spawnerEnemy.CurrentRound = 0;
        SceneManager.LoadScene(2);
     }
 

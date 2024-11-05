@@ -18,6 +18,13 @@ public class SpawnerEnemy : MonoBehaviour
     [SerializeField] private float timeBetweenRounds = 5f; // Wait time between rounds
     [SerializeField] private int maxRounds = 15; // Máximo número de rondas
 
+    
+    public int CurrentRound
+    {
+        get => currentRound;
+        set => currentRound = Mathf.Max(0, value); // Setter with validation
+    }
+
     private int spawnCount = 0;
     private int activeEnemies = 0;
     private float spawnTimer = 0f; // Temporizador para el intervalo de spawn

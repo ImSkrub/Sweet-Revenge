@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -12,19 +13,29 @@ public class GameStatusManager : MonoBehaviour
     public GameObject _UI;
     public TextMeshProUGUI purchaseText; // Reference to the TextMeshPro component
     public bool activeUI = false;
+    [SerializeField] private int cost=500;
+    private int currentCoins;
     private int maxPurchases = 3;
     private int currentPurchases = 0;
     private bool hasPowerUp = false; // New variable to track if the player has a power-up
 
-    private void Awake()
+    private void Start()
     {
+        if (PointManager.Instance == null)
+        {
+            Debug.LogError("PointManager instance is null. Make sure it is initialized before GameStatusManager.");
+            return; // Exit the method to prevent further null reference issues
+        }
+
         player.OnDeath += Checkpoint;
         UpdatePurchaseText();
+        currentCoins = PointManager.Instance._doorCoin;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && activeUI && currentPurchases < maxPurchases && !hasPowerUp)
+        if (Input.GetKeyDown(KeyCode.E) && activeUI && currentPurchases < maxPurchases &&
+            !hasPowerUp)
         {
             savedStates.Push(player.SaveState());
             currentPurchases++;
@@ -72,15 +83,18 @@ public class GameStatusManager : MonoBehaviour
 
     private void UpdatePurchaseText()
     {
-        if (currentPurchases < maxPurchases)
+        if (currentPurchases < maxPurchases && cost <= currentCoins)
         {
-            purchaseText.text = $"Press 'E' to buy power up. {maxPurchases - currentPurchases} out of {maxPurchases} left.";
+            purchaseText.text = $"Press 'E' to buy power up ${cost}\n {maxPurchases - currentPurchases} out of {maxPurchases} left.";
+            PointManager.Instance.AddDoorCoin(-cost);
         }
-        else
+        else if(currentPurchases > maxPurchases)
         {
             purchaseText.text = "You have reached the maximum purchases.";
-            // Optionally deactivate the UI or the text
-            // _UI.SetActive(false);
+        }
+        else if(cost >= currentCoins)
+        {
+            purchaseText.text = $"You are missing {currentCoins - cost} coins";
         }
     }
 

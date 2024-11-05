@@ -14,9 +14,18 @@ public class PointManager : MonoBehaviour
     [Header("Coins")]
     [SerializeField] private int shopCoin = 0;
     [SerializeField] private int doorCoin = 0;
-    public int _shopCoin => shopCoin;
-    public int _doorCoin => doorCoin;
-    
+    public int _shopCoin
+    {
+        get => shopCoin;
+        set => shopCoin = Mathf.Max(0, value);
+    }
+
+    public int _doorCoin
+    {
+        get => doorCoin;
+        set => doorCoin = Mathf.Max(0, value);
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -30,14 +39,9 @@ public class PointManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        
-    }
-
-    private void Start()
-    {
         // Busca los objetos en la escena por su nombre
-        GameObject doorCoinObject = GameObject.Find("DoorCoin");
-        GameObject shopCoinObject = GameObject.Find("ShopCoin");
+        GameObject doorCoinObject = GameObject.FindGameObjectWithTag("DoorCoin");
+        GameObject shopCoinObject = GameObject.FindGameObjectWithTag("ShopCoin");
 
         // Asegúrate de que los objetos se encontraron antes de intentar acceder a sus componentes
         if (doorCoinObject != null)
@@ -57,7 +61,6 @@ public class PointManager : MonoBehaviour
         {
             Debug.LogWarning("No se encontró el objeto 'ShopCoin' en la escena.");
         }
-
     }
 
     private void Update()
