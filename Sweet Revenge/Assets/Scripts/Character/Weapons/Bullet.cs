@@ -9,17 +9,31 @@ public class Bullet : MonoBehaviour
     private Vector3 direction = Vector3.right;
     private ObjectPool<Bullet> bulletPool;
     private bool isReleased = false;
-    private int damage = 25;
+    private int baseDamage = 25;
+    public int damage;
+    public int Damage
+    {
+        get => damage;
+        set => damage = Mathf.Max(0, value); // Setter with validation
+    }
     public ObjectPool<Bullet> Pool
     {
         get { return bulletPool; }
         set { bulletPool = value; }
     }
 
+    private void Start()
+    {
+        damage = baseDamage;
+    }
+
     private void Update()
     {
         transform.Translate(direction * Time.deltaTime * speed);
-
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log(Damage);
+        }
     }
     private void OnEnable()
     {

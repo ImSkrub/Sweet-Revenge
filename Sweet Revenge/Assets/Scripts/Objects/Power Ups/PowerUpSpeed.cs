@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpDamage : MonoBehaviour, IPowerUp
+public class PowerUpSpeed : MonoBehaviour, IPowerUp
 {
     [SerializeField] public string Name { get; set; } = "DamagePowerUp";
-    public GameObject bullet;
-    public void ApplyPowerUp(GameObject bullet)
+    public void ApplyPowerUp(GameObject player)
     {
-        bullet.GetComponent<Bullet>().Damage *= 2;
-        this.bullet = bullet;
+        player.GetComponent<PlayerController>().speed *= 2;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            ApplyPowerUp(this.bullet);
+            ApplyPowerUp(collision.gameObject);
             Destroy(gameObject);
         }
-    }
+    }    
 }

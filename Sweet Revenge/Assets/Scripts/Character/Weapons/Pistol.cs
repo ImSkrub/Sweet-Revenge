@@ -12,17 +12,17 @@ public class Pistol : MonoBehaviour, IWeapon
     [SerializeField] private Bullet bulletPrefab;
     private ObjectPool<Bullet> bulletPool;
     private Transform parentTransform;
-    
+
     private Vector3 targetRotation;
     private SpriteRenderer pistolSR;
     [SerializeField] private Player player;
     //booleans
     public bool canRotate = false;
-    
+
 
     private void Awake()
     {
-        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject,true,10,valueGun.maxBullets);
+        bulletPool = new ObjectPool<Bullet>(CreatePoolItem, OnTakeFromPool, OnReturnedFromPool, OnDestroyObject, true, 10, valueGun.maxBullets);
     }
     private void Start()
     {
@@ -78,3 +78,4 @@ public class Pistol : MonoBehaviour, IWeapon
         Destroy(bullet.gameObject);
     }
 }
+

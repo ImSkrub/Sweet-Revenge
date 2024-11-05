@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] private float speed = 5f;
+    [SerializeField] public float speed = 5f;
     [SerializeField] private float maxStamina = 100f;
     [SerializeField] private float runCost = 20f;
     [SerializeField] private float staminaRechargeRate = 2f;
+    [SerializeField] public float attackCost = 10f;
+
 
     private float stamina;
     public float Stamina
