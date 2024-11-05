@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        
-        
     }
 
     public void WinGame()
@@ -47,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseGame()
     {
-       SceneManager.LoadScene(4);
+       SceneManager.LoadScene(2);
     }
 
    

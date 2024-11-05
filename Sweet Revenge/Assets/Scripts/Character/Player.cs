@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
             lastAttackTime = Time.time; // Update the last attack time
         }
     }
+
+    public void SetAnimation(string name)
+    {
+        
+    }
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
