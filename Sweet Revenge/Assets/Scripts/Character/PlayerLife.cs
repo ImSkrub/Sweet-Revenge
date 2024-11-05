@@ -53,6 +53,7 @@ public class PlayerLife : MonoBehaviour
     {
         lifeBar.fillAmount = currentHealth / maxHealth;
         currentTime += Time.deltaTime;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
