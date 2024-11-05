@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.907, y: 3.9538, z: 0}
-  m_LocalScale: {x: 2.3094554, y: 3.5639513, z: 0.41318682}
+  m_LocalScale: {x: 0.8852336, y: 1.3660923, z: 0.15837796}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,7 +129,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -148,7 +148,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.84
+  m_Radius: 0.54
 --- !u!114 &133501569150560184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,4 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1901f5f81fef74796a094cf49bff98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
   damage: 0

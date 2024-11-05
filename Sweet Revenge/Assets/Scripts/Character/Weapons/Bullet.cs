@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    private int speed = 100;
+    [SerializeField] private int speed = 50;
     private Vector3 direction = Vector3.right;
     private ObjectPool<Bullet> bulletPool;
     private bool isReleased = false;
@@ -30,10 +30,6 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(direction * Time.deltaTime * speed);
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Debug.Log(Damage);
-        }
     }
     private void OnEnable()
     {
@@ -75,6 +71,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("holaaaaaaa");
             ApplyDamage(damage, collision.collider);
             Deactivate();
         }

@@ -179,6 +179,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 143e68afc32aeaa42ab4546c275e3e61, type: 2}
   Name: Zombie
   target: {fileID: 0}
+  enemyHealth: {fileID: 0}
 --- !u!50 &7109243454796781215
 Rigidbody2D:
   serializedVersion: 4

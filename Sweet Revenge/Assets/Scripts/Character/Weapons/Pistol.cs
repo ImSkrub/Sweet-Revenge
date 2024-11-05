@@ -14,6 +14,7 @@ public class Pistol : MonoBehaviour, IWeapon
     private Transform parentTransform;
 
     private Vector3 targetRotation;
+    Vector3 target;
     private SpriteRenderer pistolSR;
     [SerializeField] private Player player;
     //booleans
@@ -39,10 +40,10 @@ public class Pistol : MonoBehaviour, IWeapon
 
     private void Update()
     {
-        if (canRotate)
-        {
-            Rotation();
-        }
+        //if (canRotate)
+        //{
+        //    Rotation();
+        //}
     }
 
     public void Attack()
@@ -60,6 +61,9 @@ public class Pistol : MonoBehaviour, IWeapon
     private Bullet CreatePoolItem()
     {
         Bullet newBullet = Instantiate(bulletPrefab, transform.position, new Quaternion(0, 0, 0, 0), parentTransform);
+        targetRotation.z = 0;
+        target = (targetRotation - transform.position).normalized;
+
         newBullet.gameObject.SetActive(false);
         newBullet.Pool = bulletPool;
         return newBullet;
