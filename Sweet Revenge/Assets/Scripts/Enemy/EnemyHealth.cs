@@ -28,7 +28,18 @@ public class EnemyHealth : MonoBehaviour,IDamageable
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
     }
-      
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "bullet")
+        {
+            Debug.Log("enemigo recibió daño");
+            Debug.Log(health);
+
+            //TakeDamage(10);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
