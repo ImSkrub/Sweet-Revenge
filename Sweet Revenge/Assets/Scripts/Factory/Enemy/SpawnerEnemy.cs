@@ -12,7 +12,7 @@ public class SpawnerEnemy : MonoBehaviour
     [SerializeField] private int enemiesPerSpawn = 1;
 
     [Header("Rounds")]
-    [SerializeField] private int currentRound = 1;
+    [SerializeField] private int currentRound = 0;
     [SerializeField] private int baseEnemiesPerRound = 2;
     [SerializeField] private int roundMultiplier = 2;
     [SerializeField] private float timeBetweenRounds = 5f; // Wait time between rounds
