@@ -58,7 +58,11 @@ public class PointManager : MonoBehaviour
             Debug.LogWarning("No se encontró el objeto 'ShopCoin' en la escena.");
         }
 
-        UpdateCoinTexts();
+    }
+
+    private void Update()
+    {
+        UpdateCoinTexts(); 
     }
 
     // Method to update the coin text displays
