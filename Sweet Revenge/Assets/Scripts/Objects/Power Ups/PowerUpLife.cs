@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpLife : MonoBehaviour
+public class PowerUpLife : MonoBehaviour,IPowerUp
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] public string Name { get; set; } = "LifeUp";
+   
+    public void ApplyPowerUp(GameObject player)
     {
-        
+        player.GetComponent<PlayerLife>().CurrentHealth += 50;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ApplyPowerUp(collision.gameObject);
+        }
     }
 }

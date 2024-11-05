@@ -189,15 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7367d91932126db4f8fc3ee0426679aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  attackCooldown: 1
-  velocity: 10
-  rangeToAttack: 5
-  closestDist: 1
-  lerpSpeedRotation: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  enemyData: {fileID: 11400000, guid: bf54b4e277bbb5244bc674d9989e0441, type: 2}
   Name: Golem
   target: {fileID: 0}
 --- !u!50 &907504085173044391

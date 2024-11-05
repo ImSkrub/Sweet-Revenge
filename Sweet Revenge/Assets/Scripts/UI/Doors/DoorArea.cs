@@ -28,14 +28,10 @@ public class DoorArea : MonoBehaviour
             {
                 color = "green"; // Greater than or equal to required
             }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                if(currentCoins >= valueDoor)
-                {
-                    door.SetActive(false);
-                    message.gameObject.SetActive(false);
-
-                }
+            if (Input.GetKeyDown(KeyCode.F)&& currentCoins >= valueDoor)
+            {       
+                door.SetActive(false);
+                message.gameObject.SetActive(false);
             }
 
 

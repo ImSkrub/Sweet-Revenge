@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b789221eedec0489e16b5a5f26f70a, type: 3}
   m_Name: SpikeBat
   m_EditorClassIdentifier: 
-  damage: 150
+  damage: 25
   attackSpeed: 2
   attackCost: 30
-  attackRange: 10
+  attackRange: 5
   knockbackForce: 10
   maxBullets: 0
   bulletSpeed: 0

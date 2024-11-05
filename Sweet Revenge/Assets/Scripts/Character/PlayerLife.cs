@@ -11,7 +11,12 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private float currentHealth;
-    public float CurrentHealth { get { return CurrentHealth; } set { if (CurrentHealth >= 0) currentHealth = value; } }
+    public float CurrentHealth
+    {
+        get => currentHealth;
+        set => currentHealth = Mathf.Max(0, value); // Setter with validation
+    }
+
     private SpriteRenderer spriteRenderer;
    // private Animation anim;
     private float currentTime;
