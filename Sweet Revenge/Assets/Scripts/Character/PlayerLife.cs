@@ -8,7 +8,7 @@ public class PlayerLife : MonoBehaviour
 {
     // Parameters
     [Header("Parameters")]
-    [SerializeField] private float maxHealth = 100;
+    [SerializeField] public float maxHealth = 100;
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private float currentHealth;
     public float CurrentHealth

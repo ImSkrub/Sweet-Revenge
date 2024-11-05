@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float speed = 5f;
     [SerializeField] private float maxStamina = 100f;
     [SerializeField] private float runCost = 20f;
-    [SerializeField] private float staminaRechargeRate = 2f;
+    [SerializeField] public float staminaRechargeRate = 2f;
     [SerializeField] public float attackCost = 10f;
 
 
