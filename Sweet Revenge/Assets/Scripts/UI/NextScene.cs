@@ -9,7 +9,7 @@ public class NextScene : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
-
+            LevelManager.instance.LoadNextLevel();
         }
       
     }

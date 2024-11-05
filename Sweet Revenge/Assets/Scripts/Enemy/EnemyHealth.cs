@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     private SpriteRenderer sr;
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
+    public event Action OnDeath;
     //[Header("Animator")]
     //private Animator anim;
     private void Awake()
@@ -26,19 +28,16 @@ public class EnemyHealth : MonoBehaviour,IDamageable
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
     }
-
-    private void Update()
-    {
-        if(health<=0f && !isDead)
-        {
-            Death();
-        }
-    }
+      
     public void TakeDamage(float damage)
     {
         health -= damage;
         sr.color = damageColor;
         Invoke("RestoreColor", damageCooldown);
+        if(health <= 0f && !isDead)
+        {
+            Death();
+        }
     }
 
     private void RestoreColor()
@@ -50,6 +49,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     {
         //anim.SetTrigger("die");
         isDead = true;
+        OnDeath?.Invoke();
         Destroy(gameObject,destroyDelay);
     }
 

@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 5609095408663210211}
   - component: {fileID: 443888402900619257}
   - component: {fileID: 9222438946727228016}
-  - component: {fileID: 5229093306156881668}
   - component: {fileID: 2938132892847393750}
+  - component: {fileID: 5229093306156881668}
   - component: {fileID: 6203767753772169879}
   - component: {fileID: 1074383915542616130}
   - component: {fileID: 907504085173044391}
+  - component: {fileID: 6999762320652257798}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Enemy
@@ -125,23 +126,6 @@ CircleCollider2D:
   m_Offset: {x: 0.2793398, y: 0.08068752}
   serializedVersion: 2
   m_Radius: 0.22856998
---- !u!114 &5229093306156881668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3408981564694737512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e2328f5b27e55459730fa227674f0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 150
-  health: 0
-  damageCooldown: 1
-  destroyDelay: 0.5
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!195 &2938132892847393750
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -164,6 +148,23 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5229093306156881668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408981564694737512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e2328f5b27e55459730fa227674f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 150
+  health: 0
+  damageCooldown: 1
+  destroyDelay: 0.5
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &6203767753772169879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,22 +185,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3408981564694737512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7367d91932126db4f8fc3ee0426679aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  attackCooldown: 1
-  velocity: 10
-  rangeToAttack: 5
-  closestDist: 1
-  lerpSpeedRotation: 2
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  enemyData: {fileID: 11400000, guid: bf54b4e277bbb5244bc674d9989e0441, type: 2}
   Name: Golem
   target: {fileID: 0}
+  enemyHealth: {fileID: 0}
 --- !u!50 &907504085173044391
 Rigidbody2D:
   serializedVersion: 4
@@ -227,3 +221,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6999762320652257798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408981564694737512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794cee3c913b8a84bb7936fc045863c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  essencePrefab: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}

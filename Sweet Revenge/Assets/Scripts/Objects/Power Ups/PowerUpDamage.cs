@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpDamage : MonoBehaviour
+public class PowerUpDamage : MonoBehaviour, IPowerUp
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] public string Name { get; set; } = "DamagePowerUp";
+    public GameObject bullet;
+    public void ApplyPowerUp(GameObject bullet)
     {
-        
+        bullet.GetComponent<Bullet>().Damage *= 2;
+        this.bullet = bullet;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == "Player")
+        {
+            ApplyPowerUp(this.bullet);
+            Destroy(gameObject);
+        }
     }
 }

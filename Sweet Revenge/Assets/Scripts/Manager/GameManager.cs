@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerLife>();
-        player.OnDeath += FinishGame;
+        player.OnDeath += LoseGame;
     }
 
     private void Update()
@@ -36,22 +36,16 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        
-        
     }
 
-    public void CompleteGame()
+    public void WinGame()
     {
-       
-        SceneManager.LoadScene(14);
-       
+       SceneManager.LoadScene(3);
     }
 
-    public void FinishGame()
+    public void LoseGame()
     {
-       
-        SceneManager.LoadScene(12);
-       
+       SceneManager.LoadScene(2);
     }
 
    
