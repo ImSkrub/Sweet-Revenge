@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerLife : MonoBehaviour
 {
-    //Parametres
-    [Header("Parametres")]
+    // Parameters
+    [Header("Parameters")]
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private float currentHealth;
@@ -18,35 +18,45 @@ public class PlayerLife : MonoBehaviour
     }
 
     private SpriteRenderer spriteRenderer;
-   // private Animation anim;
     private float currentTime;
     public event Action OnDeath;
-    
-    //Color on hit
+
+    // Color on hit
     [SerializeField] private Color damageColor = Color.red;
     [SerializeField] private Color lifeGainColor = Color.green;
     private Color originalColor;
 
     [SerializeField] private Image lifeBar;
 
+    // Reference to PlayerCheckpoint
+    private GameStatusManager playerCheckpoint;
+
     private void Awake()
     {
         currentHealth = maxHealth;
     }
+
     private void Start()
     {
-        //anim = GetComponent<Animation>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+
+        // Find the PlayerCheckpoint in the scene
+        playerCheckpoint = FindObjectOfType<GameStatusManager>();
+        if (playerCheckpoint == null)
+        {
+            Debug.LogError("PlayerCheckpoint not found in the scene.");
+        }
     }
+
     private void Update()
     {
-        lifeBar.fillAmount =currentHealth/maxHealth;
+        lifeBar.fillAmount = currentHealth / maxHealth;
         currentTime += Time.deltaTime;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            Debug.Log("murio");
+            Debug.Log("Player died");
             Death();
         }
     }
@@ -57,6 +67,7 @@ public class PlayerLife : MonoBehaviour
         spriteRenderer.color = damageColor;
         Invoke("RestoreColor", 0.5F);
     }
+
     public void RestoreLife(int value)
     {
         currentHealth += value;
@@ -71,18 +82,28 @@ public class PlayerLife : MonoBehaviour
 
     public void Death()
     {
-        //anim.SetTrigger("Death");
-        OnDeath?.Invoke();
-        this.gameObject.SetActive(false);
+        // Check if there are any saved states before deactivating
+        if (playerCheckpoint != null && playerCheckpoint.HasSavedStates())
+        {
+            // If there are saved states, do not deactivate the player
+            OnDeath?.Invoke();
+        }
+        else
+        {
+            // If there are no saved states, deactivate the player
+            OnDeath?.Invoke();
+            this.gameObject.SetActive(false);
+        }
     }
 
     public PlayerMemento SaveState()
     {
-        return new PlayerMemento(transform.position, maxHealth);
+        return new PlayerMemento(transform.position, currentHealth);
     }
 
     public void RestoreState(PlayerMemento state)
     {
+        gameObject.SetActive(true);
         transform.position = state.position;
         this.currentHealth = state.health;
     }

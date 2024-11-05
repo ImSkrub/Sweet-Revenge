@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<PlayerController>();
-        DontDestroyOnLoad(this.gameObject);
     }
     private void Update()
     {
