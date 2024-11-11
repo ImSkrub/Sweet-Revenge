@@ -90,6 +90,10 @@ public class Bullet : MonoBehaviour
             Debug.LogWarning($"No IDamageable component found on {enemy.gameObject.name}. Damage not applied.");
         }
     }
+    public void ApplyKnockback(float knockback)
+    {
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

@@ -19,6 +19,8 @@ public class GameStatusManager : MonoBehaviour
     private int currentPurchases = 0;
     private bool hasPowerUp = false; // New variable to track if the player has a power-up
 
+    [SerializeField] Transform spawnpoint;
+
     private void Start()
     {
         if (PointManager.Instance == null)
@@ -37,7 +39,7 @@ public class GameStatusManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && activeUI && currentPurchases < maxPurchases &&
             !hasPowerUp)
         {
-            savedStates.Push(player.SaveState());
+            savedStates.Push(player.SaveState(spawnpoint.position));
             currentPurchases++;
             hasPowerUp = true; // Set to true when a power-up is purchased
             UpdatePurchaseText();
@@ -48,11 +50,15 @@ public class GameStatusManager : MonoBehaviour
 
     public void Checkpoint()
     {
-        if (savedStates.Count > 0)
+        if (HasSavedStates())
         {
             PlayerMemento lastSavedState = savedStates.Pop();
             player.RestoreState(lastSavedState);
             Debug.Log("Estado restaurado");
+        }
+        else
+        {
+            Debug.Log("No saved states available to restore.");
         }
     }
 

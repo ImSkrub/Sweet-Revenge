@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 //Add a guntype for the BaseGun parent script
-public enum GunType { Pistol, Shotgun }
+public enum GunType { Pistol, Shotgun, MachineGun }
 [CreateAssetMenu(fileName = "New Values", menuName = "Parameters")]
 public class Parameters : ScriptableObject
 {

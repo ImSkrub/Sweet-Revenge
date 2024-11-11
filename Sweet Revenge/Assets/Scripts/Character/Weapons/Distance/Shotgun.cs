@@ -45,4 +45,12 @@ public class Shotgun : BaseGun,IWeapon
             bulletsFired++; // Increment the bullets fired counter
         }
     }
+    public void Equip()
+    {
+
+    }
+    public void Unequip()
+    {
+
+    }
 }

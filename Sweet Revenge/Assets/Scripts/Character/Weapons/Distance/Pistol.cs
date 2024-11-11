@@ -20,4 +20,12 @@ public class Pistol : BaseGun,IWeapon
             lastAttackTime = Time.time; // Update last attack time
         }
     }
+    public void Equip()
+    {
+
+    }
+    public void Unequip()
+    {
+
+    }
 }

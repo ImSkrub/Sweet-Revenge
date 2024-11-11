@@ -108,6 +108,15 @@ public class Warhammer : MonoBehaviour,IWeapon
         }
     }
 
+    public void Equip()
+    {
+        Debug.Log("Me equipe");
+    }
+    public void Unequip()
+    {
+        Debug.Log("Me desequipe");
+    }
+
     // Gizmos to see the range from inspector
     private void OnDrawGizmosSelected()
     {

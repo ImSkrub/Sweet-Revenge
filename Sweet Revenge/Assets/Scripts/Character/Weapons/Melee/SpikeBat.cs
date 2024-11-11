@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpikeBat : MonoBehaviour, IWeapon
 {
@@ -71,19 +72,57 @@ public class SpikeBat : MonoBehaviour, IWeapon
 
     private void ApplyKnockback(Collider2D enemy)
     {
-        Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        // Get the NavMeshAgent component from the enemy
+        NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
+        if (navMeshAgent != null)
         {
+            // Calculate the knockback direction
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
-            //Debug.Log($"Applying knockback to {enemy.name} in direction {knockbackDirection} with force {dataBat.knockbackForce}");
-            rb.AddForce(knockbackDirection * dataBat.knockbackForce, ForceMode2D.Impulse);
+
+            // Set the velocity of the NavMeshAgent to create a knockback effect
+            // You can adjust the knockback force as needed
+            float knockbackForce = dataBat.knockbackForce; // Assuming dataBat is accessible here
+            Vector3 knockbackVelocity = knockbackDirection * knockbackForce;
+
+            // Apply the knockback by setting the agent's velocity
+            navMeshAgent.velocity = new Vector3(knockbackVelocity.x, knockbackVelocity.y, 0);
+
+            // Optionally, you can stop the agent from moving towards the target for a short duration
+            navMeshAgent.isStopped = true;
+
+            // Optionally, you can use a coroutine to resume the agent's movement after a delay
+            StartCoroutine(ResumeNavMeshAgent(navMeshAgent, 0.5f)); // Adjust the delay as needed
         }
         else
         {
-            //Debug.Log($"{enemy.name} does not have a Rigidbody2D component.");
+            // If the enemy does not have a NavMeshAgent, check for Rigidbody2D as a fallback
+            Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+                rb.AddForce(knockbackDirection * dataBat.knockbackForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                // Debug.Log($"{enemy.name} does not have a Rigidbody2D or NavMeshAgent component.");
+            }
         }
     }
 
+    // Coroutine to resume the NavMeshAgent's movement after a delay
+    private IEnumerator ResumeNavMeshAgent(NavMeshAgent agent, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        agent.isStopped = false; // Resume movement
+    }
+    public void Equip()
+    {
+        Debug.Log("Me equipe");
+    }
+    public void Unequip()
+    {
+        Debug.Log("Me desequipe");
+    }
     // Gizmos to see the range from inspector
     private void OnDrawGizmosSelected()
     {

@@ -35,29 +35,7 @@ public abstract class BaseGun : MonoBehaviour
         }
     }
 
-    /*
-    //private void Gun_equipped()
-    //{
-    //    canRotate = true;
-    //}
-
-    //private void Update()
-    //{
-    //    if (canRotate)
-    //    {
-    //        Rotation();
-    //    }
-    //}*/
-
-    /*
-    private void Rotation()
-    {
-        targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        pistolSR.flipY = angle > 90 || angle < -90;
-    }
-    */
+    
     protected virtual Bullet CreatePoolItem()
     {
         Bullet newBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity, parentTransform);

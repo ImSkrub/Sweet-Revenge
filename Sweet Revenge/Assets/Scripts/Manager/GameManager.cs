@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private PlayerLife player;
     private SpawnerEnemy spawnerEnemy;
+    private GameStatusManager quickRevive;
 
     private void Awake()
     {
@@ -27,8 +28,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerLife>();
-        player.OnDeath += LoseGame;
+        player.OnDeath += HandlePlayerDeath;
         spawnerEnemy = FindObjectOfType<SpawnerEnemy>();
+        quickRevive = FindObjectOfType<GameStatusManager>();
     }
 
     private void Update()
@@ -48,11 +50,24 @@ public class GameManager : MonoBehaviour
        SceneManager.LoadScene(3);
     }
 
-    public void LoseGame()
+    private void HandlePlayerDeath()
     {
-       spawnerEnemy.CurrentRound = 0;
-       SceneManager.LoadScene(2);
+        if (quickRevive.HasSavedStates())
+        {
+            quickRevive.Checkpoint(); // Restore the last saved state
+            Debug.Log("Player restored from checkpoint.");
+        }
+        else
+        {
+            LoseGame(); // No saved states, proceed to lose game
+        }
     }
 
-   
+    public void LoseGame()
+    {
+        spawnerEnemy.CurrentRound = 0;
+        SceneManager.LoadScene(2);
+    }
+
+
 }
