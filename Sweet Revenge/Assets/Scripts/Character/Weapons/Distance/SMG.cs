@@ -5,7 +5,7 @@ using UnityEngine;
 public class SMG : BaseGun,IWeapon
 {
     private float lastAttackTime;
-    [SerializeField] private const float bulletsPerSecond = 15f; // 15 bullets per second
+    [SerializeField] private const float bulletsPerSecond = 35f; // 15 bullets per second
     [SerializeField] private float slowDownFactor = 0.5f; // Adjust as needed
     private PlayerController playerController;
 
@@ -18,9 +18,9 @@ public class SMG : BaseGun,IWeapon
 
     public override void Attack()
     {
-        float timeBetweenShots = 1f / bulletsPerSecond;
+        float timeBetweenShots = 1f / valueGun.attackSpeed +bulletsPerSecond;
 
-        if (Time.time >= lastAttackTime + timeBetweenShots)
+        if (Time.time >= lastAttackTime + valueGun.attackSpeed)
         {
             ShootBullet();
             lastAttackTime = Time.time; // Update last attack time
@@ -32,8 +32,20 @@ public class SMG : BaseGun,IWeapon
         Bullet bullet = bulletPool.Get();
         if (bullet != null)
         {
+            SetBulletDir(bullet);
             ApplyKnockback(bullet);
         }
+    }
+
+    private void SetBulletDir(Bullet bullet)
+    {
+        bullet.transform.position = transform.position;
+
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePosition - transform.position;
+        direction.z = 0;
+
+        bullet.SetDirection(direction);
     }
 
     private void ApplyKnockback(Bullet bullet)

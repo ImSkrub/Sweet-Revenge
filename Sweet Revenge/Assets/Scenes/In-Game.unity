@@ -306,11 +306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.8
+      value: 5.52
       objectReference: {fileID: 0}
     - target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -37.3
+      value: -9.31
       objectReference: {fileID: 0}
     - target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11052,11 +11052,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7566356605575177470, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.66
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 7566356605575177470, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.61
+      value: -7.53
       objectReference: {fileID: 0}
     - target: {fileID: 7566356605575177470, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14769,7 +14769,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.8, y: -37.3, z: -10}
+  m_LocalPosition: {x: 5.52, y: -9.31, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18308,6 +18308,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4870226884308482093, guid: 5ae36f6c8c831a445b76fd6e573247ae, type: 3}
   m_PrefabInstance: {fileID: 402100537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &795108686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7513722957676348430, guid: a18fbd73ba606e347b99c2ed06686d45, type: 3}
+  m_PrefabInstance: {fileID: 691983186}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &803369769 stripped
 Transform:
@@ -742184,7 +742189,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1772644777}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795108686}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1772644777
 MonoBehaviour:
   m_ObjectHideFlags: 0

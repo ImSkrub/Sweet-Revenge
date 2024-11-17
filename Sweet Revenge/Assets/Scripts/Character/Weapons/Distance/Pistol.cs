@@ -16,10 +16,25 @@ public class Pistol : BaseGun,IWeapon
         // Use attackSpeed from Parameters to determine the cooldown
         if (Time.time >= lastAttackTime + valueGun.attackSpeed)
         {
-            bulletPool.Get();
+            Bullet bullet = bulletPool.Get();
+            SetBulletDir(bullet);
+
             lastAttackTime = Time.time; // Update last attack time
         }
     }
+
+    private void SetBulletDir(Bullet bullet)
+    {
+        
+        bullet.transform.position = transform.position;
+
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePosition - transform.position;
+        direction.z = 0;
+
+        bullet.SetDirection(direction);
+    }
+
     public void Equip()
     {
 

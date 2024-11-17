@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 public class Bullet : MonoBehaviour
 {
     private int speed = 100;
-    private Vector3 direction = Vector3.right;
+    private Vector3 direction = Vector3.zero;
     private ObjectPool<Bullet> bulletPool;
     private bool isReleased = false;
 
@@ -42,12 +42,13 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(direction * Time.deltaTime * speed);
+        transform.position += direction * speed * Time.deltaTime;
+        Debug.Log(direction);
     }
     private void OnEnable()
     {
         isReleased = false;
-        Invoke("Deactivate", 1f);
+        Invoke("Deactivate", 10f);
     }
     private void OnDisable()
     {
@@ -57,14 +58,15 @@ public class Bullet : MonoBehaviour
     {
         if (bulletPool != null && !isReleased)
         {
+            direction = Vector3.zero;
             bulletPool.Release(this);
             isReleased = true;
         }
     }
 
-    public void SetPosition(Vector3 position)
+    public void SetRotation(Quaternion rotation)
     {
-        transform.position = position;
+        transform.rotation = rotation;
     }
 
     public void SetDirection(Vector3 newDirection)
