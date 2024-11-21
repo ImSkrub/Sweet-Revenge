@@ -334,11 +334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.9254
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 34.4747
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14471,44 +14471,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - itemName: Spike-Bat
+    isPermanent: 0
     cost: 500
     image: {fileID: 883212538, guid: 7f6adea634b3e0946814afa5f7f5a73a, type: 3}
     itemPrefab: {fileID: 2973998461811780404, guid: e01be067a95470b4eb48088b0427a96e, type: 3}
     itemRef: {fileID: 0}
     quantity: 0
   - itemName: Warhammer
+    isPermanent: 0
     cost: 1500
     image: {fileID: 1764687209, guid: 7f6adea634b3e0946814afa5f7f5a73a, type: 3}
     itemPrefab: {fileID: 4172010714539424532, guid: 90dec5095978add4ea98f52210aba471, type: 3}
     itemRef: {fileID: 0}
     quantity: 0
   - itemName: Shotgun
+    isPermanent: 0
     cost: 2000
     image: {fileID: 21300000, guid: a3f23a5d8f0d5f94bafdc23a088a3cc3, type: 3}
     itemPrefab: {fileID: 7646662669731422612, guid: 6bd5e45fc39ea0c48936681665f66789, type: 3}
     itemRef: {fileID: 0}
     quantity: 0
   - itemName: Pistol
+    isPermanent: 0
     cost: 1000
     image: {fileID: -211988604, guid: 270f71b4f74663c48abf27881df705b8, type: 3}
     itemPrefab: {fileID: 8350612921599990342, guid: b705425373ddefd4b8418d7c848ea5ab, type: 3}
     itemRef: {fileID: 0}
     quantity: 0
   - itemName: Life up
+    isPermanent: 0
     cost: 250
-    image: {fileID: 0}
+    image: {fileID: -27869893, guid: d485fd21f10992c46a49703f8f926e20, type: 3}
     itemPrefab: {fileID: 0}
     itemRef: {fileID: 0}
     quantity: 0
   - itemName: Damage Up
+    isPermanent: 0
     cost: 500
-    image: {fileID: 0}
+    image: {fileID: -767924973, guid: d485fd21f10992c46a49703f8f926e20, type: 3}
     itemPrefab: {fileID: 0}
     itemRef: {fileID: 0}
     quantity: 0
   - itemName: Stamina Up
+    isPermanent: 0
     cost: 250
-    image: {fileID: 0}
+    image: {fileID: 1172123808, guid: d485fd21f10992c46a49703f8f926e20, type: 3}
     itemPrefab: {fileID: 0}
     itemRef: {fileID: 0}
     quantity: 0
@@ -14855,7 +14862,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.429676, y: -9.434982, z: -10}
+  m_LocalPosition: {x: 48.455074, y: -46.50968, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15069,7 +15076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548992039}
   m_Layer: 0
-  m_Name: POWER UPS
+  m_Name: ------POWER UPS-------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
