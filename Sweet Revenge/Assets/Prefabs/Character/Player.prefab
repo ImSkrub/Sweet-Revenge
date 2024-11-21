@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 1441961599613936671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.7052, y: 0.7514, z: 0}
-  m_LocalScale: {x: 0.3303404, y: 0.39399698, z: 0.07366781}
+  m_LocalPosition: {x: 3.0252, y: 1.1045, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6510527663029822289}
@@ -108,6 +108,7 @@ MonoBehaviour:
   maxStamina: 100
   runCost: 20
   staminaRechargeRate: 5
+  attackCost: 10
   staminaBar: {fileID: 0}
   isRecharging: 0
 --- !u!50 &5785503798244368686

@@ -79,37 +79,33 @@ public class ShopManager : MonoBehaviour
             currentCoins -= item.cost;
             item.quantity++;
             item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
-            SpawnPurchasedItems(item); // Pass the item to spawn
+            if (!item.isPermanent)
+            {
+                SpawnPurchasedItems(item); // Pass the item to spawn
+            }
+            else
+            {
+                ApplyItem(item);
+            }
         }
     }
-    /*
-    Allow the chest to be opened after a purchase
-    chestInstance.SetCanOpen(true);
-
-    Usar ApplyItem si queremos hacer items de modificacion no temporal.
+    
     public void ApplyItem(Item item)
     {
         switch (item.itemName)
         {
-            case "Warhammer":
-                player.SetWeapon(item.itemRef.gameObject.GetComponent<IWeapon>());
+            case "Life Up":
+                player.SetNewMaxHealth(25);
                 break;
-            case "SpikeBat":
-                player.SetWeapon(item.itemRef.gameObject.GetComponent<IWeapon>());
+            case "Dmg up":
+                player.SetNewMaxDamage(25);
                 break;
+            case "Stamina Up":
+                player.SetNewMaxStamina(25); break;
 
         }
     }
-
-    private void OpenChest()
-    {
-        if (chestInstance != null)
-        {
-            chestInstance.OpenChest();
-            SpawnPurchasedItems();
-        }
-    }*/
-
+    
     private void SpawnPurchasedItems(Item item)
     {
         // Calculate a spawn position
@@ -172,6 +168,7 @@ public class ShopManager : MonoBehaviour
 [System.Serializable]
 public class Item {
     public string itemName;
+    public bool isPermanent = false;
     public int cost;
     public Sprite image;
     public GameObject itemPrefab;

@@ -70,6 +70,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetNewStamina(float stamina)
+    {
+        maxStamina = stamina;
+    }
+
     private Vector3 GetInputDirection()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
