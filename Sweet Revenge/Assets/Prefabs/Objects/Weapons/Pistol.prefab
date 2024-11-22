@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7566356605575177470}
   - component: {fileID: 9081115927628332158}
-  - component: {fileID: 7477256744555536310}
-  - component: {fileID: 9040467234407406048}
+  - component: {fileID: 6848398322345363477}
+  - component: {fileID: 5256966402653262805}
+  - component: {fileID: 3875575839923067992}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Weapon
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8350612921599990342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.49, y: -0, z: -0.27}
-  m_LocalScale: {x: 6.8391623, y: 5.5672755, z: 6.8422933}
+  m_LocalPosition: {x: -0.0013626, y: 0.0013627, z: 0}
+  m_LocalScale: {x: 6.7653, y: 6.7653, z: 6.7653}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,23 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7477256744555536310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8350612921599990342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b54ab3d370838c49bc96c7e3e860dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  valueGun: {fileID: 11400000, guid: 4d709a72d4fe42d4280aaf474bc1593c, type: 2}
-  bulletPrefab: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
-  player: {fileID: 3149222838435362601, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-  canRotate: 1
---- !u!61 &9040467234407406048
+--- !u!61 &6848398322345363477
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000014901161, y: -0.000870334}
+  m_Offset: {x: 0.0003618896, y: -0.00036189333}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -145,5 +130,69 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15624794, y: 0.08713037}
+  m_Size: {x: 0.13834518, y: 0.06756265}
   m_EdgeRadius: 0
+--- !u!114 &5256966402653262805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350612921599990342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d05f70981c79b241b07647b4511cba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueGun: {fileID: 11400000, guid: 4d709a72d4fe42d4280aaf474bc1593c, type: 2}
+  bulletPrefab: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
+--- !u!114 &3875575839923067992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350612921599990342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 2
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 3.11
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 00000000c940554a
+  m_LightCookieSprite: {fileID: -211988604, guid: 270f71b4f74663c48abf27881df705b8, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.065, y: 0.03, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}

@@ -23,7 +23,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void Config()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(4);
     }
     public void LvlSelect()
     {

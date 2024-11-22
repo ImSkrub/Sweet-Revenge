@@ -53,6 +53,7 @@ public class PlayerLife : MonoBehaviour
     {
         lifeBar.fillAmount = currentHealth / maxHealth;
         currentTime += Time.deltaTime;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -85,20 +86,21 @@ public class PlayerLife : MonoBehaviour
         // Check if there are any saved states before deactivating
         if (playerCheckpoint != null && playerCheckpoint.HasSavedStates())
         {
-            // If there are saved states, do not deactivate the player
-            OnDeath?.Invoke();
+            // If there are saved states, restore the player's state
+            playerCheckpoint.Checkpoint(); // Restore the last saved state
+            Debug.Log("Player restored from checkpoint.");
         }
         else
         {
             // If there are no saved states, deactivate the player
-            OnDeath?.Invoke();
+            Debug.Log("No saved states available. Player is dead.");
             this.gameObject.SetActive(false);
         }
     }
 
-    public PlayerMemento SaveState()
+    public PlayerMemento SaveState(Vector3 position)
     {
-        return new PlayerMemento(transform.position, currentHealth);
+        return new PlayerMemento(position, maxHealth);
     }
 
     public void RestoreState(PlayerMemento state)

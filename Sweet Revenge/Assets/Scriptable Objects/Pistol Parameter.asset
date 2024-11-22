@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Pistol Parameter
   m_EditorClassIdentifier: 
   damage: 25
-  attackSpeed: 1.5
+  attackSpeed: 0.1
+  attackCost: 30
   attackRange: 100
   knockbackForce: 3
   maxBullets: 21
   bulletSpeed: 10
+  gunType: 0
