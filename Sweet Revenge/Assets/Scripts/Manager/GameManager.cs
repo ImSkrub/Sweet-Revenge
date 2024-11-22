@@ -39,10 +39,7 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        if(spawnerEnemy.CurrentRound >= 15)
-        {
-            WinGame();
-        }
+        
     }
 
     public void WinGame()
