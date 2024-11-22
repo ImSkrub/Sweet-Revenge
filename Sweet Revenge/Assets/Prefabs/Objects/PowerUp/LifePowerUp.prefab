@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611ebd389422d32418717a6bbc25ca4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeSoundClip: {fileID: 8300000, guid: f10e7ff812627164fa39911459400577, type: 3}
 --- !u!58 &2994206141274100195
 CircleCollider2D:
   m_ObjectHideFlags: 0

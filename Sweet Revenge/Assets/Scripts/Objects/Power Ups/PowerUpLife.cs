@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUpLife : MonoBehaviour, IPowerUp
 {
     [SerializeField] public string Name { get; set; } = "LifePowerUp";
+    [SerializeField] private AudioClip lifeSoundClip;
 
     public void ApplyPowerUp(GameObject player)
     {
@@ -17,6 +18,7 @@ public class PowerUpLife : MonoBehaviour, IPowerUp
         {
             ApplyPowerUp(collision.gameObject);
             Destroy(gameObject);
+            SoundFXManager.instance.PlaySoundFXClip(lifeSoundClip, transform, 1f);
         }
     }
 }

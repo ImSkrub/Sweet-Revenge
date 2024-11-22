@@ -11,6 +11,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] public float maxHealth = 100;
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private float currentHealth;
+    [SerializeField] private AudioClip damageSoundClip;
     public float CurrentHealth
     {
         get => currentHealth;
@@ -67,6 +68,7 @@ public class PlayerLife : MonoBehaviour
         currentHealth -= value;
         spriteRenderer.color = damageColor;
         Invoke("RestoreColor", 0.5F);
+        SoundFXManager.instance.PlaySoundFXClip(damageSoundClip, transform, 0.5f);
     }
 
     public void RestoreLife(int value)

@@ -13,6 +13,7 @@ public class ShopManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject shopUI;
     [SerializeField] private TMP_Text coinText;
+    [SerializeField] private AudioClip buyItemSoundClip, declineBuySoundClip;
     public Transform shopContent;
     public GameObject itemPrefab;
     private Player player;
@@ -87,7 +88,9 @@ public class ShopManager : MonoBehaviour
             {
                 ApplyItem(item);
             }
+            SoundFXManager.instance.PlaySoundFXClip(buyItemSoundClip, transform, 1f);
         }
+        else SoundFXManager.instance.PlaySoundFXClip(declineBuySoundClip, transform, 1f);
     }
     
     public void ApplyItem(Item item)
