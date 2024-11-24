@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 5171468414838153118}
   - component: {fileID: 5284062300224563789}
   - component: {fileID: 5021922589886325784}
-  - component: {fileID: 7558688213565401183}
-  - component: {fileID: 1414426223937063085}
   - component: {fileID: 4469352325594662869}
   - component: {fileID: 6390866558503570847}
   m_Layer: 6
@@ -152,39 +150,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7558688213565401183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5161239990357589631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e2328f5b27e55459730fa227674f0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1500
-  health: 0
-  damageCooldown: 1
-  destroyDelay: 0.5
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &1414426223937063085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5161239990357589631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7367d91932126db4f8fc3ee0426679aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 3fb590f914ab78d40b5a1f4cfc17ac54, type: 2}
-  Name: Boss
-  target: {fileID: 0}
-  enemyHealth: {fileID: 7558688213565401183}
 --- !u!114 &4469352325594662869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71af93dace34e3149bb540e52857fd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  enemy: {fileID: 0}
+  enemyHealth: {fileID: 0}
+  barraDeVida: {fileID: 0}
 --- !u!95 &6390866558503570847
 Animator:
   serializedVersion: 5

@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("PowerUp"))
         {
             ApplyEffectPowerUp(collision.gameObject.GetComponent<IPowerUp>());
+            
         }
         
     }
