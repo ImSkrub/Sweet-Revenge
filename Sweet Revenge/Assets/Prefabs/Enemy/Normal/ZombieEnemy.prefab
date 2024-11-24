@@ -143,7 +143,12 @@ MonoBehaviour:
   health: 0
   damageCooldown: 1
   destroyDelay: 0.5
-  damageSoundClip: {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
+  damageSoundClips:
+  - {fileID: 8300000, guid: b37c5b8ef2567e145a68fb3ccf3a1ea9, type: 3}
+  - {fileID: 8300000, guid: 1012778c2dfe0a5409d2faed47f46317, type: 3}
+  - {fileID: 8300000, guid: 347e58cdc6fbf924db1e44526724dd1d, type: 3}
+  - {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
+  - {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!195 &7396358911814645616
 NavMeshAgent:

@@ -10,6 +10,7 @@ public class DoorArea : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private TMP_Text text;
     [SerializeField] private int valueDoor;
+    [SerializeField] private AudioClip doorSoundClip;
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -29,7 +30,8 @@ public class DoorArea : MonoBehaviour
                 color = "green"; // Greater than or equal to required
             }
             if (Input.GetKey(KeyCode.F)&& currentCoins >= valueDoor)
-            {       
+            {
+                SoundFXManager.instance.PlaySoundFXClip(doorSoundClip, transform, 1f);
                 door.SetActive(false);
                 message.gameObject.SetActive(false);
                 PointManager.Instance._doorCoin -= valueDoor;
@@ -44,6 +46,9 @@ public class DoorArea : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        message.gameObject.SetActive(false);
+        if (gameObject != null)
+        {
+            message.gameObject.SetActive(false);
+        }
     }
 }
