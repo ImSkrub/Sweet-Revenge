@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private PlayerLife lifePlayer;
   
     public event Action Equipped;
+    [SerializeField] private AudioClip powerUpSound;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -81,6 +82,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("PowerUp"))
         {
             ApplyEffectPowerUp(collision.gameObject.GetComponent<IPowerUp>());
+            SoundFXManager.instance.PlaySoundFXClip(powerUpSound, transform, 1f);
         }
         
     }

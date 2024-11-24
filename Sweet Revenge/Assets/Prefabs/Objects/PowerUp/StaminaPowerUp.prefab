@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5108182383000107589}
   m_Layer: 0
   m_Name: StaminaPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5860fbecc7b09fe4380756667c3d4117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSoundClip: {fileID: 8300000, guid: 541543b2a051ec742b587f389f56ef12, type: 3}
+  staminaSoundClip: {fileID: 0}
 --- !u!58 &5108182383000107589
 CircleCollider2D:
   m_ObjectHideFlags: 0

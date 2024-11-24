@@ -5,7 +5,6 @@ using UnityEngine;
 public class StaminaPowerUp : MonoBehaviour, IPowerUp
 {
     [SerializeField] public string Name { get; set; } = "StaminaPowerUp";
-    [SerializeField] private AudioClip staminaSoundClip;
     public void ApplyPowerUp(GameObject player)
     {
         player.GetComponent<PlayerController>().staminaRechargeRate *= 3;
@@ -17,7 +16,6 @@ public class StaminaPowerUp : MonoBehaviour, IPowerUp
         {
             ApplyPowerUp(collision.gameObject);
             Destroy(gameObject);
-            SoundFXManager.instance.PlaySoundFXClip(staminaSoundClip, transform, 0.5f);
         }
     }    
 }
