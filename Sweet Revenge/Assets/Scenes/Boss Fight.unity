@@ -14855,6 +14855,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38dd26c3cc26e994abdf9be9b6818a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &923500481 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
+  m_PrefabInstance: {fileID: 39521764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &936462002
 GameObject:
   m_ObjectHideFlags: 0
@@ -15034,7 +15039,7 @@ GameObject:
   - component: {fileID: 1082325432}
   - component: {fileID: 1082325431}
   - component: {fileID: 1082325430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pared interior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20308,7 +20313,7 @@ GameObject:
   - component: {fileID: 2027771509}
   - component: {fileID: 2027771508}
   - component: {fileID: 2027771507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pared exterior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26000,6 +26005,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 945286770}
     m_Modifications:
+    - target: {fileID: 4469352325594662869, guid: 9f3a13e8e647aa54faf2dea6e4cfe4ba, type: 3}
+      propertyPath: jugador
+      value: 
+      objectReference: {fileID: 923500481}
     - target: {fileID: 4469352325594662869, guid: 9f3a13e8e647aa54faf2dea6e4cfe4ba, type: 3}
       propertyPath: healthBar
       value: 

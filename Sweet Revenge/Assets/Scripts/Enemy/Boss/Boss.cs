@@ -5,14 +5,13 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour,IDamageable
 {
     private Animator animator;
     public Rigidbody2D rb;
-    public Transform jugador;
+    public Transform playerTransform;
     private bool lookingRight = true;
-    
-    
+
     [Header("Parameters")]
     [SerializeField] private float life;
     [SerializeField] private float maxLife = 2500;
@@ -32,18 +31,18 @@ public class Boss : MonoBehaviour
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
 
-    [SerializeField] Slider healthBar;
+    [SerializeField] private Slider healthBar;
 
     public event Action OnDeath;
 
     private IBossState bossState;
-   
+
     private void Awake()
     {
-        life=maxLife;
+        life = maxLife;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        jugador = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         sr = GetComponent<SpriteRenderer>();
 
         originalColor = sr.color;
@@ -51,51 +50,47 @@ public class Boss : MonoBehaviour
 
         SetState(new Phase1State());
     }
+
     private void Update()
     {
         healthBar.value = life / maxLife;
         if (isDead) return;
-       bossState.UpdateState();
-       if(life<= 1500 && !(bossState is Phase2State))
-       {
+
+        bossState.UpdateState();
+
+        if (life <= 1500 && !(bossState is Phase2State))
+        {
             TransitionToPhaseTwo();
-       }
-       if (life <= 0 && (bossState is Phase2State))
-       {
-            //anim death
+        }
+        if (life <= 0 && (bossState is Phase2State))
+        {
             Invoke("Death", 2f);
-          
-       }
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        life -=damage;
+        life -= damage;
         sr.color = damageColor;
         Invoke("RestoreColor", damageCooldown);
-        // barraDeVida.CambiarVidaActual(life);
-
         if (life <= 1500)
         {
             animator.SetTrigger("Transformation");
-            //pasar de fase --> cambiar el modo en el que ataca al player.
         }
     }
 
     public void FollowPlayer(float moveSpeed)
     {
-        Vector2 direction = (jugador.position - transform.position).normalized;
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
         rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
         LookAtPlayer();
     }
 
     public void LookAtPlayer()
     {
-        Vector2 direction = jugador.position - transform.position;
+        Vector2 direction = playerTransform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        animator.SetFloat("MovY",direction.x);
-        Debug.DrawLine(transform.position, jugador.position, Color.red); // Draw a line to the player
-        Debug.Log("Angle: " + angle); // Log the angle for debugging
+        animator.SetFloat("MovY", direction.x);
         angle += 180f;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
@@ -107,14 +102,9 @@ public class Boss : MonoBehaviour
 
     public bool PlayerInSight()
     {
-        //direction to player
-        Vector2 directionToPlayer = (jugador.position - transform.position).normalized;
-        //Cast a ray from enemy to player. Make sure player has PlayerLife script
+        Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, bossState.GetRange(), playerLayer);
-
-        //drawing the ray in scene.
         Debug.DrawRay(transform.position, directionToPlayer * bossState.GetRange(), Color.red);
-
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
@@ -124,14 +114,15 @@ public class Boss : MonoBehaviour
         return false;
     }
 
+    private float lastAttackTime = 0f;
     public void Attack(float damage)
     {
         if (PlayerInSight())
         {
+            lastAttackTime = Time.time;
             playerHealth.GetDamage(damage);
-            Vector2 knockbackDirection = (jugador.position - transform.position).normalized;
-            jugador.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * bossState.GetKnockbackForce(), ForceMode2D.Impulse);
-            
+            Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+            playerTransform.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * bossState.GetKnockbackForce(), ForceMode2D.Impulse);
         }
     }
 
@@ -150,11 +141,11 @@ public class Boss : MonoBehaviour
 
     private void Death()
     {
-        //animator.SetTrigger("death");
-        isDead =true;
+        isDead = true;
         OnDeath?.Invoke();
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject, destroyDelay);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

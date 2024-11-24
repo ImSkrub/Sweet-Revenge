@@ -13,6 +13,7 @@ public class Phase2State : MonoBehaviour,IBossState
 
     public void Enter(Boss boss)
     {
+        Debug.Log("Entre fase 2");
         this.boss = boss;
     }
 
@@ -22,7 +23,7 @@ public class Phase2State : MonoBehaviour,IBossState
     }
     public void UpdateState()
     {
-        float distanceToPlayer = Vector2.Distance(boss.transform.position, boss.jugador.position);
+        float distanceToPlayer = Vector2.Distance(boss.transform.position, boss.playerTransform.position);
         boss.FollowPlayer(moveSpeed);
 
         if (distanceToPlayer <= attackRangeMax && distanceToPlayer >= attackRangeMin)
