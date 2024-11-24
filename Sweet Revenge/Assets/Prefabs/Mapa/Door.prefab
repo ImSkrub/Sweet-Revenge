@@ -180,5 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: {fileID: 0}
+  door: {fileID: 0}
   text: {fileID: 0}
   valueDoor: 1000
+  doorSoundClip: {fileID: 8300000, guid: b1112fd789b20844eb3edb7008a576eb, type: 3}

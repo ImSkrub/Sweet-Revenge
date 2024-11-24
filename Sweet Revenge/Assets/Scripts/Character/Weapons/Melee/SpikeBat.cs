@@ -112,8 +112,11 @@ public class SpikeBat : MonoBehaviour, IWeapon
     // Coroutine to resume the NavMeshAgent's movement after a delay
     private IEnumerator ResumeNavMeshAgent(NavMeshAgent agent, float delay)
     {
-        yield return new WaitForSeconds(delay);
-        agent.isStopped = false; // Resume movement
+        if (agent != null)
+        {
+            yield return new WaitForSeconds(delay);
+            agent.isStopped = false; // Resume movement
+        }
     }
     public void Equip()
     {

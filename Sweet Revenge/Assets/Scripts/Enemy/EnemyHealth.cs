@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     [SerializeField] private float health;
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private float destroyDelay = 0.5f;
+    [SerializeField] private AudioClip[] damageSoundClips;
     public float enemyHealth { get { return enemyHealth; } set { if (enemyHealth >= 0) health = value; } }
     private bool isDead = false;
     
@@ -37,6 +38,8 @@ public class EnemyHealth : MonoBehaviour,IDamageable
         {
             Death();
         }
+
+        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
     }
 
     private void RestoreColor()

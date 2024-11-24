@@ -174,6 +174,7 @@ MonoBehaviour:
   maxHealth: 100
   damageCooldown: 1
   currentHealth: 0
+  damageSoundClip: {fileID: 8300000, guid: c9e445e75ea7ffc479f689a0b6d4d040, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   lifeGainColor: {r: 0, g: 1, b: 0.049598217, a: 1}
   lifeBar: {fileID: 0}
@@ -190,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 6664644015094670130}
-  player: {fileID: 7095673868828625585}
 --- !u!70 &2896864044589723802
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
