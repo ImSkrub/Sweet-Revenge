@@ -11,6 +11,7 @@ public class Coins : MonoBehaviour
     }
     [SerializeField] private coinType _coinType;
     [SerializeField] private int pointsQuantity;
+    [SerializeField] private AudioClip coinSound;
     
     
     private void OnTriggerEnter2D(Collider2D collision)

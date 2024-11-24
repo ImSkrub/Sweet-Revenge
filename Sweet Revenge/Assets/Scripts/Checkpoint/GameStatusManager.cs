@@ -20,6 +20,7 @@ public class GameStatusManager : MonoBehaviour
     private bool hasPowerUp = false; // New variable to track if the player has a power-up
 
     [SerializeField] Transform spawnpoint;
+    [SerializeField] AudioClip clip;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class GameStatusManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && activeUI && currentPurchases < maxPurchases &&
             !hasPowerUp)
         {
+            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
             savedStates.Push(player.SaveState(spawnpoint.position));
             currentPurchases++;
             hasPowerUp = true; // Set to true when a power-up is purchased

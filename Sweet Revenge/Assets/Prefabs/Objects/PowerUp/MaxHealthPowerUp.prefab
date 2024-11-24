@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7928770221330281846}
   m_Layer: 0
   m_Name: MaxHealthPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
