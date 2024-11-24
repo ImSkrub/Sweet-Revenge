@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7923389398243298334}
   - component: {fileID: 5171468414838153118}
-  - component: {fileID: 5284062300224563789}
+  - component: {fileID: 86837901163800773}
   - component: {fileID: 5021922589886325784}
   - component: {fileID: 4469352325594662869}
   - component: {fileID: 6390866558503570847}
@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5161239990357589631}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0, z: -0.9999451, w: -0.010480388}
   m_LocalPosition: {x: -4.8695498, y: 0.8514815, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -181.201}
 --- !u!212 &5171468414838153118
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,8 +88,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &5284062300224563789
-CapsuleCollider2D:
+--- !u!58 &86837901163800773
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,9 +120,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12625504, y: -0.33667994}
-  m_Size: {x: 4.31501, y: 4.86086}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.7522231
 --- !u!50 &5021922589886325784
 Rigidbody2D:
   serializedVersion: 4
@@ -135,10 +135,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -163,9 +163,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  enemy: {fileID: 0}
-  enemyHealth: {fileID: 0}
-  barraDeVida: {fileID: 0}
+  jugador: {fileID: 0}
+  life: 0
+  maxLife: 2500
+  damageCooldown: 1
+  destroyDelay: 0.5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  damageSoundClips: []
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  healthBar: {fileID: 0}
 --- !u!95 &6390866558503570847
 Animator:
   serializedVersion: 5

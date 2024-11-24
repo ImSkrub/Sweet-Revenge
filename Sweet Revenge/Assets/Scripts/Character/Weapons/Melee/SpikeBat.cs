@@ -91,7 +91,7 @@ public class SpikeBat : MonoBehaviour, IWeapon
             navMeshAgent.isStopped = true;
 
             // Optionally, you can use a coroutine to resume the agent's movement after a delay
-            StartCoroutine(ResumeNavMeshAgent(navMeshAgent, 0.5f)); // Adjust the delay as needed
+            StartCoroutine(ResumeNavMeshAgent(navMeshAgent, 0.75f)); // Adjust the delay as needed
         }
         else
         {
