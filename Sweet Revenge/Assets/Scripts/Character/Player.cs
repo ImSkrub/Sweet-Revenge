@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
     [Header("UI")]
         
     private IWeapon weapon;
-    public PlayerController player;
+    private PlayerController player;
+    private PlayerLife lifePlayer;
   
     public event Action Equipped;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
+        lifePlayer = GetComponent<PlayerLife>();
     }
     private void Update()
     {
@@ -32,10 +34,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetAnimation(string name)
+    public void SetNewMaxHealth(int newHealth)
     {
-        
+        lifePlayer.maxHealth += newHealth;
+        lifePlayer.CurrentHealth = lifePlayer.maxHealth;
     }
+
+    public void SetNewMaxDamage(float newDamage)
+    {
+
+    }
+
+    public void SetNewMaxStamina(float newStamina)
+    {
+        player.SetNewStamina(newStamina);
+    }
+
     public void SetWeapon(IWeapon weapon)
     {
         this.weapon = weapon;
@@ -61,6 +75,7 @@ public class Player : MonoBehaviour
             SetWeapon(collision.gameObject.GetComponent<IWeapon>());
             collision.gameObject.transform.SetParent(weaponSlot);
             collision.gameObject.transform.position = weaponSlot.position;
+            collision.gameObject.transform.rotation = weaponSlot.rotation;
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))
