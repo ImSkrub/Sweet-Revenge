@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - DoorCoin
   - ShopCoin
+  - RoundText
   layers:
   - Default
   - TransparentFX

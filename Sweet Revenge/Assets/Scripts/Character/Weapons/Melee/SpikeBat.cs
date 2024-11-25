@@ -80,17 +80,16 @@ public class SpikeBat : MonoBehaviour, IWeapon
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
 
             // Set the velocity of the NavMeshAgent to create a knockback effect
-            // You can adjust the knockback force as needed
             float knockbackForce = dataBat.knockbackForce; // Assuming dataBat is accessible here
             Vector3 knockbackVelocity = knockbackDirection * knockbackForce;
 
             // Apply the knockback by setting the agent's velocity
             navMeshAgent.velocity = new Vector3(knockbackVelocity.x, knockbackVelocity.y, 0);
 
-            // Optionally, you can stop the agent from moving towards the target for a short duration
+            // Stop the agent from moving towards the target for a short duration
             navMeshAgent.isStopped = true;
 
-            // Optionally, you can use a coroutine to resume the agent's movement after a delay
+            // Start the coroutine to resume the agent's movement after a delay
             StartCoroutine(ResumeNavMeshAgent(navMeshAgent, 0.75f)); // Adjust the delay as needed
         }
         else
@@ -102,10 +101,6 @@ public class SpikeBat : MonoBehaviour, IWeapon
                 Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
                 rb.AddForce(knockbackDirection * dataBat.knockbackForce, ForceMode2D.Impulse);
             }
-            else
-            {
-                // Debug.Log($"{enemy.name} does not have a Rigidbody2D or NavMeshAgent component.");
-            }
         }
     }
 
@@ -115,7 +110,12 @@ public class SpikeBat : MonoBehaviour, IWeapon
         if (agent != null)
         {
             yield return new WaitForSeconds(delay);
-            agent.isStopped = false; // Resume movement
+
+            // Check if the agent is still valid before resuming
+            if (agent != null)
+            {
+                agent.isStopped = false; // Resume movement
+            }
         }
     }
     public void Equip()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SpawnerEnemy : MonoBehaviour
@@ -18,6 +19,7 @@ public class SpawnerEnemy : MonoBehaviour
     [SerializeField] private float timeBetweenRounds = 5f; // Wait time between rounds
     [SerializeField] private int maxRounds = 15; // Máximo número de rondas
 
+    [SerializeField] private TextMeshProUGUI roundText;
     
     public int CurrentRound
     {
@@ -31,50 +33,81 @@ public class SpawnerEnemy : MonoBehaviour
     private float roundTimer = 0f; // Temporizador para el tiempo entre rondas
     private bool isSpawning = false; // Indica si se están generando enemigos
 
+    private void Awake()
+    {
+        // Automatically find the TextMeshProUGUI component with the tag "RoundText"
+        GameObject roundTextObject = GameObject.FindGameObjectWithTag("RoundText");
+        if (roundTextObject != null)
+        {
+            roundText = roundTextObject.GetComponent<TextMeshProUGUI>();
+        }
+        else
+        {
+            Debug.LogError("No GameObject with tag 'RoundText' found in the scene.");
+        }
+
+        // Optionally, check if the roundText was found
+        if (roundText == null)
+        {
+            Debug.LogError("RoundText TMP component not found in the GameObject with tag 'RoundText'. Please ensure it exists.");
+        }
+    }
+
     private void Update()
     {
+        // Update the round text in the HUD
+        UpdateRoundText();
+
         if (currentRound <= maxRounds)
         {
             if (isSpawning)
             {
-                // Manejar el temporizador de spawn
+                // Handle spawn timer
                 spawnTimer += Time.deltaTime;
                 if (spawnTimer >= spawnInterval && spawnCount < CalculateEnemiesPerRound())
                 {
                     SpawnEnemies();
-                    spawnTimer = 0f; // Reiniciar el temporizador
+                    spawnTimer = 0f; // Reset timer
                 }
 
-                // Verificar si todos los enemigos han sido derrotados
+                // Check if all enemies have been defeated
                 if (activeEnemies == 0 && spawnCount >= CalculateEnemiesPerRound() && spawnCount > 0)
                 {
-                    isSpawning = false; // Detener la generación de enemigos
-                    roundTimer = 0f; // Reiniciar el temporizador de ronda
+                    isSpawning = false; // Stop spawning enemies
+                    roundTimer = 0f; // Reset round timer
                     Debug.Log($"Round {currentRound} completed.");
                 }
             }
             else
             {
-                // Manejar el temporizador entre rondas
+                // Handle round timer
                 roundTimer += Time.deltaTime;
                 if (roundTimer >= timeBetweenRounds)
                 {
-                    // Recompensar al jugador y avanzar a la siguiente ronda
+                    // Reward the player and advance to the next round
                     int coinsRewarded = CalculateCoinsReward(currentRound);
                     RewardPlayer(coinsRewarded);
                     currentRound++;
-                    spawnCount = 0; // Reiniciar el contador de enemigos por ronda
-                    isSpawning = true; // Comenzar a generar enemigos
+                    spawnCount = 0; // Reset enemy count for the round
+                    isSpawning = true; // Start spawning enemies
                 }
             }
         }
         else
         {
-            // Aquí puedes agregar lógica para lo que sucede después de alcanzar el número máximo de rondas
-            Debug.Log("Se ha alcanzado el número máximo de rondas.");
+            // Logic for what happens after reaching the maximum number of rounds
+            Debug.Log("Maximum number of rounds reached.");
         }
     }
 
+    private void UpdateRoundText()
+    {
+        // Update the TMP text to show the current round
+        if (roundText != null)
+        {
+            roundText.text = $"Round: {currentRound}"; // Update the text
+        }
+    }
 
     private void SpawnEnemies()
     {
