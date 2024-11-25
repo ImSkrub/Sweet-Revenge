@@ -146,3 +146,4 @@ MonoBehaviour:
   valueGun: {fileID: 11400000, guid: 3bb4e45ffa9a7264092bac52e526242e, type: 2}
   bulletPrefab: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
   slowDownFactor: 0.5
+  smgSound: {fileID: 8300000, guid: f7e722d74f98a664d8a86dff3e859d96, type: 3}

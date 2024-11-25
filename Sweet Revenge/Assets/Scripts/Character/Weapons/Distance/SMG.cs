@@ -8,6 +8,7 @@ public class SMG : BaseGun,IWeapon
     [SerializeField] private const float bulletsPerSecond = 35f; // 15 bullets per second
     [SerializeField] private float slowDownFactor = 0.5f; // Adjust as needed
     private PlayerController playerController;
+    [SerializeField] private AudioClip smgSound;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class SMG : BaseGun,IWeapon
         {
             ShootBullet();
             lastAttackTime = Time.time; // Update last attack time
+            SoundFXManager.instance.PlaySoundFXClip(smgSound, transform, 0.2f);
         }
     }
 

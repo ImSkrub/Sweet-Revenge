@@ -28,6 +28,7 @@ public class Coins : MonoBehaviour
                     break;
                     
             }
+            SoundFXManager.instance.PlaySoundFXClip(coinSound, transform, 0.3f);
             Destroy(gameObject);
         }
     }
