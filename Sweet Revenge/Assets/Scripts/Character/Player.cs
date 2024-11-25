@@ -72,11 +72,19 @@ public class Player : MonoBehaviour
             {
                 Destroy(weaponSlot.GetChild(0).gameObject);
             }
-            
+
             SetWeapon(collision.gameObject.GetComponent<IWeapon>());
+
+            // Set the weapon as a child of the weapon slot
             collision.gameObject.transform.SetParent(weaponSlot);
-            collision.gameObject.transform.position = weaponSlot.position;
-            collision.gameObject.transform.rotation = weaponSlot.rotation;
+
+            // Set the weapon's local position and rotation
+            collision.gameObject.transform.localPosition = Vector3.zero; // Adjust this if needed
+            collision.gameObject.transform.localRotation = Quaternion.identity; // Reset rotation to match weapon slot
+
+            // If you want to adjust the rotation based on the player's facing direction
+            // You can use the player's current rotation or a specific angle
+            collision.gameObject.transform.localRotation = Quaternion.Euler(0, 0, player.transform.eulerAngles.z);
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))
@@ -84,6 +92,5 @@ public class Player : MonoBehaviour
             ApplyEffectPowerUp(collision.gameObject.GetComponent<IPowerUp>());
             SoundFXManager.instance.PlaySoundFXClip(powerUpSound, transform, 1f);
         }
-        
     }
 }

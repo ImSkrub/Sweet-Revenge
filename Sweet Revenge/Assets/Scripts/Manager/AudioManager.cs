@@ -23,7 +23,6 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         else
@@ -34,6 +33,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        MusicSource = FindFirstObjectByType<AudioSource>();
+        SFXSource = FindFirstObjectByType<AudioSource>();
         //PlayMusic("Theme");
         //playerCharacter.ChestSound.AddListener(ChestSound);
         //playerCharacter.DoorSound.AddListener(DoorSound);
