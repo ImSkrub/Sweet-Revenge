@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour,IDamageable
     [Header("Parameters")]
     [SerializeField] private float life;
     [SerializeField] private float maxLife = 2500;
-    [SerializeField] private float damageCooldown = 1f;
+    [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
@@ -27,7 +27,7 @@ public class Boss : MonoBehaviour,IDamageable
 
     [Space(3)]
     [Header("Color")]
-    private SpriteRenderer sr;
+    [SerializeField]public SpriteRenderer sr;
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
 
@@ -44,7 +44,6 @@ public class Boss : MonoBehaviour,IDamageable
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         sr = GetComponent<SpriteRenderer>();
-
         originalColor = sr.color;
         playerHealth = FindObjectOfType<PlayerLife>();
 

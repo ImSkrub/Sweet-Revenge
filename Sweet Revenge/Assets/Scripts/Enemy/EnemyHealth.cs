@@ -20,6 +20,10 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
     public event Action OnDeath;
+    [Space(3)]
+    [Header("Reference")]
+    [SerializeField] private GenerateItem generateItem;
+
     //[Header("Animator")]
     //private Animator anim;
     private void Awake()
@@ -28,6 +32,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
         //anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
+        generateItem = GetComponent<GenerateItem>();
     }
     public void TakeDamage(float damage)
     {
@@ -50,6 +55,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     private void Death()
     {
         //anim.SetTrigger("die");
+        generateItem.SpawnItem();
         isDead = true;
         OnDeath?.Invoke();
         Destroy(gameObject,destroyDelay);

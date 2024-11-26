@@ -100,6 +100,13 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
+    public void SetNewMaxHealth(float value)
+    {
+        maxHealth += value;
+        CurrentHealth = maxHealth;
+        Debug.Log($"{maxHealth}");
+    }
+
     public PlayerMemento SaveState(Vector3 position)
     {
         return new PlayerMemento(position, maxHealth);

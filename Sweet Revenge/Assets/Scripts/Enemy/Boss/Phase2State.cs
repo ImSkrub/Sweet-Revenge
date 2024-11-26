@@ -13,6 +13,7 @@ public class Phase2State : MonoBehaviour,IBossState
 
     public void Enter(Boss boss)
     {
+        boss.sr.color = Color.red;
         Debug.Log("Entre fase 2");
         this.boss = boss;
     }

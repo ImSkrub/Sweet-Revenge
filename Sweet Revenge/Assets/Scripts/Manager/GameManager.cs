@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private SpawnerEnemy spawnerEnemy;
     private GameStatusManager quickRevive;
 
+    public bool bossDied = false;
+
     private void Awake()
     {
 
@@ -45,6 +47,23 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
        SceneManager.LoadScene(3);
+    }
+
+    private void HandlePlayerWin()
+    {
+        if(spawnerEnemy.CurrentRound == 18)
+        {
+            WinGame();
+        }
+        else if (bossDied)
+        {
+            WinGame();
+        }
+    }
+
+    public void HandleBossDeath()
+    {
+        bossDied = true;
     }
 
     private void HandlePlayerDeath()

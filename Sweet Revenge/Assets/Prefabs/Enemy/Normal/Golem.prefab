@@ -191,7 +191,9 @@ MonoBehaviour:
   health: 0
   damageCooldown: 1
   destroyDelay: 0.5
+  damageSoundClips: []
   damageColor: {r: 1, g: 0, b: 0, a: 1}
+  generateItem: {fileID: 0}
 --- !u!114 &6203767753772169879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +222,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: bf54b4e277bbb5244bc674d9989e0441, type: 2}
   Name: Golem
   target: {fileID: 0}
+  generateItem: {fileID: 0}
   enemyHealth: {fileID: 0}
 --- !u!114 &6999762320652257798
 MonoBehaviour:
@@ -233,4 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794cee3c913b8a84bb7936fc045863c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
+  coinPrefab: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
+  numberOfCoins: 3
+  spawnOffset: 0.5

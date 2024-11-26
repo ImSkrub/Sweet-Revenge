@@ -37,8 +37,7 @@ public class Player : MonoBehaviour
 
     public void SetNewMaxHealth(int newHealth)
     {
-        lifePlayer.maxHealth += newHealth;
-        lifePlayer.CurrentHealth = lifePlayer.maxHealth;
+        lifePlayer.SetNewMaxHealth(newHealth);     
     }
 
     public void SetNewMaxDamage(float newDamage)
@@ -48,7 +47,7 @@ public class Player : MonoBehaviour
 
     public void SetNewMaxStamina(float newStamina)
     {
-        player.SetNewStamina(newStamina);
+        player.SetNewStamina(newStamina); 
     }
 
     public void SetWeapon(IWeapon weapon)

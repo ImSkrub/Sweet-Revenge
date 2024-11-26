@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetNewStamina(float stamina)
     {
-        maxStamina = stamina;
+        maxStamina += stamina;
+        Debug.Log($"{maxStamina}");
     }
 
     private Vector3 GetInputDirection()
