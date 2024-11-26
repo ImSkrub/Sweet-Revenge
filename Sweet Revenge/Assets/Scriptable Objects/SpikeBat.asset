@@ -15,7 +15,7 @@ MonoBehaviour:
   damage: 1000
   attackSpeed: 2
   attackCost: 30
-  attackRange: 5
+  attackRange: 2
   knockbackForce: 10
   maxBullets: 0
   bulletSpeed: 0
