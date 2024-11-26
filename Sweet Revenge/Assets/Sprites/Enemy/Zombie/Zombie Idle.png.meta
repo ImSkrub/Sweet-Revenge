@@ -113,12 +113,12 @@ TextureImporter:
       name: Zombie Idle_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 2
-        width: 52
-        height: 60
+        x: 4
+        y: 198
+        width: 58
+        height: 52
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Zombie Idle_1
       rect:
         serializedVersion: 2
-        x: 70
-        y: 2
-        width: 52
-        height: 58
+        x: 2
+        y: 134
+        width: 60
+        height: 52
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Zombie Idle_2
       rect:
         serializedVersion: 2
-        x: 134
-        y: 2
-        width: 52
-        height: 60
+        x: 4
+        y: 70
+        width: 58
+        height: 52
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: Zombie Idle_3
       rect:
         serializedVersion: 2
-        x: 198
-        y: 2
-        width: 52
-        height: 58
+        x: 2
+        y: 6
+        width: 60
+        height: 52
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

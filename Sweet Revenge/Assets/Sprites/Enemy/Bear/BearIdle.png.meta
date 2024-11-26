@@ -113,12 +113,12 @@ TextureImporter:
       name: BearIdle_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 2
+        x: 6
+        y: 196
         width: 56
         height: 56
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: BearIdle_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 2
+        x: 6
+        y: 132
         width: 56
         height: 56
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: BearIdle_2
       rect:
         serializedVersion: 2
-        x: 132
-        y: 2
+        x: 6
+        y: 68
         width: 56
         height: 56
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: BearIdle_3
       rect:
         serializedVersion: 2
-        x: 196
-        y: 2
+        x: 6
+        y: 4
         width: 56
         height: 56
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

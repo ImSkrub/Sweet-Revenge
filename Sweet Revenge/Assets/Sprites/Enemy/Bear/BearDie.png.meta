@@ -113,12 +113,12 @@ TextureImporter:
       name: BearDie_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 2
-        width: 56
-        height: 56
+        x: 0
+        y: 264
+        width: 50
+        height: 46
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: BearDie_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 12
-        width: 56
-        height: 46
+        x: 8
+        y: 202
+        width: 52
+        height: 47
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,57 +152,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BearDie_3
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 8
-        width: 58
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e190a7dcaa3a0bc48887d5296faaad0b
-      internalID: 1317603794
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BearDie_6
-      rect:
-        serializedVersion: 2
-        x: 194
-        y: 14
-        width: 56
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62003d0ea81e4814fb8a8c0b795d309d
-      internalID: -1037457736
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: BearDie_8
       rect:
         serializedVersion: 2
-        x: 264
-        y: 14
+        x: 6
+        y: 68
         width: 46
-        height: 42
+        height: 56
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,6 +168,48 @@ TextureImporter:
       bones: []
       spriteID: 3eacc506b52614749b6f75a0eceb6ab0
       internalID: -197015969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BearDie_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 132
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0265fa5ec39730649b422d017ba3cdcf
+      internalID: 875544426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BearDie_9
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 4
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb7bbbdc2af14324c824b144208e4ce4
+      internalID: -378311777
       vertices: []
       indices: 
       edges: []
@@ -234,6 +234,7 @@ TextureImporter:
       BearDie_6: -1037457736
       BearDie_7: 1184444354
       BearDie_8: -197015969
+      BearDie_9: -378311777
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

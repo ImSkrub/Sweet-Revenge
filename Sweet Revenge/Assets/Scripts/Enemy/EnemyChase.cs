@@ -30,8 +30,6 @@ public class EnemyChase : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
-        else navMeshAgent.SetDestination(new Vector3(0,0,0));
-
         //Quaternion targetRotation = Quaternion.LookRotation(transform.forward, -target.position);
         //Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         //rb.SetRotation(rotation);
