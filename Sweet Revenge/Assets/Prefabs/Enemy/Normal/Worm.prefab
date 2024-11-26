@@ -192,9 +192,10 @@ MonoBehaviour:
   health: 0
   damageCooldown: 1
   destroyDelay: 0.5
+  volume: 0
   damageSoundClips: []
   damageColor: {r: 1, g: 0, b: 0, a: 1}
-  generateItem: {fileID: 0}
+  generateItem: {fileID: 2970190372525731859}
 --- !u!114 &2207632015377368185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &4438446690113275046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,10 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7367d91932126db4f8fc3ee0426679aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: de4cac392d6350c40a499cab684ac6f5, type: 2}
   Name: Worm
   target: {fileID: 0}
-  generateItem: {fileID: 0}
+  playerHealth: {fileID: 0}
   enemyHealth: {fileID: 6951677968752867920}
 --- !u!114 &2970190372525731859
 MonoBehaviour:

@@ -11,6 +11,8 @@ TagManager:
   - DoorCoin
   - ShopCoin
   - RoundText
+  - Wall
+  - Door
   layers:
   - Default
   - TransparentFX

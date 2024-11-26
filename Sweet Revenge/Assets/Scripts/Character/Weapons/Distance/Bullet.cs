@@ -103,5 +103,9 @@ public class Bullet : MonoBehaviour
             ApplyDamage(damage, collision);
             Deactivate();
         }
+        if (collision.gameObject.CompareTag("Door") || collision.gameObject.CompareTag("Wall"))
+        {
+            Deactivate();
+        }
     }
 }
