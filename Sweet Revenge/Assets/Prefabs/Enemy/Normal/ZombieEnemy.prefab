@@ -143,6 +143,7 @@ MonoBehaviour:
   health: 0
   damageCooldown: 1
   destroyDelay: 0.5
+  volume: 0.2
   damageSoundClips:
   - {fileID: 8300000, guid: b37c5b8ef2567e145a68fb3ccf3a1ea9, type: 3}
   - {fileID: 8300000, guid: 1012778c2dfe0a5409d2faed47f46317, type: 3}

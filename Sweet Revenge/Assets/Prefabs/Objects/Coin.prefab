@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinType: 1
   pointsQuantity: 15
+  coinSound: {fileID: 8300000, guid: 88a9b2bc563386041b907cd3a46a5f6d, type: 3}
 --- !u!1 &3044724361339190335
 GameObject:
   m_ObjectHideFlags: 0

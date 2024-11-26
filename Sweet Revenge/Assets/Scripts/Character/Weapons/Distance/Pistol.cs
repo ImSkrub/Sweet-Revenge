@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pistol : BaseGun,IWeapon
 {
     private float lastAttackTime;
+    [SerializeField] private AudioClip shootSound;
     private void Start()
     {
         base.Start();
@@ -18,7 +19,7 @@ public class Pistol : BaseGun,IWeapon
         {
             Bullet bullet = bulletPool.Get();
             SetBulletDir(bullet);
-
+            SoundFXManager.instance.PlaySoundFXClip(shootSound, transform, 0.2f);
             lastAttackTime = Time.time; // Update last attack time
         }
     }

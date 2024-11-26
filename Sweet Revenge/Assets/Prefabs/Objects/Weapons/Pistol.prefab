@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueGun: {fileID: 11400000, guid: 4d709a72d4fe42d4280aaf474bc1593c, type: 2}
   bulletPrefab: {fileID: 133501569150560184, guid: 13b6cfd3ec153d440803952c17873be7, type: 3}
+  shootSound: {fileID: 8300000, guid: f7e722d74f98a664d8a86dff3e859d96, type: 3}
 --- !u!114 &3875575839923067992
 MonoBehaviour:
   m_ObjectHideFlags: 0

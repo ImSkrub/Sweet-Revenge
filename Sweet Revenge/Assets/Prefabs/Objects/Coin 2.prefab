@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.4
 --- !u!114 &535619107342440243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinType: 0
   pointsQuantity: 25
-  coinSound: {fileID: 0}
+  coinSound: {fileID: 8300000, guid: 88a9b2bc563386041b907cd3a46a5f6d, type: 3}
 --- !u!1 &3044724361339190335
 GameObject:
   m_ObjectHideFlags: 0
