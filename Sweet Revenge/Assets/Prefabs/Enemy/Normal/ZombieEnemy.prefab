@@ -151,7 +151,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
   - {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
-  generateItem: {fileID: 0}
 --- !u!195 &7396358911814645616
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -189,7 +188,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 143e68afc32aeaa42ab4546c275e3e61, type: 2}
   Name: Zombie
   target: {fileID: 0}
-  generateItem: {fileID: 0}
+  playerHealth: {fileID: -1311028509660312670, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
   enemyHealth: {fileID: 0}
 --- !u!50 &7109243454796781215
 Rigidbody2D:
@@ -231,8 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-  rotationSpeed: 200
-  rb: {fileID: 7109243454796781215}
+  player: {fileID: -1311028509660312670, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
 --- !u!114 &-48724357427451098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,9 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794cee3c913b8a84bb7936fc045863c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
-  numberOfCoins: 3
-  spawnOffset: 0.5
+  item: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
 --- !u!82 &-4098793869986557515
 AudioSource:
   m_ObjectHideFlags: 0

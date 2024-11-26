@@ -111,6 +111,7 @@ MonoBehaviour:
   attackCost: 10
   staminaBar: {fileID: 0}
   isRecharging: 0
+  life: {fileID: -1311028509660312670}
 --- !u!50 &5785503798244368686
 Rigidbody2D:
   serializedVersion: 4
@@ -175,6 +176,7 @@ MonoBehaviour:
   damageCooldown: 1
   currentHealth: 0
   damageSoundClip: {fileID: 8300000, guid: c9e445e75ea7ffc479f689a0b6d4d040, type: 3}
+  isDead: 0
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   lifeGainColor: {r: 0, g: 1, b: 0.049598217, a: 1}
   lifeBar: {fileID: 0}

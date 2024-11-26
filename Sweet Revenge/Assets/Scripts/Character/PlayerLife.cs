@@ -12,6 +12,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private float currentHealth;
     [SerializeField] private AudioClip damageSoundClip;
+    public bool isDead = false;
     public float CurrentHealth
     {
         get => currentHealth;
@@ -19,6 +20,7 @@ public class PlayerLife : MonoBehaviour
     }
 
     private SpriteRenderer spriteRenderer;
+    Animator animator;
     private float currentTime;
     public event Action OnDeath;
 
@@ -41,6 +43,7 @@ public class PlayerLife : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+        animator = GetComponent<Animator>();
 
         // Find the PlayerCheckpoint in the scene
         playerCheckpoint = FindObjectOfType<GameStatusManager>();
@@ -65,10 +68,13 @@ public class PlayerLife : MonoBehaviour
 
     public void GetDamage(float value)
     {
-        currentHealth -= value;
-        spriteRenderer.color = damageColor;
-        Invoke("RestoreColor", 0.5F);
-        SoundFXManager.instance.PlaySoundFXClip(damageSoundClip, transform, 0.5f);
+        if (!isDead)
+        {
+            currentHealth -= value;
+            spriteRenderer.color = damageColor;
+            Invoke("RestoreColor", 0.5F);
+            SoundFXManager.instance.PlaySoundFXClip(damageSoundClip, transform, 0.5f);
+        }
     }
 
     public void RestoreLife(int value)
@@ -96,7 +102,9 @@ public class PlayerLife : MonoBehaviour
         {
             // If there are no saved states, deactivate the player
             Debug.Log("No saved states available. Player is dead.");
-            this.gameObject.SetActive(false);
+            isDead = true;
+            animator.SetBool("IsDead", isDead);
+            //this.gameObject.SetActive(false);
         }
     }
 

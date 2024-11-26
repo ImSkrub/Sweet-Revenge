@@ -14,8 +14,7 @@ public class Enemy : MonoBehaviour
     public string Name;
     private Rigidbody2D rb;
     [SerializeField]private Transform target;
-  
-    private PlayerLife playerHealth;
+    [SerializeField] private PlayerLife playerHealth;
     public EnemyHealth enemyHealth;
     private Vector3 enemyDirection;
     private bool isFacingRight = true;
@@ -24,8 +23,8 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         enemyHealth = GetComponent<EnemyHealth>();
+        //playerHealth = GetComponent<PlayerLife>();
         target = FindObjectOfType<Player>().transform;
-        
     }
 
     private void FixedUpdate()
