@@ -361,6 +361,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5230968184618618228, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230968184618618228, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 451b830fa22e83b4f8b62d4094461322, type: 2}
@@ -590391,7 +590395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 1310715803}
-  volumeFadeOff: 0.2
+  volumeFadeOff: 0.1
   volumeFadeOn: 0
   maxVolume: 1
 --- !u!82 &1310715803
@@ -590406,7 +590410,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: efc3f1a7f35da8145b9beb302e0a2a40, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

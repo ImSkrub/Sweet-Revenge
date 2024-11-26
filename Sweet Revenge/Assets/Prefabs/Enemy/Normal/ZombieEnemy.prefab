@@ -188,6 +188,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 143e68afc32aeaa42ab4546c275e3e61, type: 2}
   Name: Zombie
   target: {fileID: 0}
+  playerHealth: {fileID: -1311028509660312670, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
   enemyHealth: {fileID: 0}
 --- !u!50 &7109243454796781215
 Rigidbody2D:
@@ -229,8 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
-  rotationSpeed: 200
-  rb: {fileID: 7109243454796781215}
+  player: {fileID: -1311028509660312670, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
 --- !u!114 &-48724357427451098
 MonoBehaviour:
   m_ObjectHideFlags: 0

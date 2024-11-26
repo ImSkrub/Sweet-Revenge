@@ -31,17 +31,23 @@ public class PlayerController : MonoBehaviour
     private Coroutine rechargeCoroutine;
     private Transform playerTransform;
     public bool isRecharging;
+
+    private PlayerLife life;
     
     private void Awake()
     {
         stamina = maxStamina;
         playerTransform = transform;
+        life = GetComponent<PlayerLife>();
     }
 
     void Update()
     {
-        HandleRotation();
-        HandleMovement();
+        if (!life.isDead)
+        {
+            HandleRotation();
+            HandleMovement();
+        }
     }
 
     private void HandleRotation()
