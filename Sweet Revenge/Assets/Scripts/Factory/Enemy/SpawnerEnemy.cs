@@ -157,28 +157,34 @@ public class SpawnerEnemy : MonoBehaviour
     private void InitializeAreaTransitions()
     {
         areaTransitions[SpawnPoint.SpawnArea.Start] = new List<SpawnPoint.SpawnArea>
-        {
-            SpawnPoint.SpawnArea.Cueva,
-            SpawnPoint.SpawnArea.Volcan,
-            SpawnPoint.SpawnArea.Tierra
-        };
+    {
+        SpawnPoint.SpawnArea.Cueva,
+        SpawnPoint.SpawnArea.Volcan,
+        SpawnPoint.SpawnArea.Tierra
+    };
+
         areaTransitions[SpawnPoint.SpawnArea.Cueva] = new List<SpawnPoint.SpawnArea>
-        {
-            SpawnPoint.SpawnArea.Cueva_Profunda,
-            SpawnPoint.SpawnArea.Start
-        };
+    {
+        SpawnPoint.SpawnArea.Cueva_Profunda,
+        SpawnPoint.SpawnArea.Start
+    };
+
         areaTransitions[SpawnPoint.SpawnArea.Cueva_Profunda] = new List<SpawnPoint.SpawnArea>
-        {
-            SpawnPoint.SpawnArea.Cueva
-        };
+    {
+        SpawnPoint.SpawnArea.Volcan,
+        SpawnPoint.SpawnArea.Cueva
+    };
+
         areaTransitions[SpawnPoint.SpawnArea.Volcan] = new List<SpawnPoint.SpawnArea>
-        {
-            SpawnPoint.SpawnArea.Start
-        };
+    {
+        SpawnPoint.SpawnArea.Cueva_Profunda,
+        SpawnPoint.SpawnArea.Start
+    };
+
         areaTransitions[SpawnPoint.SpawnArea.Tierra] = new List<SpawnPoint.SpawnArea>
-        {
-            SpawnPoint.SpawnArea.Start
-        };
+    {
+        SpawnPoint.SpawnArea.Start
+    };
     }
     private void ActivateSpawnArea(SpawnPoint.SpawnArea current, SpawnPoint.SpawnArea next)
     {
@@ -194,6 +200,30 @@ public class SpawnerEnemy : MonoBehaviour
             }
         }
         currentArea = next; // Actualiza el área actual
+    }
+
+    public void ChangeArea(SpawnPoint.SpawnArea newArea)
+    {
+        // Desactiva el spawn del área actual
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.Area == currentArea)
+            {
+                spawnPoint.DisableSpawn();
+            }
+        }
+
+        // Activa el spawn del nuevo área
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.Area == newArea)
+            {
+                spawnPoint.EnableSpawn();
+            }
+        }
+
+        // Actualiza el área actual
+        currentArea = newArea;
     }
 
     private SpawnPoint.SpawnArea GetNextArea(SpawnPoint.SpawnArea current)
