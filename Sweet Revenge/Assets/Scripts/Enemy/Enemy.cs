@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public string Name;
     private Rigidbody2D rb;
     [SerializeField]private Transform target;
-    [SerializeField] private GenerateItem generateItem;
+  
     private PlayerLife playerHealth;
     public EnemyHealth enemyHealth;
     private Vector3 enemyDirection;
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemyHealth = GetComponent<EnemyHealth>();
         target = FindObjectOfType<Player>().transform;
-        generateItem = GetComponent<GenerateItem>();
+        
     }
 
     private void FixedUpdate()
