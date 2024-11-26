@@ -8,7 +8,7 @@ public class SpawnerEnemy : MonoBehaviour
     [Header("Spawn Parameters")]
     [SerializeField] private FactoryEnemy enemyFactory;
     [SerializeField] private float spawnInterval = 3f;
-    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private List<SpawnPoint> spawnPoints; // Lista de puntos de spawn
     [SerializeField] private List<string> enemyTypeToSpawn = new List<string>();
     [SerializeField] private int enemiesPerSpawn = 1;
 
@@ -18,9 +18,6 @@ public class SpawnerEnemy : MonoBehaviour
     [SerializeField] private int roundMultiplier = 2;
     [SerializeField] private float timeBetweenRounds = 5f; // Wait time between rounds
     [SerializeField] private int maxRounds = 15; // Máximo número de rondas
-
-    [SerializeField] private TextMeshProUGUI roundText;
-    
     public int CurrentRound
     {
         get => currentRound;
@@ -33,8 +30,16 @@ public class SpawnerEnemy : MonoBehaviour
     private float roundTimer = 0f; // Temporizador para el tiempo entre rondas
     private bool isSpawning = false; // Indica si se están generando enemigos
 
+    [SerializeField] private TextMeshProUGUI roundText;
+   
+    private SpawnPoint.SpawnArea currentArea; // Área actual
+
+    private Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>> areaTransitions = new Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>>();
+
     private void Awake()
     {
+        // Initialize area transitions
+        InitializeAreaTransitions();
         // Automatically find the TextMeshProUGUI component with the tag "RoundText"
         GameObject roundTextObject = GameObject.FindGameObjectWithTag("RoundText");
         if (roundTextObject != null)
@@ -51,52 +56,68 @@ public class SpawnerEnemy : MonoBehaviour
         {
             Debug.LogError("RoundText TMP component not found in the GameObject with tag 'RoundText'. Please ensure it exists.");
         }
+
+        
     }
 
     private void Update()
     {
-        // Update the round text in the HUD
         UpdateRoundText();
 
         if (currentRound <= maxRounds)
         {
             if (isSpawning)
             {
-                // Handle spawn timer
                 spawnTimer += Time.deltaTime;
                 if (spawnTimer >= spawnInterval && spawnCount < CalculateEnemiesPerRound())
                 {
                     SpawnEnemies();
-                    spawnTimer = 0f; // Reset timer
+                    spawnTimer = 0f;
                 }
 
-                // Check if all enemies have been defeated
                 if (activeEnemies == 0 && spawnCount >= CalculateEnemiesPerRound() && spawnCount > 0)
                 {
-                    isSpawning = false; // Stop spawning enemies
-                    roundTimer = 0f; // Reset round timer
+                    isSpawning = false;
+                    roundTimer = 0f;
                     Debug.Log($"Round {currentRound} completed.");
                 }
             }
             else
             {
-                // Handle round timer
                 roundTimer += Time.deltaTime;
                 if (roundTimer >= timeBetweenRounds)
                 {
-                    // Reward the player and advance to the next round
-                    int coinsRewarded = CalculateCoinsReward(currentRound);
-                    RewardPlayer(coinsRewarded);
+                    RewardPlayer(CalculateCoinsReward(currentRound));
                     currentRound++;
-                    spawnCount = 0; // Reset enemy count for the round
-                    isSpawning = true; // Start spawning enemies
+                    spawnCount = 0;
+                    isSpawning = true;
                 }
             }
         }
         else
         {
-            // Logic for what happens after reaching the maximum number of rounds
             Debug.Log("Maximum number of rounds reached.");
+        }
+    }
+
+    #region Rounds
+    private void SpawnEnemies()
+    {
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.IsActive)
+            {
+                for (int i = 0; i < enemiesPerSpawn; i++)
+                {
+                    string enemyType = enemyTypeToSpawn[Random.Range(0, enemyTypeToSpawn.Count)];
+                    Enemy newEnemy = enemyFactory.CreateEnemy(enemyType);
+                    newEnemy.transform.position = spawnPoint.GetSpawnPosition();
+                    activeEnemies++;
+                    newEnemy.enemyHealth.OnDeath += OnEnemyDeath;
+                    Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
+                }
+                spawnCount++;
+            }
         }
     }
 
@@ -108,22 +129,6 @@ public class SpawnerEnemy : MonoBehaviour
             roundText.text = $"Round: {currentRound}"; // Update the text
         }
     }
-
-    private void SpawnEnemies()
-    {
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        string enemyType = enemyTypeToSpawn[Random.Range(0, enemyTypeToSpawn.Count)];
-        for (int i = 0; i < enemiesPerSpawn; i++)
-        {
-            Enemy newEnemy = enemyFactory.CreateEnemy(enemyType);
-            newEnemy.transform.position = spawnPoint.position;
-            activeEnemies++; // Incrementar el conteo de enemigos activos
-            newEnemy.enemyHealth.OnDeath += OnEnemyDeath; // Suscribirse al evento de muerte del enemigo
-            Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
-        }
-        spawnCount++; // Incrementar el contador de enemigos generados
-    }
-
     private int CalculateEnemiesPerRound()
     {
         return baseEnemiesPerRound + (currentRound - 1) * roundMultiplier;
@@ -146,4 +151,70 @@ public class SpawnerEnemy : MonoBehaviour
         activeEnemies--;
         Debug.Log("Enemy died. Active enemies: " + activeEnemies);
     }
+    #endregion
+
+    #region Spawn Management
+    private void InitializeAreaTransitions()
+    {
+        areaTransitions[SpawnPoint.SpawnArea.Start] = new List<SpawnPoint.SpawnArea>
+        {
+            SpawnPoint.SpawnArea.Cueva,
+            SpawnPoint.SpawnArea.Volcan,
+            SpawnPoint.SpawnArea.Tierra
+        };
+        areaTransitions[SpawnPoint.SpawnArea.Cueva] = new List<SpawnPoint.SpawnArea>
+        {
+            SpawnPoint.SpawnArea.Cueva_Profunda,
+            SpawnPoint.SpawnArea.Start
+        };
+        areaTransitions[SpawnPoint.SpawnArea.Cueva_Profunda] = new List<SpawnPoint.SpawnArea>
+        {
+            SpawnPoint.SpawnArea.Cueva
+        };
+        areaTransitions[SpawnPoint.SpawnArea.Volcan] = new List<SpawnPoint.SpawnArea>
+        {
+            SpawnPoint.SpawnArea.Start
+        };
+        areaTransitions[SpawnPoint.SpawnArea.Tierra] = new List<SpawnPoint.SpawnArea>
+        {
+            SpawnPoint.SpawnArea.Start
+        };
+    }
+    private void ActivateSpawnArea(SpawnPoint.SpawnArea current, SpawnPoint.SpawnArea next)
+    {
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.Area == current)
+            {
+                spawnPoint.DisableSpawn();
+            }
+            else if (spawnPoint.Area == next)
+            {
+                spawnPoint.EnableSpawn();
+            }
+        }
+        currentArea = next; // Actualiza el área actual
+    }
+
+    private SpawnPoint.SpawnArea GetNextArea(SpawnPoint.SpawnArea current)
+    {
+        // Randomly select the next area from the possible transitions
+        if (areaTransitions.ContainsKey(current))
+        {
+            List<SpawnPoint.SpawnArea> possibleNextAreas = areaTransitions[current];
+            return possibleNextAreas[Random.Range(0, possibleNextAreas.Count)];
+        }
+        return current; // If no transitions, stay in the current area
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Get the next area based on the current area
+            SpawnPoint.SpawnArea nextArea = GetNextArea(currentArea);
+            ActivateSpawnArea(currentArea, nextArea);
+        }
+    }
+    #endregion
 }
