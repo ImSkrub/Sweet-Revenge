@@ -164,6 +164,8 @@ MonoBehaviour:
   health: 0
   damageCooldown: 1
   destroyDelay: 0.5
+  volume: 0
+  damageSoundClips: []
   damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &6203767753772169879
 MonoBehaviour:
@@ -177,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06769333f5e732499274fd4ddedcd18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
 --- !u!114 &1074383915542616130
 MonoBehaviour:
   m_ObjectHideFlags: 0
