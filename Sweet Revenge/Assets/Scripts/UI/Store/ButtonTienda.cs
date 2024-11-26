@@ -22,4 +22,9 @@ public class ButtonTienda : MonoBehaviour
         }  
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        text.gameObject.SetActive(false);
+    }
+
 }

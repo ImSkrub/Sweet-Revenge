@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +19,6 @@ public class ShopManager : MonoBehaviour
     public GameObject itemPrefab;
     private Player player;
     private int currentCoins = 0;
-    //[Header("Chest")]
-    //[SerializeField] private GameObject chestPrefab; // Reference to the chest prefab
-    //private Chest chestInstance; // Reference to the chest instance
 
 
     // Reference to the spawn point
@@ -38,14 +36,13 @@ public class ShopManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+      
         player = FindObjectOfType<Player>();
-        //chestInstance = FindObjectOfType<Chest>();
     }
 
     private void Start()
     {
-        currentCoins = PointManager.Instance._shopCoin;
+        // Initialize the shop items
         foreach (Item item in items)
         {
             GameObject _item = Instantiate(itemPrefab, shopContent);
@@ -75,67 +72,109 @@ public class ShopManager : MonoBehaviour
 
     public void BuyItem(Item item)
     {
-        if (currentCoins >= item.cost)
+        // Check if the player has enough coins using PointManager
+        if (PointManager.Instance._shopCoin >= item.cost)
         {
-            currentCoins -= item.cost;
-            item.quantity++;
-            item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
-            if (!item.isPermanent)
+            // Check if the item is permanent
+            if (item.isPermanent)
             {
-                SpawnPurchasedItems(item); // Pass the item to spawn
+                // Check if the item has reached its purchase limit
+                if (item.currentPurchaseCount < item.maxPurchaseLimit)
+                {
+                    // Deduct the cost from PointManager
+                    PointManager.Instance.AddShopCoin(-item.cost); // Deduct coins
+                    item.quantity++;
+                    item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
+                    ApplyItem(item); // Apply the item directly
+                    item.currentPurchaseCount++; // Increment the purchase count
+                    SoundFXManager.instance.PlaySoundFXClip(buyItemSoundClip, transform, 1f);
+                }
+                else
+                {
+                    Debug.LogWarning($"Cannot purchase {item.itemName}. Maximum purchase limit reached.");
+                    SoundFXManager.instance.PlaySoundFXClip(declineBuySoundClip, transform, 1f);
+                }
             }
             else
             {
-                ApplyItem(item);
+                // Deduct the cost from PointManager
+                PointManager.Instance.AddShopCoin(-item.cost); // Deduct coins
+                item.quantity++;
+                item.itemRef.transform.GetChild(0).GetComponent<TMP_Text>().SetText(item.quantity.ToString());
+                SpawnPurchasedItems(item); // Pass the item to spawn
+                SoundFXManager.instance.PlaySoundFXClip(buyItemSoundClip, transform, 1f);
             }
-            SoundFXManager.instance.PlaySoundFXClip(buyItemSoundClip, transform, 1f);
-        }
-        else SoundFXManager.instance.PlaySoundFXClip(declineBuySoundClip, transform, 1f);
-    }
-    
-    public void ApplyItem(Item item)
-    {
-        switch (item.itemName)
-        {
-            case "Life Up":
-                player.SetNewMaxHealth(25);
-                break;
-            case "Dmg up":
-                player.SetNewMaxDamage(25);
-                break;
-            case "Stamina Up":
-                player.SetNewMaxStamina(25); break;
-
-        }
-    }
-    
-    private void SpawnPurchasedItems(Item item)
-    {
-        // Calculate a spawn position
-        Vector3 spawnPosition = GetNextSpawnPosition();
-
-        if (spawnPosition != Vector3.zero) // Check if a valid position was found
-        {
-            // Instantiate the item prefab at the calculated position
-            GameObject spawnedItem = Instantiate(item.itemPrefab, spawnPosition, Quaternion.identity);
-            // Add the position to the occupied list
-            occupiedPositions.Add(spawnPosition);
-            Debug.Log($"Spawned {item.itemName} at {spawnPosition}");
         }
         else
         {
-            Debug.LogWarning("No available spawn positions!");
+            SoundFXManager.instance.PlaySoundFXClip(declineBuySoundClip, transform, 1f);
         }
-
-        item.quantity = 0; // Reset quantity after spawning
     }
-    /*
-    //itemsSpawned = true; // Mark that items were spawned
-    // Notify the chest to spawn the item
-    // chestInstance.SpawnItem(item.itemPrefab); // Commented out as per request
-    // If items were spawned, allow the chest to be opened again
-    // if (itemsSpawned) { chestInstance.SetCanOpen(true); } // Commented out as per request
-    */
+
+    public void ApplyItem(Item item)
+    {
+        // Check if the item has already been applied the maximum number of times
+        if (item.currentPurchaseCount < item.maxPurchaseLimit)
+        {
+            switch (item.itemName)
+            {
+                case "Life Up":
+                    player.SetNewMaxHealth(25);
+                    break;
+                case "Dmg Up":
+                    player.SetNewMaxDamage(25);
+                    break;
+                case "Stamina Up":
+                    player.SetNewMaxStamina(25);
+                    break;
+            }
+            item.currentPurchaseCount++; // Increment the purchase count after applying
+            Debug.Log($"Applied permanent item: {item.itemName}");
+        }
+        else
+        {
+            Debug.LogWarning($"Cannot apply {item.itemName}. Maximum application limit reached.");
+        }
+    }
+
+    private void SpawnPurchasedItems(Item item)
+    {
+        // Check if the item should be spawned based on its permanence
+        if (!item.isPermanent) // Only spawn if the item is not permanent
+        {
+            // Check if the itemPrefab is assigned
+            if (item.itemPrefab == null)
+            {
+                Debug.LogError($"Item prefab for {item.itemName} is not assigned.");
+                return; // Exit the method if the prefab is not assigned
+            }
+
+            // Calculate a spawn position
+            Vector3 spawnPosition = GetNextSpawnPosition();
+
+            if (spawnPosition != Vector3.zero) // Check if a valid position was found
+            {
+                // Instantiate the item prefab at the calculated position
+                GameObject spawnedItem = Instantiate(item.itemPrefab, spawnPosition, Quaternion.identity);
+                // Add the position to the occupied list
+                occupiedPositions.Add(spawnPosition);
+                Debug.Log($"Spawned {item.itemName} at {spawnPosition}");
+            }
+            else
+            {
+                Debug.LogWarning("No available spawn positions!");
+            }
+
+            item.quantity = 0; // Reset quantity after spawning
+        }
+        else
+        {
+            // If the item is permanent, apply it directly without spawning
+            ApplyItem(item);
+            Debug.Log($"Applied permanent item: {item.itemName}");
+        }
+    }
+
     private Vector3 GetNextSpawnPosition()
     {
         // Define the spacing between items
@@ -161,11 +200,6 @@ public class ShopManager : MonoBehaviour
     {
         shopUI.SetActive(!shopUI.activeSelf);
     }
-
-    private void OnGUI()
-    {
-        coinText.SetText("Coins: " + currentCoins);
-    }
 }
 
 [System.Serializable]
@@ -173,10 +207,10 @@ public class Item {
     public string itemName;
     public bool isPermanent = false;
     public int cost;
+    public int maxPurchaseLimit = 4;
     public Sprite image;
     public GameObject itemPrefab;
     [HideInInspector] public GameObject itemRef;
     [HideInInspector] public int quantity;
+    [HideInInspector] public int currentPurchaseCount = 0;
 }
-
-

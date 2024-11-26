@@ -6,9 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
-    [SerializeField] private PlayerController player;
-    [SerializeField] private BaseGun pistol;
-
+    
     private bool isPaused = false;
 
     void Start()
