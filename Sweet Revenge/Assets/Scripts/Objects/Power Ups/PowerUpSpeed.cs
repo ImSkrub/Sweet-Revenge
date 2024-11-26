@@ -7,7 +7,7 @@ public class PowerUpSpeed : MonoBehaviour, IPowerUp
     [SerializeField] public string Name { get; set; } = "DamagePowerUp";
     public void ApplyPowerUp(GameObject player)
     {
-        player.GetComponent<PlayerController>().speed *= 1.25f;
+        player.GetComponent<PlayerController>().speed *= 1.5f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

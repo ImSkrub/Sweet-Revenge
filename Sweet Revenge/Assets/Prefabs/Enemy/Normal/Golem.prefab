@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1074383915542616130}
   - component: {fileID: 907504085173044391}
   - component: {fileID: 6999762320652257798}
+  - component: {fileID: 5913456131682657249}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Enemy
@@ -165,7 +166,12 @@ MonoBehaviour:
   damageCooldown: 1
   destroyDelay: 0.5
   volume: 0
-  damageSoundClips: []
+  damageSoundClips:
+  - {fileID: 8300000, guid: 5f25ba7b1f48d514897741a0c2d4aa1d, type: 3}
+  - {fileID: 8300000, guid: cd4f0705302292344a2d6cd6a2e0d710, type: 3}
+  - {fileID: 8300000, guid: 485c9c6d444abd343a46094fe11e9539, type: 3}
+  - {fileID: 8300000, guid: cf2071bb9600d6040899d83297725b5c, type: 3}
+  - {fileID: 8300000, guid: 1146704cc4add2448b9ab1295576a9c5, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &6203767753772169879
 MonoBehaviour:
@@ -180,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3404793763485691485, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
+  player: {fileID: -1311028509660312670, guid: 2ffda7c7a389bcf4b971569a7a3a7894, type: 3}
 --- !u!114 &1074383915542616130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +202,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: bf54b4e277bbb5244bc674d9989e0441, type: 2}
   Name: Golem
   target: {fileID: 0}
+  playerHealth: {fileID: 0}
   enemyHealth: {fileID: 0}
 --- !u!50 &907504085173044391
 Rigidbody2D:
@@ -236,3 +244,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
+--- !u!95 &5913456131682657249
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408981564694737512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df68464e2b2578f4eab3e621a91bfe43, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
