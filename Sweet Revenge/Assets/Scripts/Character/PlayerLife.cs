@@ -104,8 +104,14 @@ public class PlayerLife : MonoBehaviour
             Debug.Log("No saved states available. Player is dead.");
             isDead = true;
             animator.SetBool("IsDead", isDead);
+            Invoke("InvokeEvent", 2.5f);
             //this.gameObject.SetActive(false);
         }
+    }
+
+    private void InvokeEvent()
+    {
+        OnDeath?.Invoke();
     }
 
     public void SetNewMaxHealth(float value)
