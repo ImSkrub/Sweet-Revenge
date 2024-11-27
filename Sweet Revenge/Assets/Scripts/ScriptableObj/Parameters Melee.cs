@@ -13,7 +13,7 @@ public class Parameters : ScriptableObject
     public float damage = 10f;
     public float attackSpeed = 1.5f;
     public float attackCost = 30f;
-    public float attackRange = 3f;
+    public float attackRange = 1f;
     public float knockbackForce = 5f;
 
     [Header("Values ranged")]
