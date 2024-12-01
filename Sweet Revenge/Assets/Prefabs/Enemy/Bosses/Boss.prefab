@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  jugador: {fileID: 0}
+  playerTransform: {fileID: 0}
   life: 0
   maxLife: 2500
   damageCooldown: 1
@@ -172,6 +172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   damageSoundClips: []
+  sr: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   healthBar: {fileID: 0}
 --- !u!95 &6390866558503570847

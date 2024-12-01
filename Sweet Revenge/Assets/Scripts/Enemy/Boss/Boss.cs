@@ -18,9 +18,11 @@ public class Boss : MonoBehaviour,IDamageable
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
     private float lastAttackTime = 0f;
+
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
     private PlayerLife playerHealth;
+    private Rigidbody2D playerRb; // Almacenamos el Rigidbody del jugador
     private bool isDead = false;
 
     [Header("Audios")]
@@ -28,7 +30,7 @@ public class Boss : MonoBehaviour,IDamageable
 
     [Space(3)]
     [Header("Color")]
-    [SerializeField]public SpriteRenderer sr;
+    [SerializeField] public SpriteRenderer sr;
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
 
@@ -37,6 +39,8 @@ public class Boss : MonoBehaviour,IDamageable
     public event Action OnDeath;
 
     private IBossState bossState;
+
+    [SerializeField] private float knockbackRange = 5f;
 
     private void Awake()
     {
@@ -47,6 +51,9 @@ public class Boss : MonoBehaviour,IDamageable
         playerHealth = FindObjectOfType<PlayerLife>();
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
+
+        // Obtener el Rigidbody2D del jugador solo una vez
+        playerRb = playerTransform.GetComponent<Rigidbody2D>();
 
         SetState(new Phase1State());
     }
@@ -65,6 +72,11 @@ public class Boss : MonoBehaviour,IDamageable
         if (life <= 0 && (bossState is Phase2State))
         {
             Invoke("Death", 2f);
+        }
+        Debug.Log(isKnockbackActive);
+        if (isKnockbackActive && !IsPlayerInKnockbackRange())
+        {
+            isKnockbackActive = false;  // Se desactiva el knockback cuando el jugador sale del rango
         }
     }
 
@@ -114,19 +126,31 @@ public class Boss : MonoBehaviour,IDamageable
         return false;
     }
 
+    private bool isKnockbackActive = false; // Nueva variable para controlar el knockback
+
     public void Attack(float damage)
     {
-        if (PlayerInSight() && Time.time - lastAttackTime >= damageCooldown) // Espera el cooldown entre ataques
+        if (PlayerInSight() && Time.time - lastAttackTime >= damageCooldown && !isKnockbackActive) // Añadimos control sobre knockback
         {
             lastAttackTime = Time.time;  // Actualiza el tiempo de último ataque
 
             playerHealth.GetDamage(damage);
 
-            // Aplica Knockback
+            //// Aplica Knockback solo una vez
             Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
-            playerTransform.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * bossState.GetKnockbackForce(), ForceMode2D.Impulse);
+            playerRb.AddForce(knockbackDirection * 5f, ForceMode2D.Impulse);
+
+            //// Activar el estado de knockback
+            isKnockbackActive = true;
+            
         }
     }
+    private bool IsPlayerInKnockbackRange()
+    {
+        return Vector2.Distance(transform.position, playerTransform.position) <= knockbackRange;
+    }
+
+   
 
     private void TransitionToPhaseTwo()
     {
@@ -148,7 +172,7 @@ public class Boss : MonoBehaviour,IDamageable
         Destroy(gameObject, destroyDelay);
     }
 
-   
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
