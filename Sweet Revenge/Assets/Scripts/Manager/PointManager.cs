@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PointManager : MonoBehaviour
 {
@@ -38,34 +39,46 @@ public class PointManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        // Inicializar los textos solo si están en la escena actual
+        UpdateCoinTextReferences();
+    }
 
-        // Busca los objetos en la escena por su nombre
+    private void OnEnable()
+    {
+        GameEvent.OnGameRestart += RestartGame;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnDisable()
+    {
+        GameEvent.OnGameRestart -= RestartGame;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UpdateCoinTextReferences();
+    }
+
+    private void UpdateCoinTextReferences()
+    {
+        // Buscar los textos en la escena actual
         GameObject doorCoinObject = GameObject.FindGameObjectWithTag("DoorCoin");
         GameObject shopCoinObject = GameObject.FindGameObjectWithTag("ShopCoin");
 
-        // Asegúrate de que los objetos se encontraron antes de intentar acceder a sus componentes
-        if (doorCoinObject != null)
-        {
-            doorCoinText = doorCoinObject.GetComponent<TMP_Text>();
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el objeto 'DoorCoin' en la escena.");
-        }
-
-        if (shopCoinObject != null)
-        {
-            shopCoinText = shopCoinObject.GetComponent<TMP_Text>();
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el objeto 'ShopCoin' en la escena.");
-        }
+        doorCoinText = doorCoinObject?.GetComponent<TMP_Text>();
+        shopCoinText = shopCoinObject?.GetComponent<TMP_Text>();
     }
 
     private void Update()
     {
-        UpdateCoinTexts(); 
+        // Solo actualizar los textos si las referencias existen
+        if (doorCoinText != null && shopCoinText != null)
+        {
+            UpdateCoinTexts();
+        }
     }
 
     // Method to update the coin text displays
@@ -96,4 +109,9 @@ public class PointManager : MonoBehaviour
         UpdateCoinTexts(); // Update the text display
     }
 
+    public void RestartGame()
+    {
+        shopCoin = 0;
+        doorCoin = 0;
+    }
 }

@@ -11,13 +11,13 @@ public class GameStatusManager : MonoBehaviour
     private Stack<PlayerMemento> savedStates = new Stack<PlayerMemento>();
     public PlayerLife player;
     public GameObject _UI;
-    public TextMeshProUGUI purchaseText; // Reference to the TextMeshPro component
+    public TextMeshProUGUI purchaseText; 
     public bool activeUI = false;
     [SerializeField] private int cost=500;
     private int currentCoins;
     private int maxPurchases = 3;
     private int currentPurchases = 0;
-    private bool hasPowerUp = false; // New variable to track if the player has a power-up
+    private bool hasPowerUp = false; 
 
     [SerializeField] Transform spawnpoint;
     [SerializeField] AudioClip clip;
@@ -27,7 +27,7 @@ public class GameStatusManager : MonoBehaviour
         if (PointManager.Instance == null)
         {
             Debug.LogError("PointManager instance is null. Make sure it is initialized before GameStatusManager.");
-            return; // Exit the method to prevent further null reference issues
+            return; 
         }
 
         player.OnDeath += Checkpoint;
@@ -37,16 +37,23 @@ public class GameStatusManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && activeUI && currentPurchases < maxPurchases &&
-            !hasPowerUp)
+        if (Input.GetKeyDown(KeyCode.E) && activeUI && currentPurchases < maxPurchases && !hasPowerUp)
         {
-            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
-            savedStates.Push(player.SaveState(spawnpoint.position));
-            currentPurchases++;
-            hasPowerUp = true; // Set to true when a power-up is purchased
-            UpdatePurchaseText();
-            ToggleUI(); // Deactivate the UI when the purchase is made
-            Debug.Log("Saved State");
+            if (currentCoins >= cost)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
+                savedStates.Push(player.SaveState(spawnpoint.position));
+                currentPurchases++;
+                hasPowerUp = true;
+                currentCoins -= cost; // Reduce the coins here instead of in UpdatePurchaseText
+                UpdatePurchaseText();
+                ToggleUI();
+                Debug.Log("Saved State");
+            }
+            else
+            {
+                Debug.Log("Not enough coins to purchase.");
+            }
         }
     }
 
@@ -69,7 +76,7 @@ public class GameStatusManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             activeUI = true; // Set activeUI to true
-            ToggleUI(); // Show the UI
+            ToggleUI(); 
             UpdatePurchaseText(); // Update the text to show purchase options
         }
     }
@@ -79,7 +86,7 @@ public class GameStatusManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             activeUI = false; // Set activeUI to false
-            ToggleUI(); // Hide the UI
+            ToggleUI(); 
             purchaseText.text = ""; // Clear the text when the player exits
         }
     }
@@ -91,29 +98,33 @@ public class GameStatusManager : MonoBehaviour
 
     private void UpdatePurchaseText()
     {
-        if (currentPurchases < maxPurchases && cost <= currentCoins)
+        if (currentPurchases < maxPurchases && currentCoins >= cost)
         {
-            purchaseText.text = $"Press 'E' to buy power up ${cost}\n {maxPurchases - currentPurchases} out of {maxPurchases} left.";
+            purchaseText.text = $"Press 'E' to buy power up ${cost}\n{maxPurchases - currentPurchases} purchases left.";
             PointManager.Instance.AddDoorCoin(-cost);
         }
-        else if(currentPurchases > maxPurchases)
+        else if (currentPurchases >= maxPurchases)
         {
             purchaseText.text = "You have reached the maximum purchases.";
         }
-        else if(cost >= currentCoins)
+        else
         {
-            purchaseText.text = $"You are missing {currentCoins - cost} coins";
+            purchaseText.text = $"You are missing {cost - currentCoins} coins.";
         }
     }
 
-    // Call this method when the power-up effect is used or expires
     public void UsePowerUp()
     {
         hasPowerUp = false; // Reset the power-up status
-        UpdatePurchaseText(); // Update the UI text to reflect the change
+        UpdatePurchaseText(); 
     }
     public bool HasSavedStates()
     {
         return savedStates.Count > 0;
+    }
+
+    public void ResetStates()
+    {
+        savedStates.Clear();
     }
 }

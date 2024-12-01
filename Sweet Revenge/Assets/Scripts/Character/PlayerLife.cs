@@ -128,8 +128,17 @@ public class PlayerLife : MonoBehaviour
 
     public void RestoreState(PlayerMemento state)
     {
-        gameObject.SetActive(true);
-        transform.position = state.position;
-        this.currentHealth = state.health;
+        if (state != null)
+        {
+            gameObject.SetActive(true);
+            transform.position = state.position;
+            currentHealth = state.health;
+            isDead = false; // Asegúrate de que el jugador esté vivo después de restaurar
+            Debug.Log("Player state restored.");
+        }
+        else
+        {
+            Debug.LogError("Cannot restore state: state is null.");
+        }
     }
 }

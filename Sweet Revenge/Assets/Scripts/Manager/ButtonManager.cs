@@ -12,10 +12,12 @@ public class ButtonManager : MonoBehaviour
     public void RestartGame()
     {
         LevelManager.instance.RestartLevel();
+        GameEvent.OnGameRestart?.Invoke();
     }
     public void ButtonPlay()
     {
         LevelManager.instance.LoadLevel(1);
+        GameEvent.OnGameRestart?.Invoke();
     }
     public void ExitGame()
     {
@@ -24,10 +26,6 @@ public class ButtonManager : MonoBehaviour
     public void Config()
     {
         SceneManager.LoadScene(4);
-    }
-    public void LvlSelect()
-    {
-        SceneManager.LoadScene(12);
     }
     //Levels
     public void Level1()

@@ -27,17 +27,19 @@ public class LevelManager : MonoBehaviour
 
     }
 
+   
+
     public void LoadNextLevel()
     {
         currentLevelIndex++;
         LoadLevel(currentLevelIndex);
-        PointManager.Instance.RestartDoorCoin();
     }
 
     public void RestartLevel()
     {
         LoadLevel(currentLevelIndex);
         PointManager.Instance.RestartDoorCoin();
+     
 
     }
 

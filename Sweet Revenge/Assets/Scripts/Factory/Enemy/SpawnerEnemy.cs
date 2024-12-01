@@ -36,8 +36,18 @@ public class SpawnerEnemy : MonoBehaviour
 
     private Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>> areaTransitions = new Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>>();
 
+    private void OnEnable()
+    {
+        GameEvent.OnGameRestart += Initialize;
+    }
+    private void OnDisable()
+    {
+        GameEvent.OnGameRestart -= Initialize;
+    }
+
     private void Awake()
     {
+        Initialize();
         // Initialize area transitions
         InitializeAreaTransitions();
         // Automatically find the TextMeshProUGUI component with the tag "RoundText"
@@ -247,4 +257,25 @@ public class SpawnerEnemy : MonoBehaviour
         }
     }
     #endregion
+
+    public void Initialize()
+    {
+        currentArea = SpawnPoint.SpawnArea.Start;
+        currentRound = 1; // Empieza en la ronda 1
+        spawnCount = 0;
+        spawnTimer = 0f;
+        roundTimer = 0f;
+        activeEnemies = 0;
+        isSpawning = true;
+
+        foreach (var spawnPoint in spawnPoints)
+        {
+            spawnPoint.DisableSpawn(); // Reinicia el estado de los puntos de spawn
+        }
+
+        // Activa el área inicial
+        ChangeArea(SpawnPoint.SpawnArea.Start);
+
+        Debug.Log("SpawnerEnemy inicializado.");
+    }
 }
