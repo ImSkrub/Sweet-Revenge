@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(life.isDead);
         if (!life.isDead)
         {
             HandleRotation();
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = GetInputDirection();
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        if (isRunning && stamina > 0)
+        if (isRunning && stamina >= 0)
         {
             Move(moveDir * 2); // Double speed when running
             Stamina -= runCost * Time.deltaTime;

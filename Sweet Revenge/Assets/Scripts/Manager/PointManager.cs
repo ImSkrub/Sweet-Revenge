@@ -42,19 +42,8 @@ public class PointManager : MonoBehaviour
     }
     private void Start()
     {
-        // Inicializar los textos solo si están en la escena actual
+        
         UpdateCoinTextReferences();
-    }
-
-    private void OnEnable()
-    {
-        GameEvent.OnGameRestart += RestartGame;
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    private void OnDisable()
-    {
-        GameEvent.OnGameRestart -= RestartGame;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -74,7 +63,7 @@ public class PointManager : MonoBehaviour
 
     private void Update()
     {
-        // Solo actualizar los textos si las referencias existen
+        if(LevelManager.instance.GetCurrentLevelIndex() == 1)
         if (doorCoinText != null && shopCoinText != null)
         {
             UpdateCoinTexts();
@@ -107,11 +96,5 @@ public class PointManager : MonoBehaviour
     {
         doorCoin = 0;
         UpdateCoinTexts(); // Update the text display
-    }
-
-    public void RestartGame()
-    {
-        shopCoin = 0;
-        doorCoin = 0;
     }
 }

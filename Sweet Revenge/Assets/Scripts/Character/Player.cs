@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private float attackDelay = 0.5f;
     private float lastAttackTime;
     [Header("UI")]
+    [SerializeField] private Image escImage;
         
     private IWeapon weapon;
     private PlayerController player;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
             weapon?.Attack();
             lastAttackTime = Time.time; // Update the last attack time            
         }
+       
     }
 
     public void SetNewMaxHealth(int newHealth)
@@ -75,15 +77,11 @@ public class Player : MonoBehaviour
 
             SetWeapon(collision.gameObject.GetComponent<IWeapon>());
 
-            // Set the weapon as a child of the weapon slot
             collision.gameObject.transform.SetParent(weaponSlot);
+                       
+            collision.gameObject.transform.localPosition = Vector3.zero; 
+            collision.gameObject.transform.localRotation = Quaternion.identity; 
 
-            // Set the weapon's local position and rotation
-            collision.gameObject.transform.localPosition = Vector3.zero; // Adjust this if needed
-            collision.gameObject.transform.localRotation = Quaternion.identity; // Reset rotation to match weapon slot
-
-            // If you want to adjust the rotation based on the player's facing direction
-            // You can use the player's current rotation or a specific angle
             collision.gameObject.transform.localRotation = Quaternion.Euler(0, 0, player.transform.eulerAngles.z);
         }
 

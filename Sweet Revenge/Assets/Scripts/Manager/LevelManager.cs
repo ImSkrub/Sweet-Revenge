@@ -39,8 +39,6 @@ public class LevelManager : MonoBehaviour
     {
         LoadLevel(currentLevelIndex);
         PointManager.Instance.RestartDoorCoin();
-     
-
     }
 
     public void LoadLevel(int levelIndex)

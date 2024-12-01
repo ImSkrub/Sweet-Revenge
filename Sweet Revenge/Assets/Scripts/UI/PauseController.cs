@@ -16,7 +16,7 @@ public class PauseController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P)||(Input.GetKeyDown(KeyCode.Escape)))
         {
             if (isPaused)
             {
@@ -31,16 +31,21 @@ public class PauseController : MonoBehaviour
 
     public void PauseGame()
     {
-        pauseMenuUI.SetActive(true);
+        HandlePauseUI();
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
+        HandlePauseUI();
         Time.timeScale = 1f; 
         isPaused = false;
+    }
+
+    public void HandlePauseUI()
+    {
+        pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
     }
 
     public void OnContinueButton()
