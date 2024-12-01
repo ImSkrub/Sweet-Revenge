@@ -22,39 +22,29 @@ public class SpikeBat : MonoBehaviour, IWeapon
 
     public void Attack()
     {
-        if (Time.time >= lastAttackTime + 1f / dataBat.attackSpeed)
+        if (Time.time >= lastAttackTime + 1.5f / dataBat.attackSpeed)
         {
             SoundFXManager.instance.PlaySoundFXClip(batSound, transform, 0.5f);
             //Even if you dont find enemy you deduct stamina
             player.Stamina -= dataBat.attackCost; // Deduct stamina
             if (player.Stamina < 0) player.Stamina = 0;
             player.UpdateStaminaBar();
-            // Log the position and attack range
-            //Debug.Log($"Attack Position: {transform.position}, Attack Range: {dataBat.attackRange}");
-
-            // Detect enemies within attack range
+           
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, dataBat.attackRange, enemyLayer);
 
             if (hitEnemies.Length > 0)
             {
-                //Debug.Log($"Detected {hitEnemies.Length} enemies within range.");
+
                 foreach (Collider2D enemy in hitEnemies)
                 {
-                    //Debug.Log($"Attacking enemy: {enemy.name} at position: {enemy.transform.position}");
-                    ApplyDamage(enemy);
-                    ApplyKnockback(enemy);
+                    if (!IsBlockedByWall(enemy)) // Check if the attack is blocked by a wall
+                    {
+                        ApplyDamage(enemy);
+                        ApplyKnockback(enemy);
+                    }
                 }
             }
-            else
-            {
-                //Debug.Log("No enemies detected within attack range.");
-            }
-
             lastAttackTime = Time.time;
-        }
-        else
-        {
-            //Debug.Log($"{Name} is on cooldown. Time until next attack: {lastAttackTime + 1f / dataBat.attackSpeed - Time.time}");
         }
     }
 
@@ -66,10 +56,6 @@ public class SpikeBat : MonoBehaviour, IWeapon
             //Debug.Log($"Applying {dataBat.damage} damage to {enemy.name}");
             damageable.TakeDamage(dataBat.damage);
         }
-        else
-        {
-            //Debug.Log($"{enemy.name} is not damageable.");
-        }
     }
 
     private void ApplyKnockback(Collider2D enemy)
@@ -78,10 +64,8 @@ public class SpikeBat : MonoBehaviour, IWeapon
         NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
         if (navMeshAgent != null)
         {
-            // Calculate the knockback direction
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
 
-            // Set the velocity of the NavMeshAgent to create a knockback effect
             float knockbackForce = dataBat.knockbackForce; // Assuming dataBat is accessible here
             Vector3 knockbackVelocity = knockbackDirection * knockbackForce;
 
@@ -105,7 +89,6 @@ public class SpikeBat : MonoBehaviour, IWeapon
             }
         }
     }
-
     // Coroutine to resume the NavMeshAgent's movement after a delay
     private IEnumerator ResumeNavMeshAgent(NavMeshAgent agent, float delay)
     {
@@ -120,6 +103,15 @@ public class SpikeBat : MonoBehaviour, IWeapon
             }
         }
     }
+
+    private bool IsBlockedByWall(Collider2D enemy)
+    {
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, enemy.transform.position, LayerMask.GetMask("Wall"));
+       
+
+        return hit.collider != null;
+    }
+
     public void Equip()
     {
         Debug.Log("Me equipe");
