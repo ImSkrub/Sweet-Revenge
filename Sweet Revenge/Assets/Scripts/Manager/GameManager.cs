@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         if (gotItem1 && gotItem2)
         {
             activeBossBattle = true;  
+            //suena sonido + aparece mensaje.
         }
        
     }
