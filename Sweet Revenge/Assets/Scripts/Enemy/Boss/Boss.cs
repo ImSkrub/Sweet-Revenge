@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour,IDamageable
     [SerializeField] private float maxLife = 2500;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
+    private float lastAttackTime = 0f;
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
     private PlayerLife playerHealth;
@@ -43,9 +44,9 @@ public class Boss : MonoBehaviour,IDamageable
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerHealth = FindObjectOfType<PlayerLife>();
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
-        playerHealth = FindObjectOfType<PlayerLife>();
 
         SetState(new Phase1State());
     }
@@ -113,13 +114,15 @@ public class Boss : MonoBehaviour,IDamageable
         return false;
     }
 
-    private float lastAttackTime = 0f;
     public void Attack(float damage)
     {
-        if (PlayerInSight())
+        if (PlayerInSight() && Time.time - lastAttackTime >= damageCooldown) // Espera el cooldown entre ataques
         {
-            lastAttackTime = Time.time;
+            lastAttackTime = Time.time;  // Actualiza el tiempo de último ataque
+
             playerHealth.GetDamage(damage);
+
+            // Aplica Knockback
             Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
             playerTransform.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * bossState.GetKnockbackForce(), ForceMode2D.Impulse);
         }
@@ -145,11 +148,20 @@ public class Boss : MonoBehaviour,IDamageable
         Destroy(gameObject, destroyDelay);
     }
 
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             playerHealth.GetDamage(5f);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (bossState == null) return;
+        Debug.Log("Drawing Gizmo with range: " + bossState.GetRange());
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, bossState.GetRange());
     }
 }

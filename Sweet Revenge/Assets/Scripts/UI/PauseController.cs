@@ -7,7 +7,7 @@ public class PauseController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
     
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     void Start()
     {
@@ -27,6 +27,13 @@ public class PauseController : MonoBehaviour
                 PauseGame(); 
             }
         }
+    }
+
+
+    void OnEnable()
+    {
+        Time.timeScale = 1f; 
+        isPaused = false;
     }
 
     public void PauseGame()

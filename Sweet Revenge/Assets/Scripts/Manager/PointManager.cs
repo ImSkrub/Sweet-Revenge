@@ -42,13 +42,22 @@ public class PointManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        SceneManager.sceneLoaded += OnSceneLoaded; // Suscribirse al evento de escena cargada
         UpdateCoinTextReferences();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnDestroy()
     {
-        UpdateCoinTextReferences();
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Desuscribirse al evento
+    }
+
+    private void Update()
+    {
+        
+        if (doorCoinText != null && shopCoinText != null)
+        {
+            UpdateCoinTexts();
+        }
     }
 
     private void UpdateCoinTextReferences()
@@ -60,16 +69,6 @@ public class PointManager : MonoBehaviour
         doorCoinText = doorCoinObject?.GetComponent<TMP_Text>();
         shopCoinText = shopCoinObject?.GetComponent<TMP_Text>();
     }
-
-    private void Update()
-    {
-        if(LevelManager.instance.GetCurrentLevelIndex() == 1)
-        if (doorCoinText != null && shopCoinText != null)
-        {
-            UpdateCoinTexts();
-        }
-    }
-
     // Method to update the coin text displays
     private void UpdateCoinTexts()
     {
@@ -96,5 +95,11 @@ public class PointManager : MonoBehaviour
     {
         doorCoin = 0;
         UpdateCoinTexts(); // Update the text display
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Buscar y actualizar los textos nuevamente cuando se cargue una nueva escena
+        UpdateCoinTextReferences();
+        UpdateCoinTexts();
     }
 }
