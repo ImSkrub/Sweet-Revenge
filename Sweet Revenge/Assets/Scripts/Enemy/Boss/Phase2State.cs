@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Phase2State : IBossState
 {
     private Boss boss;
     private float attackRangeMin = 1f;
-    private float attackRangeMax = 5f;
-    private float knockbackForce = 5f;
-    private float damage = 30f;
+    private float attackRangeMax = 4f;
+    private float knockbackForce = 4f;
+    private float damage = 20f;
     private float moveSpeed = 3.5f;
+    private float attackCooldown = 1f; // Cooldown duration in seconds
+    private float lastAttackTime = 0f; // Time of the last attack
 
     public void Enter(Boss boss)
     {
@@ -29,7 +32,10 @@ public class Phase2State : IBossState
 
         if (distanceToPlayer <= attackRangeMax && distanceToPlayer >= attackRangeMin)
         {
-            boss.Attack(damage);
+            if (Time.time >= lastAttackTime + attackCooldown)
+            {
+                boss.Attack(damage);
+            }
         }
         
     }
