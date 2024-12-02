@@ -27,6 +27,7 @@ public class Boss : MonoBehaviour,IDamageable
     [SerializeField] private LayerMask playerLayer;
     private PlayerLife playerHealth;
     private Rigidbody2D playerRb; // Almacenamos el Rigidbody del jugador
+    [SerializeField] Rigidbody2D bossRb;
     public bool isDead = false, isFollowing = false;
 
     [Header("Audios")]
@@ -85,10 +86,12 @@ public class Boss : MonoBehaviour,IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(life);
-        life -= damage;
-        sr.color = damageColor;
-        Invoke("RestoreColor", damageCooldown);
+        if (!isDead)
+        {
+            life -= damage;
+            sr.color = damageColor;
+            Invoke("RestoreColor", damageCooldown);
+        }
         if (life <= 1500)
         {
             animator.SetTrigger("Transformation");
@@ -103,20 +106,16 @@ public class Boss : MonoBehaviour,IDamageable
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
             LookAtPlayer();
-            animator.SetBool("isFollowing", isFollowing);
         }
     }
 
     public void LookAtPlayer()
     {
-        if (!isDead)
-        {
-            Vector2 direction = playerTransform.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            animator.SetFloat("MovY", direction.x);
-            angle += 180f;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        }
+        Vector2 direction = playerTransform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        animator.SetFloat("MovY", direction.x);
+        angle += 180f;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private void RestoreColor()
@@ -151,7 +150,6 @@ public class Boss : MonoBehaviour,IDamageable
                 Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
                 playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
                 StartCoroutine(ResetKB());
-
             }
         }
     }
@@ -181,6 +179,7 @@ public class Boss : MonoBehaviour,IDamageable
         isDead = true;
         OnDeath?.Invoke();
         animator.SetBool("isDead", isDead);
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         //Destroy(gameObject, destroyDelay);
     }
 
