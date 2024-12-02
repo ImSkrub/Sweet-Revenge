@@ -27,7 +27,7 @@ public class Boss : MonoBehaviour,IDamageable
     [SerializeField] private LayerMask playerLayer;
     private PlayerLife playerHealth;
     private Rigidbody2D playerRb; // Almacenamos el Rigidbody del jugador
-    private bool isDead = false;
+    public bool isDead = false, isFollowing = false;
 
     [Header("Audios")]
     [SerializeField] private AudioClip[] damageSoundClips;
@@ -63,10 +63,13 @@ public class Boss : MonoBehaviour,IDamageable
 
     private void Update()
     {
-        healthBar.value = life / maxLife;
+        //healthBar.value = life / maxLife;
         if (isDead) return;
 
-        bossState.UpdateState();
+        if (!isDead)
+        {
+            bossState.UpdateState();
+        }
 
         if (life <= 1500 && !(bossState is Phase2State))
         {
@@ -74,13 +77,15 @@ public class Boss : MonoBehaviour,IDamageable
         }
         if (life <= 0 && (bossState is Phase2State))
         {
-            Invoke("Death", 2f);
+            Death();
+            //Invoke("Death", 2f);
         }
         
     }
 
     public void TakeDamage(float damage)
     {
+        Debug.Log(life);
         life -= damage;
         sr.color = damageColor;
         Invoke("RestoreColor", damageCooldown);
@@ -92,18 +97,26 @@ public class Boss : MonoBehaviour,IDamageable
 
     public void FollowPlayer(float moveSpeed)
     {
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-        rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
-        LookAtPlayer();
+        if (!isDead)
+        {
+            isFollowing = true;
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
+            LookAtPlayer();
+            animator.SetBool("isFollowing", isFollowing);
+        }
     }
 
     public void LookAtPlayer()
     {
-        Vector2 direction = playerTransform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        animator.SetFloat("MovY", direction.x);
-        angle += 180f;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (!isDead)
+        {
+            Vector2 direction = playerTransform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            animator.SetFloat("MovY", direction.x);
+            angle += 180f;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
     }
 
     private void RestoreColor()
@@ -129,14 +142,17 @@ public class Boss : MonoBehaviour,IDamageable
 
     public void Attack(float damage)
     {
-        if (PlayerInSight()) // Añadimos control sobre knockback
+        if (!isDead)
         {
-            playerHealth.GetDamage(damage);
+            if (PlayerInSight()) // Añadimos control sobre knockback
+            {
+                playerHealth.GetDamage(damage);
 
-            Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
-            playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
-            StartCoroutine(ResetKB());     
-                        
+                Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+                playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
+                StartCoroutine(ResetKB());
+
+            }
         }
     }
    
@@ -164,13 +180,14 @@ public class Boss : MonoBehaviour,IDamageable
     {
         isDead = true;
         OnDeath?.Invoke();
-        Destroy(gameObject, destroyDelay);
+        animator.SetBool("isDead", isDead);
+        //Destroy(gameObject, destroyDelay);
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !isDead)
         {
             playerHealth.GetDamage(15f);
         }

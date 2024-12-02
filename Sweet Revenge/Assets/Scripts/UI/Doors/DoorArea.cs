@@ -59,7 +59,7 @@ public class DoorArea : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (gameObject != null)
+        if (gameObject == null)
         {
             message.gameObject.SetActive(false);
         }

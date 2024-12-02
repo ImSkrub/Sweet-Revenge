@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(life.isDead);
+        //Debug.Log(life.isDead);
         if (!life.isDead)
         {
             HandleRotation();
