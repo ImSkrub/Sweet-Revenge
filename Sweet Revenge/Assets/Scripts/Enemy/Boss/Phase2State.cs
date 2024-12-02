@@ -27,7 +27,7 @@ public class Phase2State : IBossState
         float distanceToPlayer = Vector2.Distance(boss.transform.position, boss.playerTransform.position);
         boss.FollowPlayer(moveSpeed);
 
-        if (distanceToPlayer <= attackRangeMax && distanceToPlayer >= attackRangeMin)
+        if (distanceToPlayer <= attackRangeMax && distanceToPlayer >= attackRangeMin && !boss.isDead)
         {
             boss.Attack(damage);
         }

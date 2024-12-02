@@ -28,7 +28,7 @@ public class Phase1State : IBossState
         if (distanceToPlayer <= attackRangeMax && distanceToPlayer >= attackRangeMin)
         {
             // Check if the cooldown has passed
-            if (!attacked && Time.time >= lastAttackTime + attackCooldown)
+            if (!attacked && Time.time >= lastAttackTime + attackCooldown && !boss.isDead)
             {
                 Debug.Log("Ataque");
                 boss.Attack(damage);

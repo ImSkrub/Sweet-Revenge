@@ -124,7 +124,7 @@ public class SpawnerEnemy : MonoBehaviour
                     newEnemy.transform.position = spawnPoint.GetSpawnPosition();
                     activeEnemies++;
                     newEnemy.enemyHealth.OnDeath += OnEnemyDeath;
-                    Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
+                    //Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
                 }
                 spawnCount++;
             }
