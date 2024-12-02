@@ -14,7 +14,7 @@ public class Boss : MonoBehaviour,IDamageable
 
     [Header("Parameters")]
     [SerializeField] private float life;
-    [SerializeField] private float maxLife = 2500;
+    [SerializeField] private float maxLife = 1000;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
     //Knockback
@@ -72,7 +72,7 @@ public class Boss : MonoBehaviour,IDamageable
             bossState.UpdateState();
         }
 
-        if (life <= 1500 && !(bossState is Phase2State))
+        if (life <= 500 && !(bossState is Phase2State))
         {
             TransitionToPhaseTwo();
         }
@@ -92,7 +92,7 @@ public class Boss : MonoBehaviour,IDamageable
             sr.color = damageColor;
             Invoke("RestoreColor", damageCooldown);
         }
-        if (life <= 1500)
+        if (life <= 500)
         {
             animator.SetTrigger("Transformation");
         }
@@ -180,6 +180,7 @@ public class Boss : MonoBehaviour,IDamageable
         OnDeath?.Invoke();
         animator.SetBool("isDead", isDead);
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        GameManager.Instance.WinGame();
         //Destroy(gameObject, destroyDelay);
     }
 

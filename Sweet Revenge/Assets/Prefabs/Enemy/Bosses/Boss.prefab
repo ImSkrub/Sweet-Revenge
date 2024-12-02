@@ -165,12 +165,19 @@ MonoBehaviour:
   rb: {fileID: 0}
   playerTransform: {fileID: 0}
   life: 0
-  maxLife: 2500
+  maxLife: 1000
   damageCooldown: 1
   destroyDelay: 0.5
+  KBCounter: 0
+  KBTotalTime: 0
+  KBDelay: 0.5
+  KnockbackForce: 7.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  bossRb: {fileID: 0}
+  isDead: 0
+  isFollowing: 0
   damageSoundClips: []
   sr: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
