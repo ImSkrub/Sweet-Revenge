@@ -11,9 +11,10 @@ public class DoorArea : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private int valueDoor;
     [SerializeField] private AudioClip doorSoundClip;
+    public bool bossDoor = false;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")&& !bossDoor)
         {
             message.gameObject.SetActive(true);
             // Get the current amount of coins the player has
@@ -42,6 +43,18 @@ public class DoorArea : MonoBehaviour
             text.SetText($"<color=white>To open this door you need:</color> " +
                           $"<color={color}>{currentCoins}</color>/</color=white>{valueDoor}</color>" +
                           "Press F to buy");
+        }
+        if(collision.CompareTag("Player") && bossDoor)
+        {
+            if (GameManager.Instance.activeBossBattle)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(doorSoundClip, transform, 1f);
+                door.SetActive(false);
+            }
+            else
+            {
+              text.SetText($"<color=white>To open this door you need to grab the parts scatered on the map</color>");
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

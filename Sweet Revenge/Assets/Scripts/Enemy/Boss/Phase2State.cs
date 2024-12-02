@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Phase2State : MonoBehaviour,IBossState
+public class Phase2State : IBossState
 {
     private Boss boss;
     private float attackRangeMin = 1f;
     private float attackRangeMax = 5f;
     private float knockbackForce = 5f;
     private float damage = 30f;
-    private float moveSpeed = 3f;
+    private float moveSpeed = 3.5f;
 
     public void Enter(Boss boss)
     {

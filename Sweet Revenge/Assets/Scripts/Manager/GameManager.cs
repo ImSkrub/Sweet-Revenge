@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private GameStatusManager quickRevive;
     public bool gotItem1 = false;
     public bool gotItem2 = false;
-
+    public bool activeBossBattle= false;
     public bool bossDied = false;
 
     private void Awake()
@@ -37,6 +37,16 @@ public class GameManager : MonoBehaviour
         quickRevive = FindObjectOfType<GameStatusManager>();
     }
 
+    private void Update()
+    {
+        if (gotItem1 && gotItem2)
+        {
+            activeBossBattle = true;  
+            //suena sonido + aparece mensaje.
+        }
+       
+    }
+
     public void WinGame()
     {
        SceneManager.LoadScene(3);
@@ -47,10 +57,6 @@ public class GameManager : MonoBehaviour
         if(spawnerEnemy.CurrentRound == 15)
         {
             WinGame();
-        }
-        if (gotItem1 && gotItem2)
-        {
-          //UI para pasar a la escena del boss (5)  
         }
       
     }

@@ -9,7 +9,7 @@ public class Phase1State : IBossState
     private float attackRangeMax = 3f;
     private float knockbackForce = 3f;
     private float damage = 15f;
-    private float moveSpeed = 2f;
+    private float moveSpeed = 3f;
     private bool attacked = false;
     private float attackCooldown = 1f; // Cooldown duration in seconds
     private float lastAttackTime = 0f; // Time of the last attack

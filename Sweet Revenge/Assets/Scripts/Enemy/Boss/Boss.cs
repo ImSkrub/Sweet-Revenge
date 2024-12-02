@@ -10,14 +10,18 @@ public class Boss : MonoBehaviour,IDamageable
     private Animator animator;
     public Rigidbody2D rb;
     public Transform playerTransform;
-    private bool lookingRight = true;
+    
 
     [Header("Parameters")]
     [SerializeField] private float life;
     [SerializeField] private float maxLife = 2500;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
-    private float lastAttackTime = 0f;
+    //Knockback
+    [SerializeField] private float KBCounter;
+    [SerializeField] private float KBTotalTime;
+    [SerializeField] private float KBDelay = 0.5f;
+    [SerializeField] private float KnockbackForce = 7.5f;
 
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
@@ -40,7 +44,6 @@ public class Boss : MonoBehaviour,IDamageable
 
     private IBossState bossState;
 
-    [SerializeField] private float knockbackRange = 5f;
 
     private void Awake()
     {
@@ -73,11 +76,7 @@ public class Boss : MonoBehaviour,IDamageable
         {
             Invoke("Death", 2f);
         }
-        Debug.Log(isKnockbackActive);
-        if (isKnockbackActive && !IsPlayerInKnockbackRange())
-        {
-            isKnockbackActive = false;  // Se desactiva el knockback cuando el jugador sale del rango
-        }
+        
     }
 
     public void TakeDamage(float damage)
@@ -126,30 +125,26 @@ public class Boss : MonoBehaviour,IDamageable
         return false;
     }
 
-    private bool isKnockbackActive = false; // Nueva variable para controlar el knockback
+   
 
     public void Attack(float damage)
     {
-        if (PlayerInSight() && Time.time - lastAttackTime >= damageCooldown && !isKnockbackActive) // Añadimos control sobre knockback
+        if (PlayerInSight()) // Añadimos control sobre knockback
         {
-            lastAttackTime = Time.time;  // Actualiza el tiempo de último ataque
-
             playerHealth.GetDamage(damage);
 
-            //// Aplica Knockback solo una vez
             Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
-            playerRb.AddForce(knockbackDirection * 5f, ForceMode2D.Impulse);
-
-            //// Activar el estado de knockback
-            isKnockbackActive = true;
-            
+            playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
+            StartCoroutine(ResetKB());     
+                        
         }
     }
-    private bool IsPlayerInKnockbackRange()
+   
+    private IEnumerator ResetKB()
     {
-        return Vector2.Distance(transform.position, playerTransform.position) <= knockbackRange;
+        yield return new WaitForSeconds(KBDelay);
+        playerRb.velocity = Vector2.zero;
     }
-
    
 
     private void TransitionToPhaseTwo()
@@ -177,7 +172,7 @@ public class Boss : MonoBehaviour,IDamageable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth.GetDamage(5f);
+            playerHealth.GetDamage(15f);
         }
     }
 
