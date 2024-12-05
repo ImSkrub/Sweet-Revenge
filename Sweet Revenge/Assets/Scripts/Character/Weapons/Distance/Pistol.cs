@@ -6,7 +6,7 @@ public class Pistol : BaseGun,IWeapon
 {
     private float lastAttackTime;
     [SerializeField] private AudioClip shootSound;
-    private void Start()
+    private new void Start()
     {
         base.Start();
         lastAttackTime = Time.time;

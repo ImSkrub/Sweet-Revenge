@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private float attackDelay = 0.5f;
     private float lastAttackTime;
     [Header("UI")]
-    [SerializeField] private Image escImage;
+    //[SerializeField] private Image escImage;
         
     private IWeapon weapon;
     private PlayerController player;

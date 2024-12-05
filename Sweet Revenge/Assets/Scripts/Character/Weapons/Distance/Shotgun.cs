@@ -12,7 +12,7 @@ public class Shotgun : BaseGun,IWeapon
     [SerializeField] private float spreadAngle = 15f; // Spread angle in degrees
     [SerializeField] private float delayBetweenShots = 0.1f; // Delay between each bullet shot
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
         lastAttackTime = Time.time; // Initialize last attack time

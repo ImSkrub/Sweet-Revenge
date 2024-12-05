@@ -10,7 +10,7 @@ public class SMG : BaseGun,IWeapon
     private PlayerController playerController;
     [SerializeField] private AudioClip smgSound;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
         lastAttackTime = Time.time;
