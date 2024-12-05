@@ -10,13 +10,13 @@ public class SpikeBat : MonoBehaviour, IWeapon
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private AudioClip batSound;
     public string Name { get; private set; } = "SpikeBat";
-    private Animation anim;
+    private Animator anim;
     private float lastAttackTime;
     private PlayerController player;
 
     private void Awake()
     {
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
         player = FindAnyObjectByType<PlayerController>();
     }
 
@@ -24,6 +24,7 @@ public class SpikeBat : MonoBehaviour, IWeapon
     {
         if (Time.time >= lastAttackTime + 1.5f / dataBat.attackSpeed)
         {
+            anim.SetTrigger("Attack");
             SoundFXManager.instance.PlaySoundFXClip(batSound, transform, 0.5f);
             //Even if you dont find enemy you deduct stamina
             player.Stamina -= dataBat.attackCost; // Deduct stamina
