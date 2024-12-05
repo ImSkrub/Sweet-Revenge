@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3303271877615091231}
   - component: {fileID: 5198775128384028719}
   - component: {fileID: 5445839967551071731}
-  - component: {fileID: 8662504427292109428}
+  - component: {fileID: -3413453067360615143}
   m_Layer: 0
   m_Name: Spike Bat
   m_TagString: Weapon
@@ -200,7 +200,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   batSound: {fileID: 8300000, guid: 0685ac49df3d83b4c83ff3c155822c18, type: 3}
---- !u!95 &8662504427292109428
+--- !u!95 &-3413453067360615143
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
