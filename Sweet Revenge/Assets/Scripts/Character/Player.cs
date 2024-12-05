@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
             collision.gameObject.transform.localPosition = Vector3.zero; 
             collision.gameObject.transform.localRotation = Quaternion.identity; 
 
-            collision.gameObject.transform.localRotation = Quaternion.Euler(0, 0, player.transform.eulerAngles.z);
+            collision.gameObject.transform.localRotation = Quaternion.Euler(0, 0, player.transform.rotation.z);
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))
