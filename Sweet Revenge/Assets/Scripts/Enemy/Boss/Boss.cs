@@ -5,12 +5,12 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour,IDamageable
+public class Boss : MonoBehaviour, IDamageable
 {
     private Animator animator;
     public Rigidbody2D rb;
     public Transform playerTransform;
-    
+
 
     [Header("Parameters")]
     [SerializeField] private float life;
@@ -81,7 +81,7 @@ public class Boss : MonoBehaviour,IDamageable
             Death();
             //Invoke("Death", 2f);
         }
-        
+
     }
 
     public void TakeDamage(float damage)
@@ -137,7 +137,7 @@ public class Boss : MonoBehaviour,IDamageable
         return false;
     }
 
-   
+
 
     public void Attack(float damage)
     {
@@ -153,13 +153,13 @@ public class Boss : MonoBehaviour,IDamageable
             }
         }
     }
-   
+
     private IEnumerator ResetKB()
     {
         yield return new WaitForSeconds(KBDelay);
         playerRb.velocity = Vector2.zero;
     }
-   
+
 
     private void TransitionToPhaseTwo()
     {
@@ -180,10 +180,14 @@ public class Boss : MonoBehaviour,IDamageable
         OnDeath?.Invoke();
         animator.SetBool("isDead", isDead);
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        GameManager.Instance.WinGame();
+        Invoke("HandleBossDeath", 1.5f);
         //Destroy(gameObject, destroyDelay);
     }
 
+    private void HandleBossDeath()
+    {
+        GameManager.Instance.WinGame();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

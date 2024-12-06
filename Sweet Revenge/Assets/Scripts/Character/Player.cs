@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         // Check if the player can attack
-        if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay && !lifePlayer.isDead)
+        if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay && !lifePlayer.isDead && Time.timeScale>0)
         {
             player.isRecharging= false;
             weapon?.Attack();

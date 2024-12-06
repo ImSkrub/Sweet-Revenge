@@ -53,9 +53,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector3 targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(playerTransform.position);
-        float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
-        playerTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (Time.timeScale > 0)
+        {
+            Vector3 targetRotation = Input.mousePosition - Camera.main.WorldToScreenPoint(playerTransform.position);
+            float angle = Mathf.Atan2(targetRotation.y, targetRotation.x) * Mathf.Rad2Deg;
+            playerTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
     }
 
     private void HandleMovement()
