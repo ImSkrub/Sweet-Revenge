@@ -138,3 +138,4 @@ MonoBehaviour:
   texto: Press 'E' to activate
   tpSpawn: {fileID: 0}
   item1: 1
+  clip: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}

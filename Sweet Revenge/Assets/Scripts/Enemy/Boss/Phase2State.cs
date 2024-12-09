@@ -9,10 +9,11 @@ public class Phase2State : IBossState
     private float attackRangeMin = 1f;
     private float attackRangeMax = 7f;
     private float knockbackForce = 1f;
-    private float damage = 30f;
+    private float damage = 20f;
     private float moveSpeed = 5f;
     private float attackCooldown = 1f; // Cooldown duration in seconds
     private float lastAttackTime = 0f; // Time of the last attack
+    private float scaleVelocity = 1f;
 
     public void Enter(Boss boss)
     {
@@ -27,14 +28,18 @@ public class Phase2State : IBossState
     }
     public void UpdateState()
     {
+        scaleVelocity += scaleVelocity * Time.deltaTime;
+        if (scaleVelocity > 2f) scaleVelocity = 2f;
         float distanceToPlayer = Vector2.Distance(boss.transform.position, boss.playerTransform.position);
         boss.FollowPlayer(moveSpeed);
+        boss.transform.localScale = new Vector3 (scaleVelocity, scaleVelocity,2) ;
 
         if (distanceToPlayer <= attackRangeMax && distanceToPlayer >= attackRangeMin)
         {
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 boss.Attack(damage);
+                Debug.Log("attack phase2");
             }
         }
         
