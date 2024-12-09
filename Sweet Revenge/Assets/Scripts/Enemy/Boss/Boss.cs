@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private float maxLife = 300;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
+    private float transitionLife = 500;
     //Knockback
     [SerializeField] private float KBCounter;
     [SerializeField] private float KBTotalTime;
@@ -77,7 +78,7 @@ public class Boss : MonoBehaviour, IDamageable
         if (isDead) return;
         bossState.UpdateState();
        
-        if (life <= 150 && !(bossState is Phase2State))
+        if (life <= transitionLife && !(bossState is Phase2State))
         {
             TransitionToPhaseTwo();
         }
@@ -102,7 +103,7 @@ public class Boss : MonoBehaviour, IDamageable
                 life = 0; 
                 Death();
             }
-            else if (life <= 150 && !(bossState is Phase2State))
+            else if (life <= transitionLife && !(bossState is Phase2State))
             {
                 animator.SetTrigger("Transformation");
                 TransitionToPhaseTwo();
@@ -176,7 +177,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void TransitionToPhaseTwo()
     {
-        if (bossState is Phase2State)
+        if (bossState is Phase1State)
         {
             SetState(new Phase2State());
             animator.SetTrigger("Transformation");
