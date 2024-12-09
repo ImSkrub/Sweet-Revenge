@@ -8,7 +8,7 @@ public class Phase1State : IBossState
     private float attackRangeMin = 0.5f;
     private float attackRangeMax = 10f;
     private float knockbackForce = 1f;
-    private float damage = 20f;
+    private float damage = 15f;
     private float moveSpeed = 7f;
     private bool attacked = false;
     private float attackCooldown = 1f; // Cooldown duration in seconds
@@ -30,7 +30,7 @@ public class Phase1State : IBossState
             // Check if the cooldown has passed
             if (!attacked && Time.time >= lastAttackTime + attackCooldown)
             {
-                Debug.Log("Ataque");
+                //Debug.Log("Ataque");
                 boss.Attack(damage);
                 attacked = true;
                 lastAttackTime = Time.time; // Update the last attack time

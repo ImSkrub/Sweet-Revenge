@@ -12,6 +12,7 @@ public class ImportantItem : MonoBehaviour
     public string texto;
     public Transform tpSpawn;
     public bool item1=false;
+    [SerializeField] private AudioClip clip;
       
 
     private void Start()
@@ -28,6 +29,7 @@ public class ImportantItem : MonoBehaviour
             {
                 OnInteract();
                 collision.gameObject.transform.position = tpSpawn.position;
+                SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
             }
 
         }      

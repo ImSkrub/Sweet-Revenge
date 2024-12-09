@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,9 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private float KBTotalTime;
     [SerializeField] private float KBDelay = 0.5f;
     [SerializeField] private float KnockbackForce = 5f;
+    public float scaleVelocity = 1f;
+    private float scaleVelocityMax = 2;
+
 
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
@@ -87,6 +91,8 @@ public class Boss : MonoBehaviour, IDamageable
             Death();
         }
 
+        //scaleVelocity += scaleVelocity * Time.deltaTime;
+        //if (scaleVelocity > scaleVelocityMax) scaleVelocity = scaleVelocityMax;
     }
 
     public void TakeDamage(float damage)
@@ -105,7 +111,7 @@ public class Boss : MonoBehaviour, IDamageable
             }
             else if (life <= transitionLife && !(bossState is Phase2State))
             {
-                animator.SetTrigger("Transformation");
+                //animator.SetTrigger("Transformation");
                 TransitionToPhaseTwo();
             }
         }
@@ -119,6 +125,7 @@ public class Boss : MonoBehaviour, IDamageable
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
             LookAtPlayer();
+            animator.SetBool("Walk", true);
         }
     }
 
@@ -164,6 +171,8 @@ public class Boss : MonoBehaviour, IDamageable
                 playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
                 StartCoroutine(ResetKB());
                 playerRb.velocity = Vector2.zero;
+                animator.SetTrigger("Attack");
+                Debug.Log("ataque");
             }
         }
     }
@@ -180,7 +189,7 @@ public class Boss : MonoBehaviour, IDamageable
         if (bossState is Phase1State)
         {
             SetState(new Phase2State());
-            animator.SetTrigger("Transformation");
+            //animator.SetTrigger("Transformation");
             sr.color = Color.magenta;
         }
        
@@ -208,11 +217,20 @@ public class Boss : MonoBehaviour, IDamageable
         GameManager.Instance.WinGame();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.collider.tag == "Player" && !isDead)
+    //    {
+    //        playerHealth.GetDamage(1f * Time.deltaTime);
+
+    //    }
+    //}
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !isDead)
         {
-            playerHealth.GetDamage(15f);
+            playerHealth.GetDamage(10f * Time.deltaTime);
         }
     }
 

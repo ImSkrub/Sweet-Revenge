@@ -20,7 +20,7 @@ public class GameStatusManager : MonoBehaviour
     private bool hasPowerUp = false;
 
     [SerializeField] Transform spawnpoint;
-    [SerializeField] AudioClip clip;
+    [SerializeField] private AudioClip clip, reviveClip;
 
     private void Start()
     {
@@ -70,6 +70,7 @@ public class GameStatusManager : MonoBehaviour
             PlayerMemento lastSavedState = savedStates.Pop();
             player.RestoreState(lastSavedState);
             Debug.Log("Estado restaurado");
+            SoundFXManager.instance.PlaySoundFXClip(reviveClip,transform, 1f);
         }
         else
         {

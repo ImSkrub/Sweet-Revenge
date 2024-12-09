@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool gotItem2 = false;
     public bool activeBossBattle= false;
     public bool bossDied = false;
+    [SerializeField] private AudioClip clip;
 
     private void Awake()
     {
@@ -41,7 +42,8 @@ public class GameManager : MonoBehaviour
     {
         if (gotItem1 && gotItem2)
         {
-            activeBossBattle = true;  
+            activeBossBattle = true;
+            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
             //suena sonido + aparece mensaje.
         }
        
