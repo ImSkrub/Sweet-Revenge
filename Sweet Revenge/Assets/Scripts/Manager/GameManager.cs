@@ -70,14 +70,10 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
-        if (quickRevive.HasSavedStates())
-        {
-            quickRevive.Checkpoint(); // Restore the last saved state
-            Debug.Log("Player restored from checkpoint.");
-        }
-        else
+        if (!quickRevive.HasSavedStates())
         {
             LoseGame(); // No saved states, proceed to lose game
+            
         }
     }
 

@@ -22,6 +22,8 @@ public class GameStatusManager : MonoBehaviour
     [SerializeField] Transform spawnpoint;
     [SerializeField] private AudioClip clip, reviveClip;
 
+    private bool isRestoring = false;
+
     private void Start()
     {
         if (PointManager.Instance == null)
@@ -50,8 +52,8 @@ public class GameStatusManager : MonoBehaviour
                 savedStates.Push(player.SaveState(spawnpoint.position));
                 currentPurchases++;
                 hasPowerUp = true;
-                currentCoins -= cost; 
-                PointManager.Instance.AddDoorCoin(-cost); 
+                currentCoins -= cost;
+                PointManager.Instance.AddDoorCoin(-cost);
                 UpdatePurchaseText(); // Update the text after the purchase
                 ToggleUI();
                 Debug.Log("Saved State");
@@ -61,21 +63,26 @@ public class GameStatusManager : MonoBehaviour
                 Debug.Log("Not enough coins to purchase.");
             }
         }
+      
     }
 
     public void Checkpoint()
     {
+        if (isRestoring) return;
+        isRestoring = true;
+
         if (HasSavedStates())
         {
             PlayerMemento lastSavedState = savedStates.Pop();
             player.RestoreState(lastSavedState);
             Debug.Log("Estado restaurado");
-            SoundFXManager.instance.PlaySoundFXClip(reviveClip,transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(reviveClip, transform, 1f);
         }
         else
         {
             Debug.Log("No saved states available to restore.");
         }
+        isRestoring= false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -129,11 +136,13 @@ public class GameStatusManager : MonoBehaviour
     public bool HasSavedStates()
     {
         return savedStates.Count > 0;
+        
     }
 
     public void ResetStates()
     {
         savedStates.Clear();
+        Debug.Log("Saved states have been Reset.");
     }
 
 }

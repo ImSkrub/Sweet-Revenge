@@ -64,6 +64,7 @@ public class PlayerLife : MonoBehaviour
             Debug.Log("Player died");
             Death();
         }
+      
     }
 
     public void GetDamage(float value)
@@ -91,21 +92,20 @@ public class PlayerLife : MonoBehaviour
 
     public void Death()
     {
-        // Check if there are any saved states before deactivating
+        if (isDead) return; // Prevent multiple calls to Death
+
         if (playerCheckpoint != null && playerCheckpoint.HasSavedStates())
         {
-            // If there are saved states, restore the player's state
+            Debug.Log(playerCheckpoint.HasSavedStates());
             playerCheckpoint.Checkpoint(); // Restore the last saved state
             Debug.Log("Player restored from checkpoint.");
         }
         else
         {
-            // If there are no saved states, deactivate the player
             Debug.Log("No saved states available. Player is dead.");
             isDead = true;
             animator.SetBool("IsDead", isDead);
             Invoke("InvokeEvent", 2.5f);
-            //this.gameObject.SetActive(false);
         }
     }
 
@@ -123,7 +123,7 @@ public class PlayerLife : MonoBehaviour
 
     public PlayerMemento SaveState(Vector3 position)
     {
-        return new PlayerMemento(position, maxHealth);
+       return new PlayerMemento(position, maxHealth);
     }
 
     public void RestoreState(PlayerMemento state)
@@ -141,4 +141,6 @@ public class PlayerLife : MonoBehaviour
             Debug.LogError("Cannot restore state: state is null.");
         }
     }
+
+  
 }

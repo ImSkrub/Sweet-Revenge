@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class SpawnActivator : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnGameObject;
+    [SerializeField] private SpawnerEnemy spawnerEnemy; // Referencia al SpawnerEnemy
+
+    private void Awake()
+    {
+        spawnerEnemy = FindFirstObjectByType<SpawnerEnemy>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
-            spawnGameObject.SetActive(true);
+          
+            spawnerEnemy.ActivateSpawnArea(); // Notifica al SpawnerEnemy
         }
     }
 }

@@ -48,9 +48,7 @@ public class SpawnerEnemy : MonoBehaviour
     private void Awake()
     {
         Initialize();
-        // Initialize area transitions
         InitializeAreaTransitions();
-        // Automatically find the TextMeshProUGUI component with the tag "RoundText"
         GameObject roundTextObject = GameObject.FindGameObjectWithTag("RoundText");
         if (roundTextObject != null)
         {
@@ -60,8 +58,6 @@ public class SpawnerEnemy : MonoBehaviour
         {
             Debug.LogError("No GameObject with tag 'RoundText' found in the scene.");
         }
-
-        // Optionally, check if the roundText was found
         if (roundText == null)
         {
             Debug.LogError("RoundText TMP component not found in the GameObject with tag 'RoundText'. Please ensure it exists.");
@@ -119,7 +115,7 @@ public class SpawnerEnemy : MonoBehaviour
             {
                 for (int i = 0; i < enemiesPerSpawn; i++)
                 {
-                    string enemyType = enemyTypeToSpawn[Random.Range(0, enemyTypeToSpawn.Count)];
+                    string enemyType = GetEnemyTypeForCurrentArea();
                     Enemy newEnemy = enemyFactory.CreateEnemy(enemyType);
                     newEnemy.transform.position = spawnPoint.GetSpawnPosition();
                     activeEnemies++;
@@ -129,6 +125,26 @@ public class SpawnerEnemy : MonoBehaviour
                 spawnCount++;
             }
         }
+    }
+
+    private string GetEnemyTypeForCurrentArea()
+    {
+        List<string> enemyTypes = new List<string> { "Zombie" }; // Siempre incluye Zombie
+
+        switch (currentArea)
+        {
+            case SpawnPoint.SpawnArea.Volcan:
+                enemyTypes.Add("Golem"); // Agrega Golem para el área de Volcán
+                break;
+            case SpawnPoint.SpawnArea.Tierra:
+                enemyTypes.Add("Worm"); // Agrega Worm para el área de Tierra
+                break;
+            default:
+                break; // No se agrega nada más para otras áreas
+        }
+
+        // Selecciona un tipo de enemigo al azar de la lista
+        return enemyTypes[Random.Range(0, enemyTypes.Count)];
     }
 
     private void UpdateRoundText()
@@ -184,22 +200,12 @@ public class SpawnerEnemy : MonoBehaviour
         SpawnPoint.SpawnArea.Volcan
     };
 }
-    private void ActivateSpawnArea(SpawnPoint.SpawnArea current, SpawnPoint.SpawnArea next)
+    public void ActivateSpawnArea()
     {
-        foreach (var spawnPoint in spawnPoints)
-        {
-            if (spawnPoint.Area == current)
-            {
-                spawnPoint.DisableSpawn();
-            }
-            else if (spawnPoint.Area == next)
-            {
-                spawnPoint.EnableSpawn();
-            }
-        }
-        currentArea = next; // Actualiza el área actual
+        // Aquí puedes definir la lógica para activar el área de spawn
+        SpawnPoint.SpawnArea nextArea = GetNextArea(currentArea);
+        ChangeArea(nextArea);
     }
-
     public void ChangeArea(SpawnPoint.SpawnArea newArea)
     {
         // Desactiva el spawn del área actual
@@ -222,6 +228,8 @@ public class SpawnerEnemy : MonoBehaviour
 
         // Actualiza el área actual
         currentArea = newArea;
+        isSpawning = true;
+        Debug.Log($"Changed area to {newArea}. Spawning is now active.");
     }
 
     private SpawnPoint.SpawnArea GetNextArea(SpawnPoint.SpawnArea current)
@@ -235,15 +243,6 @@ public class SpawnerEnemy : MonoBehaviour
         return current; // If no transitions, stay in the current area
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            // Get the next area based on the current area
-            SpawnPoint.SpawnArea nextArea = GetNextArea(currentArea);
-            ActivateSpawnArea(currentArea, nextArea);
-        }
-    }
     #endregion
 
     public void Initialize()
