@@ -14,7 +14,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     [Header("Parameters")]
     [SerializeField] private float life;
-    [SerializeField] private float maxLife = 1000;
+    [SerializeField] private float maxLife = 300;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
     //Knockback
@@ -29,7 +29,7 @@ public class Boss : MonoBehaviour, IDamageable
     private Rigidbody2D playerRb; // Almacenamos el Rigidbody del jugador
     [SerializeField] Rigidbody2D bossRb;
     public bool isDead = false, isFollowing = false;
-
+    [Space(3)]
     [Header("Audios")]
     [SerializeField] private AudioClip[] damageSoundClips;
 
@@ -38,10 +38,14 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] public SpriteRenderer sr;
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
+    [Header("UI")]
+    [SerializeField] private GameObject healthBarCanvas;
+    [SerializeField] private Image healthBar;
 
-    [SerializeField] private Slider healthBar;
+    public bool cinematicFinished = false;
 
     public event Action OnDeath;
+
 
     private IBossState bossState;
 
@@ -62,9 +66,14 @@ public class Boss : MonoBehaviour, IDamageable
         SetState(new Phase1State());
     }
 
+    private void Start()
+    {
+        healthBarCanvas.SetActive(false);
+    }
+
     private void Update()
     {
-        //healthBar.value = life / maxLife;
+        healthBar.fillAmount= life / maxLife;
         if (isDead) return;
 
         if (!isDead)
@@ -88,11 +97,12 @@ public class Boss : MonoBehaviour, IDamageable
     {
         if (!isDead)
         {
+            
             life -= damage;
             sr.color = damageColor;
             Invoke("RestoreColor", damageCooldown);
         }
-        if (life <= 500)
+        if (life <= 150)
         {
             animator.SetTrigger("Transformation");
         }
@@ -100,7 +110,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     public void FollowPlayer(float moveSpeed)
     {
-        if (!isDead)
+        if (!isDead&& cinematicFinished)
         {
             isFollowing = true;
             Vector2 direction = (playerTransform.position - transform.position).normalized;
@@ -199,9 +209,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void OnDrawGizmos()
     {
-        if (bossState == null) return;
-        Debug.Log("Drawing Gizmo with range: " + bossState.GetRange());
+        
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, bossState.GetRange());
+        Gizmos.DrawWireSphere(transform.position, 5f);
     }
 }
