@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpawnActivator : MonoBehaviour
 {
     [SerializeField] private SpawnerEnemy spawnerEnemy; // Referencia al SpawnerEnemy
+    [SerializeField] private SpawnPoint.SpawnArea areaToActivate; // Área a activar
+    [SerializeField] private SpawnPoint.SpawnArea previousArea; // Área anterior
 
     private void Awake()
     {
@@ -15,8 +17,17 @@ public class SpawnActivator : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-          
-            spawnerEnemy.ActivateSpawnArea(); // Notifica al SpawnerEnemy
+            // Verifica si el área actual es la misma que el área a activar
+            if (spawnerEnemy.CurrentArea == areaToActivate)
+            {
+                // Cambia al área anterior
+                spawnerEnemy.ActivateSpawnArea(previousArea);
+            }
+            else
+            {
+                // Cambia al área a activar
+                spawnerEnemy.ActivateSpawnArea(areaToActivate);
+            }
         }
     }
 }

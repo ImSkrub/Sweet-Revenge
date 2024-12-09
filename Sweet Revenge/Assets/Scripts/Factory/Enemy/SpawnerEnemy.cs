@@ -33,6 +33,7 @@ public class SpawnerEnemy : MonoBehaviour
     [SerializeField] private TextMeshProUGUI roundText;
    
     private SpawnPoint.SpawnArea currentArea; // Área actual
+    public SpawnPoint.SpawnArea CurrentArea { get;private set; }
 
     private Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>> areaTransitions = new Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>>();
 
@@ -115,37 +116,36 @@ public class SpawnerEnemy : MonoBehaviour
             {
                 for (int i = 0; i < enemiesPerSpawn; i++)
                 {
-                    string enemyType = GetEnemyTypeForCurrentArea();
+                    string enemyType = enemyTypeToSpawn[Random.Range(0,enemyTypeToSpawn.Count)];
                     Enemy newEnemy = enemyFactory.CreateEnemy(enemyType);
                     newEnemy.transform.position = spawnPoint.GetSpawnPosition();
                     activeEnemies++;
                     newEnemy.enemyHealth.OnDeath += OnEnemyDeath;
-                   // Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
                 }
                 spawnCount++;
             }
         }
     }
 
-    private string GetEnemyTypeForCurrentArea()
+    /*private string GetEnemyTypeForCurrentArea()
     {
         List<string> enemyTypes = new List<string> { "Zombie" }; // Siempre incluye Zombie
 
         switch (currentArea)
         {
             case SpawnPoint.SpawnArea.Volcan:
-                enemyTypes.Add("Golem"); // Agrega Golem para el área de Volcán
+                enemyTypes.Add("Golem"); 
                 break;
             case SpawnPoint.SpawnArea.Tierra:
-                enemyTypes.Add("Worm"); // Agrega Worm para el área de Tierra
+                enemyTypes.Add("Worm"); 
                 break;
             default:
-                break; // No se agrega nada más para otras áreas
+                break; 
         }
 
-        // Selecciona un tipo de enemigo al azar de la lista
+        
         return enemyTypes[Random.Range(0, enemyTypes.Count)];
-    }
+    }*/
 
     private void UpdateRoundText()
     {
@@ -200,10 +200,8 @@ public class SpawnerEnemy : MonoBehaviour
         SpawnPoint.SpawnArea.Volcan
     };
 }
-    public void ActivateSpawnArea()
+    public void ActivateSpawnArea(SpawnPoint.SpawnArea nextArea)
     {
-        // Aquí puedes definir la lógica para activar el área de spawn
-        SpawnPoint.SpawnArea nextArea = GetNextArea(currentArea);
         ChangeArea(nextArea);
     }
     public void ChangeArea(SpawnPoint.SpawnArea newArea)
@@ -248,7 +246,7 @@ public class SpawnerEnemy : MonoBehaviour
     public void Initialize()
     {
         currentArea = SpawnPoint.SpawnArea.Start;
-        currentRound = 1; // Empieza en la ronda 1
+        currentRound = 1;
         spawnCount = 0;
         spawnTimer = 0f;
         roundTimer = 0f;
