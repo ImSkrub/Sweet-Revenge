@@ -57,11 +57,19 @@ public class DoorArea : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        Debug.Log("Message object is being destroyed.");
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.CompareTag("Player"))
+        {
         if (gameObject != null)
         {
             message.gameObject.SetActive(false);
+        }
+
         }
     }
 }
