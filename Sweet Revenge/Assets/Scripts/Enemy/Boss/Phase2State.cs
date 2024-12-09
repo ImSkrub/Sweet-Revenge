@@ -7,8 +7,8 @@ public class Phase2State : IBossState
 {
     private Boss boss;
     private float attackRangeMin = 1f;
-    private float attackRangeMax = 12f;
-    private float knockbackForce = 4f;
+    private float attackRangeMax = 7f;
+    private float knockbackForce = 1f;
     private float damage = 30f;
     private float moveSpeed = 5f;
     private float attackCooldown = 1f; // Cooldown duration in seconds
@@ -16,9 +16,9 @@ public class Phase2State : IBossState
 
     public void Enter(Boss boss)
     {
+        this.boss = boss;
         boss.sr.color = Color.magenta;
         Debug.Log("Entre fase 2");
-        this.boss = boss;
     }
 
     public void Exit()

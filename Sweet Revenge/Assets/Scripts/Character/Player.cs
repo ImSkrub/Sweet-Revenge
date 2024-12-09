@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public event Action Equipped;
     [SerializeField] private AudioClip powerUpSound;
     [SerializeField] private float volume;
+
+    public bool cinematicPlaying = false;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -31,12 +33,18 @@ public class Player : MonoBehaviour
         // Check if the player can attack
         if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay && !lifePlayer.isDead && Time.timeScale>0)
         {
+            if (!cinematicPlaying)
+            {
             player.isRecharging= false;
             weapon?.Attack();
             lastAttackTime = Time.time; // Update the last attack time            
+            }
         }
        
     }
+
+
+
 
     public void SetNewMaxHealth(int newHealth)
     {

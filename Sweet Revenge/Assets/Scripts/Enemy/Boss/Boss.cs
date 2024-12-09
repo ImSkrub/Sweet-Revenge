@@ -21,7 +21,7 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private float KBCounter;
     [SerializeField] private float KBTotalTime;
     [SerializeField] private float KBDelay = 0.5f;
-    [SerializeField] private float KnockbackForce = 7.5f;
+    [SerializeField] private float KnockbackForce = 5f;
 
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
@@ -75,20 +75,15 @@ public class Boss : MonoBehaviour, IDamageable
     {
         healthBar.fillAmount= life / maxLife;
         if (isDead) return;
-
-        if (!isDead)
-        {
-            bossState.UpdateState();
-        }
-
-        if (life <= 500 && !(bossState is Phase2State))
+        bossState.UpdateState();
+       
+        if (life <= 150 && !(bossState is Phase2State))
         {
             TransitionToPhaseTwo();
         }
-        if (life <= 0 && (bossState is Phase2State))
+        if (life <= 0)
         {
             Death();
-            //Invoke("Death", 2f);
         }
 
     }
@@ -97,14 +92,21 @@ public class Boss : MonoBehaviour, IDamageable
     {
         if (!isDead)
         {
-            
             life -= damage;
             sr.color = damageColor;
             Invoke("RestoreColor", damageCooldown);
-        }
-        if (life <= 150)
-        {
-            animator.SetTrigger("Transformation");
+
+            // Verifica si la vida es menor o igual a cero
+            if (life <= 0)
+            {
+                life = 0; 
+                Death();
+            }
+            else if (life <= 150 && !(bossState is Phase2State))
+            {
+                animator.SetTrigger("Transformation");
+                TransitionToPhaseTwo();
+            }
         }
     }
 
@@ -160,6 +162,7 @@ public class Boss : MonoBehaviour, IDamageable
                 Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
                 playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
                 StartCoroutine(ResetKB());
+                playerRb.velocity = Vector2.zero;
             }
         }
     }
@@ -167,14 +170,19 @@ public class Boss : MonoBehaviour, IDamageable
     private IEnumerator ResetKB()
     {
         yield return new WaitForSeconds(KBDelay);
-        playerRb.velocity = Vector2.zero;
+        
     }
 
 
     private void TransitionToPhaseTwo()
     {
-        SetState(new Phase2State());
-        animator.SetTrigger("Transformation");
+        if (bossState is Phase2State)
+        {
+            SetState(new Phase2State());
+            animator.SetTrigger("Transformation");
+            sr.color = Color.magenta;
+        }
+       
     }
 
     private void SetState(IBossState newState)

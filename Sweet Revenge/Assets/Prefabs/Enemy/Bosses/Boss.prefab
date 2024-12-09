@@ -162,10 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71af93dace34e3149bb540e52857fd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 5021922589886325784}
   playerTransform: {fileID: 0}
   life: 0
-  maxLife: 1000
+  maxLife: 300
   damageCooldown: 1
   destroyDelay: 0.5
   KBCounter: 0
@@ -181,7 +181,9 @@ MonoBehaviour:
   damageSoundClips: []
   sr: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
+  healthBarCanvas: {fileID: 0}
   healthBar: {fileID: 0}
+  cinematicFinished: 0
 --- !u!95 &6390866558503570847
 Animator:
   serializedVersion: 5

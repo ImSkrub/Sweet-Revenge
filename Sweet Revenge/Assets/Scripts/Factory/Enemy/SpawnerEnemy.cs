@@ -124,7 +124,7 @@ public class SpawnerEnemy : MonoBehaviour
                     newEnemy.transform.position = spawnPoint.GetSpawnPosition();
                     activeEnemies++;
                     newEnemy.enemyHealth.OnDeath += OnEnemyDeath;
-                    Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
+                   // Debug.Log($"Spawned enemy: {enemyType}. Active enemies: {activeEnemies}");
                 }
                 spawnCount++;
             }
@@ -159,7 +159,7 @@ public class SpawnerEnemy : MonoBehaviour
     private void OnEnemyDeath()
     {
         activeEnemies--;
-        Debug.Log("Enemy died. Active enemies: " + activeEnemies);
+       // Debug.Log("Enemy died. Active enemies: " + activeEnemies);
     }
     #endregion
 
@@ -168,34 +168,22 @@ public class SpawnerEnemy : MonoBehaviour
     {
         areaTransitions[SpawnPoint.SpawnArea.Start] = new List<SpawnPoint.SpawnArea>
     {
-        SpawnPoint.SpawnArea.Cueva,
         SpawnPoint.SpawnArea.Volcan,
         SpawnPoint.SpawnArea.Tierra
     };
 
-        areaTransitions[SpawnPoint.SpawnArea.Cueva] = new List<SpawnPoint.SpawnArea>
-    {
-        SpawnPoint.SpawnArea.Cueva_Profunda,
-        SpawnPoint.SpawnArea.Start
-    };
-
-        areaTransitions[SpawnPoint.SpawnArea.Cueva_Profunda] = new List<SpawnPoint.SpawnArea>
-    {
-        SpawnPoint.SpawnArea.Volcan,
-        SpawnPoint.SpawnArea.Cueva
-    };
-
         areaTransitions[SpawnPoint.SpawnArea.Volcan] = new List<SpawnPoint.SpawnArea>
     {
-        SpawnPoint.SpawnArea.Cueva_Profunda,
-        SpawnPoint.SpawnArea.Start
+        SpawnPoint.SpawnArea.Start,
+        SpawnPoint.SpawnArea.Tierra
     };
 
         areaTransitions[SpawnPoint.SpawnArea.Tierra] = new List<SpawnPoint.SpawnArea>
     {
-        SpawnPoint.SpawnArea.Start
+        SpawnPoint.SpawnArea.Start,
+        SpawnPoint.SpawnArea.Volcan
     };
-    }
+}
     private void ActivateSpawnArea(SpawnPoint.SpawnArea current, SpawnPoint.SpawnArea next)
     {
         foreach (var spawnPoint in spawnPoints)
