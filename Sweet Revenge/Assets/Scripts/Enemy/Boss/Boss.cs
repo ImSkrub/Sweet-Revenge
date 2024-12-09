@@ -37,6 +37,7 @@ public class Boss : MonoBehaviour, IDamageable
     [Space(3)]
     [Header("Audios")]
     [SerializeField] private AudioClip[] damageSoundClips;
+    [SerializeField] private AudioClip attackSound, deathSound;
 
     [Space(3)]
     [Header("Color")]
@@ -102,6 +103,7 @@ public class Boss : MonoBehaviour, IDamageable
             life -= damage;
             sr.color = damageColor;
             Invoke("RestoreColor", damageCooldown);
+            SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
 
             // Verifica si la vida es menor o igual a cero
             if (life <= 0)
@@ -172,7 +174,8 @@ public class Boss : MonoBehaviour, IDamageable
                 StartCoroutine(ResetKB());
                 playerRb.velocity = Vector2.zero;
                 animator.SetTrigger("Attack");
-                Debug.Log("ataque");
+                SoundFXManager.instance.PlaySoundFXClip(attackSound, transform, 1f);
+                //Debug.Log("ataque");
             }
         }
     }
@@ -209,6 +212,7 @@ public class Boss : MonoBehaviour, IDamageable
         animator.SetBool("isDead", isDead);
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         Invoke("HandleBossDeath", 1.5f);
+        SoundFXManager.instance.PlaySoundFXClip(deathSound, transform, 1f);
         //Destroy(gameObject, destroyDelay);
     }
 
