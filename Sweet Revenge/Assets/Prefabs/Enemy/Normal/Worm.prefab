@@ -194,6 +194,7 @@ MonoBehaviour:
   destroyDelay: 0.5
   volume: 0
   damageSoundClips: []
+  blood: {fileID: 1644727368190767777, guid: 0aa03648ed26caf4ab5bec2679045113, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   generateItem: {fileID: 2970190372525731859}
 --- !u!114 &2207632015377368185

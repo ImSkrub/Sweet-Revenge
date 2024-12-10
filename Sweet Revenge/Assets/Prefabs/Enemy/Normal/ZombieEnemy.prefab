@@ -151,6 +151,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 347e58cdc6fbf924db1e44526724dd1d, type: 3}
   - {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
   - {fileID: 8300000, guid: 55294842533c692448b42c7078185db1, type: 3}
+  blood: {fileID: 1644727368190767777, guid: 0aa03648ed26caf4ab5bec2679045113, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   generateItem: {fileID: 0}
 --- !u!195 &7396358911814645616
