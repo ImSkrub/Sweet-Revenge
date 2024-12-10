@@ -49,7 +49,7 @@ public class SpawnerEnemy : MonoBehaviour
     private void Awake()
     {
         Initialize();
-        InitializeAreaTransitions();
+        //InitializeAreaTransitions();
         GameObject roundTextObject = GameObject.FindGameObjectWithTag("RoundText");
         if (roundTextObject != null)
         {
