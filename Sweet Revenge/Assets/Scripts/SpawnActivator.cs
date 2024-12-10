@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class SpawnActivator : MonoBehaviour
 {
-    [SerializeField] private SpawnerEnemy spawnerEnemy; // Referencia al SpawnerEnemy
+    [SerializeField] private GameObject spawnerEnemy; // Referencia al SpawnerEnemy
     [SerializeField] private SpawnPoint.SpawnArea areaToActivate; // Área a activar
     [SerializeField] private SpawnPoint.SpawnArea previousArea; // Área anterior
 
     private void Awake()
     {
-        spawnerEnemy = FindFirstObjectByType<SpawnerEnemy>();
+        //spawnerEnemy = FindFirstObjectByType<SpawnerEnemy>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // Verifica si el área actual es la misma que el área a activar
-            if (spawnerEnemy.CurrentArea == areaToActivate)
-            {
-                // Cambia al área anterior
-                spawnerEnemy.ActivateSpawnArea(previousArea);
-            }
-            else
-            {
-                // Cambia al área a activar
-                spawnerEnemy.ActivateSpawnArea(areaToActivate);
-            }
+            spawnerEnemy.SetActive(true);
+
+            //// Verifica si el área actual es la misma que el área a activar
+            //if (spawnerEnemy.CurrentArea == areaToActivate)
+            //{
+            //    // Cambia al área anterior
+            //    spawnerEnemy.ActivateSpawnArea(previousArea);
+            //}
+            //else
+            //{
+            //    // Cambia al área a activar
+            //    spawnerEnemy.ActivateSpawnArea(areaToActivate);
+            //}
         }
     }
 }
