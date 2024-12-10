@@ -32,10 +32,10 @@ public class SpawnerEnemy : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI roundText;
    
-    private SpawnPoint.SpawnArea currentArea; // Área actual
-    public SpawnPoint.SpawnArea CurrentArea { get;private set; }
+    //private SpawnPoint.SpawnArea currentArea; // Área actual
+    //public SpawnPoint.SpawnArea CurrentArea { get;private set; }
 
-    private Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>> areaTransitions = new Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>>();
+    //private Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>> areaTransitions = new Dictionary<SpawnPoint.SpawnArea, List<SpawnPoint.SpawnArea>>();
 
     private void OnEnable()
     {
@@ -127,26 +127,6 @@ public class SpawnerEnemy : MonoBehaviour
         }
     }
 
-    /*private string GetEnemyTypeForCurrentArea()
-    {
-        List<string> enemyTypes = new List<string> { "Zombie" }; // Siempre incluye Zombie
-
-        switch (currentArea)
-        {
-            case SpawnPoint.SpawnArea.Volcan:
-                enemyTypes.Add("Golem"); 
-                break;
-            case SpawnPoint.SpawnArea.Tierra:
-                enemyTypes.Add("Worm"); 
-                break;
-            default:
-                break; 
-        }
-
-        
-        return enemyTypes[Random.Range(0, enemyTypes.Count)];
-    }*/
-
     private void UpdateRoundText()
     {
         // Update the TMP text to show the current round
@@ -180,86 +160,80 @@ public class SpawnerEnemy : MonoBehaviour
     #endregion
 
     #region Spawn Management
-    private void InitializeAreaTransitions()
-    {
-        areaTransitions[SpawnPoint.SpawnArea.Start] = new List<SpawnPoint.SpawnArea>
-    {
-        SpawnPoint.SpawnArea.Volcan,
-        SpawnPoint.SpawnArea.Tierra
-    };
+//    private void InitializeAreaTransitions()
+//    {
+//        areaTransitions[SpawnPoint.SpawnArea.Start] = new List<SpawnPoint.SpawnArea>
+//    {
+//        SpawnPoint.SpawnArea.Volcan,
+//        SpawnPoint.SpawnArea.Tierra
+//    };
 
-        areaTransitions[SpawnPoint.SpawnArea.Volcan] = new List<SpawnPoint.SpawnArea>
-    {
-        SpawnPoint.SpawnArea.Start,
-        SpawnPoint.SpawnArea.Tierra
-    };
+//        areaTransitions[SpawnPoint.SpawnArea.Volcan] = new List<SpawnPoint.SpawnArea>
+//    {
+//        SpawnPoint.SpawnArea.Start,
+//        SpawnPoint.SpawnArea.Tierra
+//    };
 
-        areaTransitions[SpawnPoint.SpawnArea.Tierra] = new List<SpawnPoint.SpawnArea>
-    {
-        SpawnPoint.SpawnArea.Start,
-        SpawnPoint.SpawnArea.Volcan
-    };
-}
-    public void ActivateSpawnArea(SpawnPoint.SpawnArea nextArea)
-    {
-        ChangeArea(nextArea);
-    }
-    public void ChangeArea(SpawnPoint.SpawnArea newArea)
-    {
-        // Desactiva el spawn del área actual
-        foreach (var spawnPoint in spawnPoints)
-        {
-            if (spawnPoint.Area == currentArea)
-            {
-                spawnPoint.DisableSpawn();
-            }
-        }
+//        areaTransitions[SpawnPoint.SpawnArea.Tierra] = new List<SpawnPoint.SpawnArea>
+//    {
+//        SpawnPoint.SpawnArea.Start,
+//        SpawnPoint.SpawnArea.Volcan
+//    };
+//}
+//    public void ActivateSpawnArea(SpawnPoint.SpawnArea nextArea)
+//    {
+//        ChangeArea(nextArea);
+//    }
+//    public void ChangeArea(SpawnPoint.SpawnArea newArea)
+//    {
+//        // Desactiva el spawn del área actual
+//        foreach (var spawnPoint in spawnPoints)
+//        {
+//            if (spawnPoint.Area == currentArea)
+//            {
+//                spawnPoint.DisableSpawn();
+//            }
+//        }
 
-        // Activa el spawn del nuevo área
-        foreach (var spawnPoint in spawnPoints)
-        {
-            if (spawnPoint.Area == newArea)
-            {
-                spawnPoint.EnableSpawn();
-            }
-        }
+//        // Activa el spawn del nuevo área
+//        foreach (var spawnPoint in spawnPoints)
+//        {
+//            if (spawnPoint.Area == newArea)
+//            {
+//                spawnPoint.EnableSpawn();
+//            }
+//        }
 
-        // Actualiza el área actual
-        currentArea = newArea;
-        isSpawning = true;
-        Debug.Log($"Changed area to {newArea}. Spawning is now active.");
-    }
+//        // Actualiza el área actual
+//        currentArea = newArea;
+//        isSpawning = true;
+//        Debug.Log($"Changed area to {newArea}. Spawning is now active.");
+//    }
 
-    private SpawnPoint.SpawnArea GetNextArea(SpawnPoint.SpawnArea current)
-    {
-        // Randomly select the next area from the possible transitions
-        if (areaTransitions.ContainsKey(current))
-        {
-            List<SpawnPoint.SpawnArea> possibleNextAreas = areaTransitions[current];
-            return possibleNextAreas[Random.Range(0, possibleNextAreas.Count)];
-        }
-        return current; // If no transitions, stay in the current area
-    }
+//    private SpawnPoint.SpawnArea GetNextArea(SpawnPoint.SpawnArea current)
+//    {
+//        // Randomly select the next area from the possible transitions
+//        if (areaTransitions.ContainsKey(current))
+//        {
+//            List<SpawnPoint.SpawnArea> possibleNextAreas = areaTransitions[current];
+//            return possibleNextAreas[Random.Range(0, possibleNextAreas.Count)];
+//        }
+//        return current; // If no transitions, stay in the current area
+//    }
 
     #endregion
 
     public void Initialize()
     {
-        currentArea = SpawnPoint.SpawnArea.Start;
+        //currentArea = SpawnPoint.SpawnArea.Start;
         currentRound = 1;
         spawnCount = 0;
         spawnTimer = 0f;
         roundTimer = 0f;
         activeEnemies = 0;
         isSpawning = true;
-
-        foreach (var spawnPoint in spawnPoints)
-        {
-            spawnPoint.DisableSpawn(); // Reinicia el estado de los puntos de spawn
-        }
-
         // Activa el área inicial
-        ChangeArea(SpawnPoint.SpawnArea.Start);
+        //ChangeArea(SpawnPoint.SpawnArea.Start);
 
         Debug.Log("SpawnerEnemy inicializado.");
     }
