@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 758c414d25621ce4ab411c737b072890
+guid: 7579f514336119344b5956998099d1ee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ataque Gusano_0
+      name: Golem walk right_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 78
-        width: 77
-        height: 47
+        x: 2
+        y: 196
+        width: 56
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c940c31ab9a8514fbc01afd0870f040
-      internalID: 1352749802
+      spriteID: 1df53249d9286e04681ee42a153179c4
+      internalID: -907455457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ataque Gusano_1
+      name: Golem walk right_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 78
-        width: 75
-        height: 47
+        x: 4
+        y: 132
+        width: 52
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e30d8e240fa79c3489ffc6c016e94b55
-      internalID: 311093487
+      spriteID: 48bfa1d5c3147a04a8d2d5ad6c2d1b97
+      internalID: 1143975484
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ataque Gusano_2
+      name: Golem walk right_2
       rect:
         serializedVersion: 2
-        x: 165
-        y: 78
-        width: 77
-        height: 47
+        x: 6
+        y: 68
+        width: 52
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e44a1863efc98d4495f640ab01ab768
-      internalID: 178932913
+      spriteID: ead6cb98c001e884ca898eb5ea20d42f
+      internalID: -1324024824
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ataque Gusano_3
+      name: Golem walk right_3
       rect:
         serializedVersion: 2
-        x: 252
-        y: 78
-        width: 75
-        height: 47
+        x: 4
+        y: 4
+        width: 52
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,92 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d45649a4b34307241afa2459c54a4958
-      internalID: -1150124077
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ataque Gusano_4
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 77
-        width: 76
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8fb25795c4e3ff342a26f270568322bb
-      internalID: 1935475019
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ataque Gusano_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
-        width: 78
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f25901a176ebd346b339cbaf3cddb8d
-      internalID: 679992949
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ataque Gusano_6
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 8
-        width: 81
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 697e0e7edec1c1e4eaa5815044172293
-      internalID: 1779057761
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ataque Gusano_7
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 8
-        width: 80
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b5166e56c57935419e2ecc97da039d0
-      internalID: 1894706763
+      spriteID: a4c9288e6a1590c4d96467af449fe511
+      internalID: 1327265073
       vertices: []
       indices: 
       edges: []
@@ -288,14 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ataque Gusano_0: 1352749802
-      Ataque Gusano_1: 311093487
-      Ataque Gusano_2: 178932913
-      Ataque Gusano_3: -1150124077
-      Ataque Gusano_4: 1935475019
-      Ataque Gusano_5: 679992949
-      Ataque Gusano_6: 1779057761
-      Ataque Gusano_7: 1894706763
+      Golem walk right_0: -907455457
+      Golem walk right_1: 1143975484
+      Golem walk right_2: -1324024824
+      Golem walk right_3: 1327265073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

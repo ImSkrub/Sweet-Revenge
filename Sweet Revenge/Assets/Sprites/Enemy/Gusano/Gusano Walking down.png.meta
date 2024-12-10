@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d8b1376de298f342bd23f68b2756807
+guid: 7048ac2ede8801346815eb9bf41b0c60
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gusano Walking_0
+      name: Gusano Walking down_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 78
-        width: 72
-        height: 35
+        x: 19
+        y: 337
+        width: 39
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fab9f447eb03c34f92df90424e8385b
-      internalID: 1477930778
+      spriteID: 37212df2f8004a2439dfaaca01200b2b
+      internalID: 2145403647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Walking_1
+      name: Gusano Walking down_1
       rect:
         serializedVersion: 2
-        x: 89
-        y: 76
-        width: 71
-        height: 37
+        x: 19
+        y: 260
+        width: 39
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 095e1757d3c776b40b0b1c901ad28ee0
-      internalID: 222769732
+      spriteID: 0759ea582a23c7b498ba538182bfac5b
+      internalID: -2086437201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Walking_2
+      name: Gusano Walking down_2
       rect:
         serializedVersion: 2
-        x: 176
-        y: 76
-        width: 71
-        height: 37
+        x: 20
+        y: 176
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18de22d9e3ea48247aed74fba5f3747f
-      internalID: 1096631210
+      spriteID: 5b5e2f406cccda4489052a955a6e16fe
+      internalID: 468624594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Walking_3
+      name: Gusano Walking down_3
       rect:
         serializedVersion: 2
-        x: 260
-        y: 75
-        width: 70
-        height: 39
+        x: 20
+        y: 89
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 824e8c032aeb0ea4aa79c95607e6831d
-      internalID: 1127513624
+      spriteID: d1b69ba596ad7bd42a32a4b0d552df9a
+      internalID: 1948229399
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Walking_4
+      name: Gusano Walking down_4
       rect:
         serializedVersion: 2
-        x: 337
-        y: 75
-        width: 70
-        height: 39
+        x: 77
+        y: 88
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8a2e61209ec17744a92ef98089a61d3
-      internalID: 1694289368
+      spriteID: fe4ca919067ed0c419c3ac6ff9f63d09
+      internalID: -110217247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Walking_5
+      name: Gusano Walking down_5
       rect:
         serializedVersion: 2
-        x: 4
-        y: 19
-        width: 71
-        height: 37
+        x: 20
+        y: 2
+        width: 35
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 905ebcf6a7a1af64c9440e529e7eda71
-      internalID: 601551802
+      spriteID: bb168061d02279c4aa2684ddde9448f0
+      internalID: 1533981069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Walking_6
+      name: Gusano Walking down_6
       rect:
         serializedVersion: 2
-        x: 88
-        y: 19
-        width: 71
-        height: 37
+        x: 77
+        y: 4
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0035ee19a694a38419dffae7b73f1ad2
-      internalID: 330231980
+      spriteID: 40144f3c4ea476742b6df517cae71916
+      internalID: 950185750
       vertices: []
       indices: 
       edges: []
@@ -267,13 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Gusano Walking_0: 1477930778
-      Gusano Walking_1: 222769732
-      Gusano Walking_2: 1096631210
-      Gusano Walking_3: 1127513624
-      Gusano Walking_4: 1694289368
-      Gusano Walking_5: 601551802
-      Gusano Walking_6: 330231980
+      Gusano Walking down_0: 2145403647
+      Gusano Walking down_1: -2086437201
+      Gusano Walking down_2: 468624594
+      Gusano Walking down_3: 1948229399
+      Gusano Walking down_4: -110217247
+      Gusano Walking down_5: 1533981069
+      Gusano Walking down_6: 950185750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

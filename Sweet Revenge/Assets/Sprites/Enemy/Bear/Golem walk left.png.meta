@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1a66f79d0835f5c48888de305784f083
+guid: 2fdb644140ed3c74cb6b39b66b3ff0bf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gusano Death_0
+      name: Golem walk left_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 74
-        width: 76
-        height: 42
+        x: 8
+        y: 196
+        width: 52
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b0225f6b7e6496448b0d156d47a7cce
-      internalID: -1644862682
+      spriteID: ba69a17a14d8a59468f33afc9a444513
+      internalID: 351644537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Death_1
+      name: Golem walk left_1
       rect:
         serializedVersion: 2
-        x: 81
-        y: 74
-        width: 78
-        height: 42
+        x: 6
+        y: 132
+        width: 52
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87277e02607cf044699175bb48038f53
-      internalID: -703429548
+      spriteID: 623d50b3ecb04a34483fa30fe8983314
+      internalID: -873132454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Death_2
+      name: Golem walk left_2
       rect:
         serializedVersion: 2
-        x: 164
-        y: 74
-        width: 77
-        height: 42
+        x: 8
+        y: 68
+        width: 52
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b141b138498311945a24fc7d26d6282b
-      internalID: -1006835584
+      spriteID: 0a4cef5e324ae6949a4a12667c36a8b3
+      internalID: 569384561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gusano Death_3
+      name: Golem walk left_3
       rect:
         serializedVersion: 2
-        x: 245
-        y: 74
-        width: 79
-        height: 43
+        x: 6
+        y: 4
+        width: 56
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,113 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a53d7a4793671843a79dbd377400213
-      internalID: 1608580516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gusano Death_4
-      rect:
-        serializedVersion: 2
-        x: 329
-        y: 75
-        width: 77
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dea99851079016a4eab21db5b6fa80db
-      internalID: -974205980
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gusano Death_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 15
-        width: 78
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 06a9a6fc988ddba4ebfa52072cab8d83
-      internalID: 2003589677
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gusano Death_6
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 15
-        width: 80
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 494782a4353eb474289cc21178fa8545
-      internalID: 1916238034
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gusano Death_7
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 14
-        width: 80
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a27388226cfaf74bbec3f1841bee044
-      internalID: 465492079
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gusano Death_8
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 14
-        width: 80
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e908bdde6b914d43ac38c8d259d33ab
-      internalID: -256969969
+      spriteID: 2442211cb083251449ef83ee5d955b43
+      internalID: -1014711520
       vertices: []
       indices: 
       edges: []
@@ -309,15 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Gusano Death_0: -1644862682
-      Gusano Death_1: -703429548
-      Gusano Death_2: -1006835584
-      Gusano Death_3: 1608580516
-      Gusano Death_4: -974205980
-      Gusano Death_5: 2003589677
-      Gusano Death_6: 1916238034
-      Gusano Death_7: 465492079
-      Gusano Death_8: -256969969
+      Golem walk left_0: 351644537
+      Golem walk left_1: -873132454
+      Golem walk left_2: 569384561
+      Golem walk left_3: -1014711520
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

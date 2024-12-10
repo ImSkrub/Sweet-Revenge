@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: efcbf4a5a46a1b34c877264f6053a77e
+guid: b3fdf1e84a224f2469fb48b9c9d94ac7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Golem WALK_0
+      name: Gusano Walking up_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 196
-        width: 52
-        height: 56
+        x: 19
+        y: 335
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e758e742350512c41be5e7fbcb593470
-      internalID: 713915196
+      spriteID: aef9bcddb6a7a5143b29cab879fad051
+      internalID: 807265177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem WALK_1
+      name: Gusano Walking up_1
       rect:
         serializedVersion: 2
-        x: 6
-        y: 132
-        width: 52
-        height: 56
+        x: 78
+        y: 336
+        width: 35
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37379bf9dc53cbf4a8a1ef0a6dc39adb
-      internalID: -2097687378
+      spriteID: 2f914d6643b97e74aabb5eda8f795af8
+      internalID: 917924516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem WALK_2
+      name: Gusano Walking up_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 68
-        width: 52
-        height: 56
+        x: 19
+        y: 251
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46c21f27bf2a1834fbc1afb589eb5a5e
-      internalID: -1958600460
+      spriteID: 002f9e3c5f7f5fa4ca2181e1d60b899c
+      internalID: -1688211884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Golem WALK_3
+      name: Gusano Walking up_3
       rect:
         serializedVersion: 2
-        x: 6
-        y: 4
-        width: 56
-        height: 56
+        x: 76
+        y: 250
+        width: 37
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7a59dd5ed3313247be143c9ff72406c
-      internalID: -914412413
+      spriteID: b77f8715af9841244a297564f5819f7c
+      internalID: -1309967170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gusano Walking up_4
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 163
+        width: 37
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09455ceaaea274b4aa10e93e74ab7f82
+      internalID: -1029707585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gusano Walking up_5
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 80
+        width: 39
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1639e3a9886669e408194815a9609200
+      internalID: -804723145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gusano Walking up_6
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 3
+        width: 39
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 956026dbea2c01a40ad4b367b233fb18
+      internalID: -1824601880
       vertices: []
       indices: 
       edges: []
@@ -204,10 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Golem WALK_0: 713915196
-      Golem WALK_1: -2097687378
-      Golem WALK_2: -1958600460
-      Golem WALK_3: -914412413
+      Gusano Walking up_0: 807265177
+      Gusano Walking up_1: 917924516
+      Gusano Walking up_2: -1688211884
+      Gusano Walking up_3: -1309967170
+      Gusano Walking up_4: -1029707585
+      Gusano Walking up_5: -804723145
+      Gusano Walking up_6: -1824601880
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
