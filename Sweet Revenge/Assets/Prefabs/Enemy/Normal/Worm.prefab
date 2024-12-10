@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -926683833, guid: a85d25474c3cb2d488dad9688a8922fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.72, y: 0.35}
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
-  coinPrefabDoor: {fileID: 0}
+  coinPrefabDoor: {fileID: 2748119234082738052, guid: 72cd7a771ef2c9c438c10a20add449ef, type: 3}
   numberOfCoins: 3
   spawnOffset: 0.5
 --- !u!95 &-404707568942287686
