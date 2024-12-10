@@ -13,12 +13,12 @@ public class AreaTrigger : MonoBehaviour
         enemySpawner = FindObjectOfType<SpawnerEnemy>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            // Cambia el área actual en el EnemySpawner
-            enemySpawner.ChangeArea(areaToActivate);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        // Cambia el área actual en el EnemySpawner
+    //        enemySpawner.ChangeArea(areaToActivate);
+    //    }
+    //}
 }

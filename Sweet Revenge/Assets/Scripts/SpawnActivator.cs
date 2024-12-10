@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnActivator : MonoBehaviour
 {
     [SerializeField] private GameObject spawnerEnemy; // Referencia al SpawnerEnemy
-    [SerializeField] private SpawnPoint.SpawnArea areaToActivate; // 햞ea a activar
-    [SerializeField] private SpawnPoint.SpawnArea previousArea; // 햞ea anterior
+    //[SerializeField] private SpawnPoint.SpawnArea areaToActivate; // 햞ea a activar
+    //[SerializeField] private SpawnPoint.SpawnArea previousArea; // 햞ea anterior
 
     private void Awake()
     {

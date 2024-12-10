@@ -202,7 +202,7 @@ public class SpawnerEnemy : MonoBehaviour
 }
     public void ActivateSpawnArea(SpawnPoint.SpawnArea nextArea)
     {
-        ChangeArea(nextArea);
+        //ChangeArea(nextArea);
     }
     public void ChangeArea(SpawnPoint.SpawnArea newArea)
     {
@@ -227,7 +227,7 @@ public class SpawnerEnemy : MonoBehaviour
         // Actualiza el área actual
         currentArea = newArea;
         isSpawning = true;
-        Debug.Log($"Changed area to {newArea}. Spawning is now active.");
+        Debug.LogWarning($"Changed area to {newArea}. Spawning is now active.");
     }
 
     private SpawnPoint.SpawnArea GetNextArea(SpawnPoint.SpawnArea current)
