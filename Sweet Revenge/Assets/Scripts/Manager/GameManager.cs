@@ -43,10 +43,15 @@ public class GameManager : MonoBehaviour
         if (gotItem1 && gotItem2)
         {
             activeBossBattle = true;
-            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 0.4f);
             //suena sonido + aparece mensaje.
         }
-       
+        if (Input.GetKey(KeyCode.J))
+        {
+            activeBossBattle = true;
+        }
+
+
     }
 
     public void WinGame()
