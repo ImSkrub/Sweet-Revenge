@@ -13,7 +13,8 @@ public class EnemyChase : MonoBehaviour
 
     private void Start()
     {
-        target=FindObjectOfType<Player>().transform;
+        target = FindObjectOfType<Player>().transform;
+        player = FindObjectOfType<PlayerLife>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;

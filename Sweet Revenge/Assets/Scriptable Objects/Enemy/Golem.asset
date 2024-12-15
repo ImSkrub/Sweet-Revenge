@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626148bfa3baaaf43ae887523572d6e4, type: 3}
   m_Name: Golem
   m_EditorClassIdentifier: 
-  damage: 25
-  attackCooldown: 0.4
-  velocity: 10
-  rangeToAttack: 7
+  damage: 35
+  attackCooldown: 0.5
+  velocity: 7
+  rangeToAttack: 5
   closestDist: 1
   lerpSpeedRotation: 2
   playerLayer:

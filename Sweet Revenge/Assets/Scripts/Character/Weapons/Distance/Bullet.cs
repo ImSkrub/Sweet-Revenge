@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         transform.position += direction * speed * Time.deltaTime;
-        Debug.Log(direction);
+        
     }
     private void OnEnable()
     {

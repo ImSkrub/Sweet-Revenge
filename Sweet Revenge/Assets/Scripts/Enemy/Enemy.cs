@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = enemyDirection.normalized * enemyData.velocity;
+        //rb.velocity = enemyDirection.normalized * enemyData.velocity;
         
     }
     private void Update()

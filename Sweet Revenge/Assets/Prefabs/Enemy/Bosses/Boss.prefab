@@ -162,19 +162,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71af93dace34e3149bb540e52857fd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 5021922589886325784}
   playerTransform: {fileID: 0}
   life: 0
-  maxLife: 2500
+  maxLife: 300
   damageCooldown: 1
   destroyDelay: 0.5
+  KBCounter: 0
+  KBTotalTime: 0
+  KBDelay: 0.5
+  KnockbackForce: 7.5
+  scaleVelocity: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  damageSoundClips: []
+  bossRb: {fileID: 0}
+  isDead: 0
+  isFollowing: 0
+  damageSoundClips:
+  - {fileID: 8300000, guid: 148fa349710126a43b5409f28f54ab09, type: 3}
+  - {fileID: 8300000, guid: 091a0a4eab6b8484cb9b2958f465404f, type: 3}
+  - {fileID: 8300000, guid: f150a2c8d63c4cf448e2330aa6838f3f, type: 3}
+  - {fileID: 8300000, guid: 65258e12342485246bb52d500a606ac9, type: 3}
+  attackSound: {fileID: 8300000, guid: d24881ed134402d4194939bacebc6faf, type: 3}
+  deathSound: {fileID: 8300000, guid: c17f037df2b6f3640b9212ca98f8937e, type: 3}
   sr: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
+  healthBarCanvas: {fileID: 0}
   healthBar: {fileID: 0}
+  cinematicFinished: 0
 --- !u!95 &6390866558503570847
 Animator:
   serializedVersion: 5

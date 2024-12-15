@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626148bfa3baaaf43ae887523572d6e4, type: 3}
   m_Name: Worm
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   attackCooldown: 0.5
   velocity: 35
   rangeToAttack: 5

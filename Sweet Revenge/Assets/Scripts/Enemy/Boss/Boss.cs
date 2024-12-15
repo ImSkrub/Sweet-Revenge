@@ -2,45 +2,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour,IDamageable
+public class Boss : MonoBehaviour, IDamageable
 {
     private Animator animator;
     public Rigidbody2D rb;
     public Transform playerTransform;
-    
+
 
     [Header("Parameters")]
     [SerializeField] private float life;
-    [SerializeField] private float maxLife = 2500;
+    [SerializeField] private float maxLife = 300;
     [SerializeField] private float damageCooldown = 0.5f;
     [SerializeField] private float destroyDelay = 0.5f;
+    private float transitionLife = 500;
     //Knockback
     [SerializeField] private float KBCounter;
     [SerializeField] private float KBTotalTime;
     [SerializeField] private float KBDelay = 0.5f;
-    [SerializeField] private float KnockbackForce = 7.5f;
+    [SerializeField] private float KnockbackForce = 5f;
+    public float scaleVelocity = 1f;
+    private float scaleVelocityMax = 2;
+
 
     [Header("References")]
     [SerializeField] private LayerMask playerLayer;
     private PlayerLife playerHealth;
     private Rigidbody2D playerRb; // Almacenamos el Rigidbody del jugador
-    private bool isDead = false;
-
+    [SerializeField] Rigidbody2D bossRb;
+    public bool isDead = false, isFollowing = false;
+    [Space(3)]
     [Header("Audios")]
     [SerializeField] private AudioClip[] damageSoundClips;
+    [SerializeField] private AudioClip attackSound, deathSound;
 
     [Space(3)]
     [Header("Color")]
     [SerializeField] public SpriteRenderer sr;
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
+    public Color OriginalColor
+    {
+        get { return originalColor; }
+        set { originalColor = value; }
+    }
+    [Header("UI")]
+    [SerializeField] private GameObject healthBarCanvas;
+    [SerializeField] private Image healthBar;
 
-    [SerializeField] private Slider healthBar;
+    public bool cinematicFinished = false;
 
     public event Action OnDeath;
+
 
     private IBossState bossState;
 
@@ -61,40 +77,63 @@ public class Boss : MonoBehaviour,IDamageable
         SetState(new Phase1State());
     }
 
+    private void Start()
+    {
+        healthBarCanvas.SetActive(false);
+    }
+
     private void Update()
     {
-        healthBar.value = life / maxLife;
+        healthBar.fillAmount= life / maxLife;
         if (isDead) return;
-
         bossState.UpdateState();
-
-        if (life <= 1500 && !(bossState is Phase2State))
+       
+        if (life <= transitionLife && !(bossState is Phase2State))
         {
             TransitionToPhaseTwo();
         }
-        if (life <= 0 && (bossState is Phase2State))
+        if (life <= 0)
         {
-            Invoke("Death", 2f);
+            Death();
         }
-        
+
+        //scaleVelocity += scaleVelocity * Time.deltaTime;
+        //if (scaleVelocity > scaleVelocityMax) scaleVelocity = scaleVelocityMax;
     }
 
     public void TakeDamage(float damage)
     {
-        life -= damage;
-        sr.color = damageColor;
-        Invoke("RestoreColor", damageCooldown);
-        if (life <= 1500)
+        if (!isDead)
         {
-            animator.SetTrigger("Transformation");
+            life -= damage;
+            sr.color = damageColor;
+            Invoke("RestoreColor", damageCooldown);
+            SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
+
+            // Verifica si la vida es menor o igual a cero
+            if (life <= 0)
+            {
+                life = 0; 
+                Death();
+            }
+            else if (life <= transitionLife && !(bossState is Phase2State))
+            {
+                //animator.SetTrigger("Transformation");
+                TransitionToPhaseTwo();
+            }
         }
     }
 
     public void FollowPlayer(float moveSpeed)
     {
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-        rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
-        LookAtPlayer();
+        if (!isDead&& cinematicFinished)
+        {
+            isFollowing = true;
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
+            LookAtPlayer();
+            animator.SetBool("Walk", true);
+        }
     }
 
     public void LookAtPlayer()
@@ -125,32 +164,43 @@ public class Boss : MonoBehaviour,IDamageable
         return false;
     }
 
-   
+
 
     public void Attack(float damage)
     {
-        if (PlayerInSight()) // Añadimos control sobre knockback
+        if (!isDead)
         {
-            playerHealth.GetDamage(damage);
+            if (PlayerInSight()) // Añadimos control sobre knockback
+            {
+                playerHealth.GetDamage(damage);
 
-            Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
-            playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
-            StartCoroutine(ResetKB());     
-                        
+                Vector2 knockbackDirection = (playerTransform.position - transform.position).normalized;
+                playerRb.AddForce(knockbackDirection * KnockbackForce, ForceMode2D.Impulse);
+                StartCoroutine(ResetKB());
+                playerRb.velocity = Vector2.zero;
+                animator.SetTrigger("Attack");
+                SoundFXManager.instance.PlaySoundFXClip(attackSound, transform, 1f);
+                Debug.Log(damage);
+            }
         }
     }
-   
+
     private IEnumerator ResetKB()
     {
         yield return new WaitForSeconds(KBDelay);
-        playerRb.velocity = Vector2.zero;
+        
     }
-   
+
 
     private void TransitionToPhaseTwo()
     {
-        SetState(new Phase2State());
-        animator.SetTrigger("Transformation");
+        if (bossState is Phase1State)
+        {
+            SetState(new Phase2State());
+            //animator.SetTrigger("Transformation");
+            sr.color = Color.magenta;
+        }
+       
     }
 
     private void SetState(IBossState newState)
@@ -164,23 +214,39 @@ public class Boss : MonoBehaviour,IDamageable
     {
         isDead = true;
         OnDeath?.Invoke();
-        Destroy(gameObject, destroyDelay);
+        animator.SetBool("isDead", isDead);
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        Invoke("HandleBossDeath", 1.5f);
+        SoundFXManager.instance.PlaySoundFXClip(deathSound, transform, 1f);
+        //Destroy(gameObject, destroyDelay);
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void HandleBossDeath()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        GameManager.Instance.WinGame();
+    }
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.collider.tag == "Player" && !isDead)
+    //    {
+    //        playerHealth.GetDamage(1f * Time.deltaTime);
+
+    //    }
+    //}
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !isDead)
         {
-            playerHealth.GetDamage(15f);
+            playerHealth.GetDamage(10f * Time.deltaTime);
         }
     }
 
     private void OnDrawGizmos()
     {
-        if (bossState == null) return;
-        Debug.Log("Drawing Gizmo with range: " + bossState.GetRange());
+        
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, bossState.GetRange());
+        Gizmos.DrawWireSphere(transform.position, 5f);
     }
 }

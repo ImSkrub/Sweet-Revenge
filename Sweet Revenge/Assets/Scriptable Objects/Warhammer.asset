@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b789221eedec0489e16b5a5f26f70a, type: 3}
   m_Name: Warhammer
   m_EditorClassIdentifier: 
-  damage: 35
+  damage: 120
   attackSpeed: 3
   attackCost: 35
   attackRange: 6
   knockbackForce: 15
   maxBullets: 0
   bulletSpeed: 0
+  gunType: 0

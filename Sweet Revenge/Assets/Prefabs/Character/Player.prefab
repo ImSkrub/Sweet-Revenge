@@ -104,14 +104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdda4cfa36f965418742ed066679e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.5
   maxStamina: 100
   runCost: 20
   staminaRechargeRate: 5
   attackCost: 10
   staminaBar: {fileID: 0}
   isRecharging: 0
-  life: {fileID: -1311028509660312670}
 --- !u!50 &5785503798244368686
 Rigidbody2D:
   serializedVersion: 4
@@ -193,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 6664644015094670130}
+  escImage: {fileID: 0}
   powerUpSound: {fileID: 8300000, guid: 541543b2a051ec742b587f389f56ef12, type: 3}
   volume: 0.2
 --- !u!70 &2896864044589723802

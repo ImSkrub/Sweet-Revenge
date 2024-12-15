@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool gotItem2 = false;
     public bool activeBossBattle= false;
     public bool bossDied = false;
+    [SerializeField] private AudioClip clip;
 
     private void Awake()
     {
@@ -41,10 +42,16 @@ public class GameManager : MonoBehaviour
     {
         if (gotItem1 && gotItem2)
         {
-            activeBossBattle = true;  
+            activeBossBattle = true;
+            SoundFXManager.instance.PlaySoundFXClip(clip, transform, 0.4f);
             //suena sonido + aparece mensaje.
         }
-       
+        if (Input.GetKey(KeyCode.J))
+        {
+            activeBossBattle = true;
+        }
+
+
     }
 
     public void WinGame()
@@ -68,14 +75,10 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
-        if (quickRevive.HasSavedStates())
-        {
-            quickRevive.Checkpoint(); // Restore the last saved state
-            Debug.Log("Player restored from checkpoint.");
-        }
-        else
+        if (!quickRevive.HasSavedStates())
         {
             LoseGame(); // No saved states, proceed to lose game
+            
         }
     }
 

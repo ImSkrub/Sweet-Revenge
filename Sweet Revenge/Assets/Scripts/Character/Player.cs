@@ -9,10 +9,10 @@ public class Player : MonoBehaviour
     [Space(3)]
     [Header("Weapon")]
     [SerializeField] private Transform weaponSlot;
-    private float attackDelay = 0.5f;
+    private float attackDelay = 0.005f;
     private float lastAttackTime;
     [Header("UI")]
-    [SerializeField] private Image escImage;
+    //[SerializeField] private Image escImage;
         
     private IWeapon weapon;
     private PlayerController player;
@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public event Action Equipped;
     [SerializeField] private AudioClip powerUpSound;
     [SerializeField] private float volume;
+
+    public bool cinematicPlaying = false;
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -29,14 +31,20 @@ public class Player : MonoBehaviour
     private void Update()
     {
         // Check if the player can attack
-        if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay && !lifePlayer.isDead)
+        if (Input.GetButton("Fire1") && player.Stamina >= 0 && !lifePlayer.isDead && Time.timeScale>0)
         {
+            if (!cinematicPlaying)
+            {
             player.isRecharging= false;
             weapon?.Attack();
-            lastAttackTime = Time.time; // Update the last attack time            
+                     
+            }
         }
        
     }
+
+
+
 
     public void SetNewMaxHealth(int newHealth)
     {
@@ -82,7 +90,7 @@ public class Player : MonoBehaviour
             collision.gameObject.transform.localPosition = Vector3.zero; 
             collision.gameObject.transform.localRotation = Quaternion.identity; 
 
-            collision.gameObject.transform.localRotation = Quaternion.Euler(0, 0, player.transform.eulerAngles.z);
+            collision.gameObject.transform.localRotation = Quaternion.Euler(0, 0, player.transform.rotation.z);
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))

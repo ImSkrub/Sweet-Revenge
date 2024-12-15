@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 485c9c6d444abd343a46094fe11e9539, type: 3}
   - {fileID: 8300000, guid: cf2071bb9600d6040899d83297725b5c, type: 3}
   - {fileID: 8300000, guid: 1146704cc4add2448b9ab1295576a9c5, type: 3}
+  blood: {fileID: 1644727368190767777, guid: 0aa03648ed26caf4ab5bec2679045113, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   generateItem: {fileID: 0}
 --- !u!114 &6203767753772169879
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
-  coinPrefabDoor: {fileID: 0}
+  coinPrefabDoor: {fileID: 2748119234082738052, guid: 72cd7a771ef2c9c438c10a20add449ef, type: 3}
   numberOfCoins: 3
   spawnOffset: 0.5
 --- !u!95 &5913456131682657249
