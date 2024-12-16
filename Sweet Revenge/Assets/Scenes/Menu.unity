@@ -891,8 +891,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorCoinText: {fileID: 1852948378}
   shopCoinText: {fileID: 336827273}
-  shopCoin: 15200
-  doorCoin: 0
+  shopCoin: 1000
+  doorCoin: 2000
 --- !u!4 &1208870423
 Transform:
   m_ObjectHideFlags: 0
