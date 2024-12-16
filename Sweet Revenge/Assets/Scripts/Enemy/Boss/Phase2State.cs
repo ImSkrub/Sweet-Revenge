@@ -18,7 +18,7 @@ public class Phase2State : IBossState
     public void Enter(Boss boss)
     {
         this.boss = boss;
-        boss.OriginalColor = Color.magenta;
+        boss.sr.color = Color.magenta;
         Debug.Log("Entre fase 2");
     }
 
@@ -39,8 +39,6 @@ public class Phase2State : IBossState
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 boss.Attack(damage);
-                lastAttackTime = Time.time;
-                Debug.Log(damage);
                 Debug.Log("attack phase2");
             }
         }

@@ -13,9 +13,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     [SerializeField] private AudioClip[] damageSoundClips;
     public float enemyHealth { get { return enemyHealth; } set { if (enemyHealth >= 0) health = value; } }
     private bool isDead = false;
-
-    public GameObject blood;
-
+    
     [Space(3)]
     [Header("Color")]
     private SpriteRenderer sr;
@@ -41,8 +39,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
         health -= damage;
         sr.color = damageColor;
         Invoke("RestoreColor", damageCooldown);
-        Instantiate(blood, transform.position, Quaternion.identity);
-        if (health <= 0f && !isDead)
+        if(health <= 0f && !isDead)
         {
             Death();
         }
@@ -59,7 +56,6 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     {
         //anim.SetTrigger("die");
         generateItem.SpawnItem();
-        
         isDead = true;
         OnDeath?.Invoke();
         Destroy(gameObject,destroyDelay);

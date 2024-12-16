@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorCoinText: {fileID: 1852948378}
   shopCoinText: {fileID: 336827273}
-  shopCoin: 0
+  shopCoin: 15200
   doorCoin: 0
 --- !u!4 &1208870423
 Transform:

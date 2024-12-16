@@ -44,11 +44,6 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] public SpriteRenderer sr;
     [SerializeField] private Color damageColor = Color.red;
     private Color originalColor;
-    public Color OriginalColor
-    {
-        get { return originalColor; }
-        set { originalColor = value; }
-    }
     [Header("UI")]
     [SerializeField] private GameObject healthBarCanvas;
     [SerializeField] private Image healthBar;
@@ -180,7 +175,7 @@ public class Boss : MonoBehaviour, IDamageable
                 playerRb.velocity = Vector2.zero;
                 animator.SetTrigger("Attack");
                 SoundFXManager.instance.PlaySoundFXClip(attackSound, transform, 1f);
-                Debug.Log(damage);
+                //Debug.Log("ataque");
             }
         }
     }
