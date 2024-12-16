@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol Parameter
   m_EditorClassIdentifier: 
   damage: 25
-  attackSpeed: 0.75
+  attackSpeed: 0.1
   attackCost: 30
   attackRange: 100
   knockbackForce: 3

@@ -7,7 +7,7 @@ public class Phase2State : IBossState
 {
     private Boss boss;
     private float attackRangeMin = 1f;
-    private float attackRangeMax = 10f;
+    private float attackRangeMax = 7f;
     private float knockbackForce = 1f;
     private float damage = 20f;
     private float moveSpeed = 5f;
