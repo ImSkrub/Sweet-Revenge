@@ -161,11 +161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e2328f5b27e55459730fa227674f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 200
   health: 0
   damageCooldown: 1
   destroyDelay: 0.5
-  volume: 0
+  volume: 0.3
   damageSoundClips:
   - {fileID: 8300000, guid: 5f25ba7b1f48d514897741a0c2d4aa1d, type: 3}
   - {fileID: 8300000, guid: cd4f0705302292344a2d6cd6a2e0d710, type: 3}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2748119234082738052, guid: 64f5dfe5c68270040bf250b48664e16c, type: 3}
-  coinPrefabDoor: {fileID: 0}
+  coinPrefabDoor: {fileID: 2748119234082738052, guid: 72cd7a771ef2c9c438c10a20add449ef, type: 3}
   numberOfCoins: 3
   spawnOffset: 0.5
 --- !u!95 &5913456131682657249
