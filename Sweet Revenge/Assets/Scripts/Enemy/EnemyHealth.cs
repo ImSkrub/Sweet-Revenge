@@ -13,7 +13,10 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     [SerializeField] private AudioClip[] damageSoundClips;
     public float enemyHealth { get { return enemyHealth; } set { if (enemyHealth >= 0) health = value; } }
     private bool isDead = false;
-    
+
+
+    public GameObject blood;
+
     [Space(3)]
     [Header("Color")]
     private SpriteRenderer sr;
@@ -23,7 +26,7 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     [Space(3)]
     [Header("Reference")]
     [SerializeField] private GenerateItem generateItem;
-
+    private bool takenDamage = false;
     //[Header("Animator")]
     //private Animator anim;
     private void Awake()
@@ -36,20 +39,32 @@ public class EnemyHealth : MonoBehaviour,IDamageable
     }
     public void TakeDamage(float damage)
     {
+        takenDamage = true;
+        if (takenDamage)
+        {
+        Instantiate(blood, transform.position, Quaternion.identity);
         health -= damage;
         sr.color = damageColor;
         Invoke("RestoreColor", damageCooldown);
-        if(health <= 0f && !isDead)
+            
+        }
+        
+
+        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, volume);
+        
+        if (health <= 0f && !isDead)
         {
             Death();
         }
 
-        SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, volume);
+        takenDamage = false;
     }
 
     private void RestoreColor()
     {
        sr.color = originalColor;
+
+
     }
 
     private void Death()
