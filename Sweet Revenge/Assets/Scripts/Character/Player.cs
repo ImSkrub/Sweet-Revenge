@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Space(3)]
     [Header("Weapon")]
     [SerializeField] private Transform weaponSlot;
-    private float attackDelay = 0.005f;
+    private float attackDelay = 0.5f;
     private float lastAttackTime;
     [Header("UI")]
     //[SerializeField] private Image escImage;
@@ -31,13 +31,13 @@ public class Player : MonoBehaviour
     private void Update()
     {
         // Check if the player can attack
-        if (Input.GetButton("Fire1") && player.Stamina >= 0 && !lifePlayer.isDead && Time.timeScale>0)
+        if (Input.GetButton("Fire1") && player.Stamina >= 0 && Time.time >= lastAttackTime + attackDelay && !lifePlayer.isDead && Time.timeScale>0)
         {
             if (!cinematicPlaying)
             {
             player.isRecharging= false;
             weapon?.Attack();
-                     
+            lastAttackTime = Time.time; // Update the last attack time            
             }
         }
        

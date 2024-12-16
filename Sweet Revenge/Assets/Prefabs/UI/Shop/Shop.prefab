@@ -31,8 +31,7 @@ Transform:
   m_LocalPosition: {x: -1.43, y: 6.68, z: 0}
   m_LocalScale: {x: 3.113211, y: 2.858871, z: 0.5271}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8206732430234576389}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3179156877704149855
@@ -144,35 +143,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820cec07e42cce54cb751e4f01237166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopSpawnpoint: {fileID: 0}
---- !u!1 &7782809172999432922
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8206732430234576389}
-  m_Layer: 0
-  m_Name: Spawnpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8206732430234576389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7782809172999432922}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9135152, y: -1.3143979, z: -0.48237625}
-  m_LocalScale: {x: 0.32121179, y: 0.34978843, z: 1.897173}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 282703623885324072}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

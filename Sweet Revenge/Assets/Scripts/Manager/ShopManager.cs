@@ -22,7 +22,7 @@ public class ShopManager : MonoBehaviour
 
 
     // Reference to the spawn point
-    [SerializeField] private Transform currentSpawnPoint;
+    [SerializeField] private Transform itemSpawnPoint;
     private List<Vector3> occupiedPositions = new List<Vector3>(); // List to track occupied positions
 
     public bool itemsSpawned = false;
@@ -137,14 +137,9 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void SetSpawnPoint(Transform spawnPoint)
-    {
-        currentSpawnPoint = spawnPoint;
-        occupiedPositions.Clear(); // Clear occupied positions when switching spawn points
-    }
-
     private void SpawnPurchasedItems(Item item)
     {
+        // Check if the item should be spawned based on its permanence
         if (!item.isPermanent) // Only spawn if the item is not permanent
         {
             // Check if the itemPrefab is assigned
@@ -154,7 +149,7 @@ public class ShopManager : MonoBehaviour
                 return; // Exit the method if the prefab is not assigned
             }
 
-           
+            // Calculate a spawn position
             Vector3 spawnPosition = GetNextSpawnPosition();
 
             if (spawnPosition != Vector3.zero) // Check if a valid position was found
@@ -163,7 +158,7 @@ public class ShopManager : MonoBehaviour
                 GameObject spawnedItem = Instantiate(item.itemPrefab, spawnPosition, Quaternion.identity);
                 // Add the position to the occupied list
                 occupiedPositions.Add(spawnPosition);
-               
+                Debug.Log($"Spawned {item.itemName} at {spawnPosition}");
             }
             else
             {
@@ -183,14 +178,15 @@ public class ShopManager : MonoBehaviour
     private Vector3 GetNextSpawnPosition()
     {
         // Define the spacing between items
-        float spacing = 1.0f; 
-        Vector3 basePosition = currentSpawnPoint.position;
+        float spacing = 1.0f; // Adjust this value as needed
+        Vector3 basePosition = itemSpawnPoint.position;
 
         // Check for the next available position
         for (int i = 0; i < 100; i++) // Limit the number of attempts to find a position
         {
             Vector3 newPosition = basePosition + new Vector3((i % 10) * spacing, (i / 10) * spacing, 0); // Create a grid-like pattern
 
+            // Check if the position is already occupied
             if (!occupiedPositions.Contains(newPosition))
             {
                 return newPosition; // Return the first unoccupied position found
