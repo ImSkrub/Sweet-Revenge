@@ -24,10 +24,6 @@ public class FactoryEnemy2 : MonoBehaviour
         return null;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1f);
-    }
+    
 
 }
