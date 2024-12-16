@@ -55,7 +55,7 @@ public class GameStatusManager : MonoBehaviour
                 currentCoins -= cost;
                 PointManager.Instance.AddDoorCoin(-cost);
                 UpdatePurchaseText(); // Update the text after the purchase
-                ToggleUI();
+                _UI.SetActive(false);
                 Debug.Log("Saved State");
             }
             else
@@ -73,6 +73,7 @@ public class GameStatusManager : MonoBehaviour
 
         if (HasSavedStates())
         {
+            UsePowerUp();
             PlayerMemento lastSavedState = savedStates.Pop();
             player.RestoreState(lastSavedState);
             Debug.Log("Estado restaurado");
