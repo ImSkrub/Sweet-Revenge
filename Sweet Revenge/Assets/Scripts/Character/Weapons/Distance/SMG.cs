@@ -19,9 +19,9 @@ public class SMG : BaseGun,IWeapon
 
     public override void Attack()
     {
-        float timeBetweenShots = 1f / valueGun.attackSpeed +bulletsPerSecond;
+        float timeBetweenShots = valueGun.attackSpeed;
 
-        if (Time.time >= lastAttackTime + valueGun.attackSpeed)
+        if (Time.time >= lastAttackTime + timeBetweenShots)
         {
             ShootBullet();
             lastAttackTime = Time.time; // Update last attack time
